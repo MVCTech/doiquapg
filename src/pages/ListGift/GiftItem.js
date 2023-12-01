@@ -100,14 +100,14 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
                 </div>
               </div>
             ) : null}
-            {infor?.is_physical_gift === true ? null : (
+            {infor?.gift_type === "evoucher_urbox" ? (
               <div className="text-item-gift font-light-mon mt-1">
                 Ngày hết hạn sử dụng
                 <div className="pr-3 font-semibold-mon corlor-text-darkblue">
                   {infor?.exchange_expired_date}
                 </div>
               </div>
-            )}
+            ) : null}
             {infor?.is_physical_gift === false ? (
               <div className="font-regular-mon mt-1 justify-between text-[12px] text-[#1D86FA] flex flex-nowrap">
                 Link
@@ -118,7 +118,7 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
                 </div>
               </div>
             ) : null}
-            {infor?.is_physical_gift === false ? (
+            {infor?.gift_type === "evoucher_urbox" ? (
               <div
                 className="font-regular-mon mt-1 text-[12px] text-[#fa1d1d] flex justify-between pb-5"
                 onClick={handleCopy}
