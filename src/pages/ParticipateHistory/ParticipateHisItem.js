@@ -12,8 +12,8 @@ export default function ParticipateHisItem({ lstProduct }) {
         className="containerNotify__background-itemImage w-[55px] h-[55px] col-span-2 rounded-lg"
       />
       <div className="containerNotify__background-itemChild pl-1 box-border col-span-10 relative bottom-0">
-        <div className="containerNotify__background-itemChildTime font-light-mon flex justify-between">
-          <div className="flex">
+        <div className="containerNotify__background-itemChildTime font-regular-mon flex justify-between">
+          <div className="flex text-[#424242]">
             <img src={CALENDER} className="w-3 h-3 mr-[4px] mt-[2px]" />
             {lstProduct.date}
           </div>
