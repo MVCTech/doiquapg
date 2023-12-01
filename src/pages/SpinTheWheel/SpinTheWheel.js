@@ -173,6 +173,7 @@ export default function SpinTheWheel() {
         }, 6500);
       })
       .catch((err) => {
+        console.log(err)
         toast.warn(err);
         setTimeout(() => {
           navigate(`/list-rotation`);
