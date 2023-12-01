@@ -1,0 +1,121 @@
+.App {
+  /* text-align: center; */
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.border-notify {
+  border: 2px solid #98ebff;
+}
+.App-link {
+  color: #61dafb;
+}
+.tab1 button {
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 13px;
+}
+.tab1 button:disabled {
+  height: 40px;
+  border-radius: 16px;
+  background-color: #003da5;
+  width: 90%;
+  font-size: 13px;
+  color: white;
+  box-shadow: 2px 4px 8px 0px rgba(74, 74, 75, 0.5);
+}
+.tab1 {
+  box-shadow: 2px -5px 20px 0px rgba(74, 74, 75, 0.5);
+  border-radius: 13px;
+  padding-bottom: 8px;
+}
+.background-light-ani {
+  background: url(./assets/fontawesome/image/light.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 200% 200%;
+  width: 100%;
+  height: 425px;
+  animation: App-logo-spin 6s linear infinite;
+}
+.background-firework-ani {
+  background: url(./assets/fontawesome/image/firework.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 425px;
+  animation: Fade-Ani-Zoom 4s ease infinite;
+}
+
+.input-hidden:focus {
+  border: none;
+  outline-offset: 0px;
+  outline: none;
+}
+.border-hd {
+  background-color: #f0f0f0;
+}
+@keyframes Fade-Ani-Zoom {
+  from {
+    transform: scale(40%);
+    opacity: 1;
+  }
+  to {
+    transform: scale(160%);
+    opacity: 0.1;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.break-line {
+  word-wrap: break-word; /* IE 5.5-7 */
+  white-space: -moz-pre-wrap; /* Firefox 1.0-2.0 */
+  white-space: pre-wrap; /* current browsers */
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: white;
+  color: #333;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  top: -30px;
+  right: 10px;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

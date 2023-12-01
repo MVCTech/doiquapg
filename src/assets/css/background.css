@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.bg_default {
+  background: url(../bg_default.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fontawesome/fonts/static/Montserrat-Bold.ttf");
+}

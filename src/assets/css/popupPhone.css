@@ -1,0 +1,25 @@
+.popup-confirm-phone {
+  background: url(../fontawesome/image/header_popup_phone.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 40px 40px 0 0;
+}
+.image__phone {
+  transform: translate(-50%, -50%);
+  height: 80px;
+  width: 80px;
+}
+.nav__overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: none;
+  animation: faceIn linear 0.2s;
+}
+.nav__check:checked ~ .nav__overlay {
+  display: block;
+  opacity: 1;
+}

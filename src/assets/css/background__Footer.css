@@ -1,0 +1,41 @@
+.form__footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.footer-background {
+  height: 60px;
+  font-size: 13px;
+  line-height: 20px;
+  color: #003da5;
+  /* margin-bottom: 80px; */
+  background-color: #f5f9ff;
+}
+.form__footer-img {
+  height: 29px;
+  width: 88px;
+  background-color: aliceblue;
+}
+
+.form__footer-copyright {
+  line-height: 20px;
+  width: 220px;
+  height: 45px;
+  font-size: 13px;
+}
+.form__footer-logo {
+  width: 25px;
+}
+.form__space {
+  color: blue;
+  width: 1px;
+  height: 20px;
+  padding: 0 7px 0 3px;
+}
+.form__space1 {
+  color: white;
+  width: 1px;
+  height: 20px;
+  padding: 0 7px 0 3px;
+}

@@ -1,0 +1,25 @@
+.container-prizerules {
+  overflow-y: auto;
+  max-height: 100%;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+  overflow: hidden;
+}
+
+.container-prizerules::-webkit-scrollbar {
+  display: none;
+}
+
+.content-prizerules {
+  font-size: 12px;
+  line-height: 19px;
+}
+
+.content-prizerules-ul {
+  line-height: 17px;
+  font-size: 12px;
+}
+.btn-prizerules {
+  font-size: 16px;
+  line-height: 20px;
+}

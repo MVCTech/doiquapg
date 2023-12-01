@@ -1,0 +1,74 @@
+.title-description-bill {
+  font-size: 13px;
+  line-height: 18px;
+  width: 80%;
+  word-wrap: break-word;
+  text-align: left;
+}
+.full-height {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.btn-takephoto {
+  display: flex;
+  justify-content: space-around;
+  height: 55px;
+  width: 140px;
+  border-radius: 16px;
+}
+.content-description-bill {
+  line-height: 19px;
+  font-size: 13px;
+}
+.btn-text {
+  width: 100px;
+  border-radius: 16px;
+}
+.carousel .control-dots {
+  z-index: 0;
+}
+.btn-tc-detail {
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-top-left-radius: 18px;
+  padding-top: 5px;
+  padding-left: 20px;
+  background-color: #1f3ca3;
+  width: 45%;
+  height: 28px;
+  color: #ffffff;
+  font-size: 12px;
+}
+.input-name-staff {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #003da5;
+  font-size: 20px;
+  margin-top: -45px;
+}
+.input-name-staff-form {
+  border: 1px solid #1e2191;
+}
+.input-btn-staff {
+  border: 1px solid #1e2191;
+  width: 100px;
+  height: 40px;
+  background-color: #1e2191;
+  border-radius: 10px;
+  color: #ffffff;
+}
+.input-btn-staff-cancel {
+  border: 1px solid #fff;
+  width: 100px;
+  height: 40px;
+  background-color: #63cafd;
+  border-radius: 10px;
+  color: #333333;
+}
+
+.dCGcRQ {
+  margin-top: -40px;
+  margin-bottom: -100px;
+}

@@ -1,0 +1,42 @@
+.icon-back {
+  overflow-y: hidden;
+}
+.icon-back::after {
+  content: "";
+  background-color: #333;
+}
+.container__login-item .color-phone {
+  color: #43c2f2;
+}
+
+.fa-solid-back {
+  color: white;
+}
+.fa-solid-phone {
+  font-size: 18px;
+  color: #333;
+}
+
+@media (max-width: 414px) and (max-height: 736px) {
+  .icon-back {
+    margin-top: 3%;
+    padding: 26px 0;
+  }
+  .container__login-item {
+    color: #fff;
+    font-weight: 400;
+    font-size: 16px;
+    font-style: normal;
+    padding: 16px 0 48px 0;
+    line-height: 24px;
+    width: 85%;
+  }
+}
+@media (max-width: 320px) {
+  .container__login {
+    padding: 0 0 10px 0;
+  }
+  .container__login-item {
+    padding: 16px 0 38px 0;
+  }
+}

@@ -1,0 +1,83 @@
+.conatiner__notify {
+  transform: translateY(0%);
+  transition: transform linear 0.8s, opacity linear 0.8s;
+  box-shadow: 15px 8px 13px 13px rgba(20, 63, 194, 0.5);
+  animation: faceIn linear 0.3s;
+}
+.image__gift {
+  transform: translate(-50%, -50%);
+}
+.checkbox__notify {
+  background-color: rgba(0, 0, 0, 0.3);
+  animation: faceIn linear 0.1s;
+}
+
+/* max-[325px]:w-[100px] max-[321px]:p-[10px_20px_10px_20px] max-[321px]:h-[40px] 
+p-[15px_32px_15px_32px] text-center no-underline rounded-3xl text-[16px] mr-[15px] cursor-pointer hover:opacity-80*/
+.format-button-popup {
+  color: #fff;
+  padding: 15px 32px;
+  text-align: center;
+  border-radius: 12px;
+  margin-right: 15px;
+  cursor: pointer;
+  border: 2px solid #98ebff;
+}
+.format-button-popup:hover {
+  opacity: 0.8;
+}
+@keyframes faceIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 320px) {
+  .format-button-popup {
+    width: 100px;
+    padding: 10px 20px;
+    height: 40px;
+  }
+  .conatiner__notify {
+    position: fixed;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    height: 128px;
+    width: 100%;
+    transform: translateY(0%);
+    transition: transform linear 0.8s, opacity linear 0.8s;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 15px 8px 13px 13px rgba(20, 63, 194, 0.5);
+    animation: faceIn linear 0.3s;
+  }
+  .conatiner__notify-name {
+    margin-top: 0;
+    padding-top: 23px;
+  }
+  .image__gift {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0;
+    position: absolute;
+    z-index: 9999;
+    height: 60px;
+    width: 60px;
+  }
+  .conatiner__notify-btnClose {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .conatiner__notify-name {
+    margin-top: 16px;
+  }
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fontawesome/fonts/static/Montserrat-Bold.ttf");
+}

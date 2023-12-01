@@ -1,0 +1,69 @@
+.guide-take-photo.modal-header {
+  height: 100%;
+}
+.guide-take-photo .modal-body {
+  padding-bottom: 1.25rem;
+  position: relative;
+  top: -30px;
+}
+.guide-take-photo .check {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-50%);
+}
+.guide-take-photo input::placeholder {
+  color: #bdbdbd;
+  font-size: 13px;
+  font-family: Montserrat;
+}
+.take-photo .check {
+  position: absolute;
+  transform: translateY(-50%);
+}
+.hotline-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  height: 54px;
+  border: 2px solid #98ebff;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 13px;
+}
+.load {
+  background-image: url(../../assets/fontawesome/image/upload.gif);
+  background-position: center;
+  background-size: cover;
+  border-radius: 50%;
+}
+.title-gu {
+  position: relative;
+  left: 30px;
+  font-size: 13px;
+  line-height: 18px;
+  width: 100%;
+  word-wrap: break-word;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+}
+div .style-li ul li::before {
+  /* content: "\2022";
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  display: inline-block;
+  width: 100%;
+  margin-left: -1em; */
+}
+.containerNotify__background-takephoto {
+}
+.containerNotify__background-takephoto
+  .containerNotify__background-takephotolist {
+  overflow-y: auto;
+  max-height: 80%;
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}

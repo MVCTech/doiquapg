@@ -1,0 +1,11 @@
+.spin-the-wheel {
+  background: #ffffff;
+}
+.spin-the-wheel .wheel {
+  /* background-image: url(../../assets/fontawesome/image/wheel-bg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 800px; */
+  /* top: 64px; */
+}

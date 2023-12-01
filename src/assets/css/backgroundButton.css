@@ -1,0 +1,22 @@
+.color-button-primary {
+  background-color: #003da5;
+}
+.color-button-disable {
+  background-color: #bdbdbd;
+}
+.color-button-enable {
+  background-color: #47ccff;
+}
+.color-button-blue {
+  background-color: #003da5;
+}
+/* text-[#333] px-[32px] py-[17px] text-center no-underline inline-block rounded-3xl text-[16px] cursor-pointer */
+.button-login {
+  color: #333;
+  padding: 17px 32px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 24px;
+  font-size: 16px;
+  cursor: pointer;
+}

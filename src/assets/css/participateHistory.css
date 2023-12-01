@@ -1,0 +1,29 @@
+.period-parhis {
+  font-size: 11px;
+  line-height: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  /* -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical; */
+  max-width: 120px;
+}
+
+.quantity-parhis {
+  font-size: 16px;
+  line-height: 16px;
+}
+.content-description-his {
+  font-size: 13px;
+  line-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.participatehis-item {
+  display: flex;
+  padding: 13px;
+}

@@ -1,0 +1,33 @@
+.icon-bottom {
+  background: url(../fontawesome/image/icon-bottom-list-rotation.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.text-reponsive-date {
+  font-size: 13px;
+  line-height: 16px;
+}
+@media (max-width: 399px) {
+  .icon-bottom {
+    background: url(../fontawesome/image/icon-bottom-list-rotation.svg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin-top: 15px;
+    margin-left: 15px;
+  }
+  .bgr-icon-back {
+    width: 45px;
+    height: 45px;
+  }
+  .image-product {
+    width: 90px;
+    height: 90px;
+  }
+  .text-reponsive {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+}

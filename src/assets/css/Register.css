@@ -1,0 +1,80 @@
+.form__check {
+  width: calc(100% - 20px);
+  margin-top: 40px 0 28px 0;
+}
+.form__description {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #ffffff;
+  line-height: 19px;
+  white-space: pre-line;
+  display: flex;
+  flex-wrap: wrap;
+  word-break: break-word;
+  font-weight: 300;
+}
+/* border-white rounded-[14px] text-[13px] font-normal text-[#363534] leading-5 */
+.input-data {
+  border-radius: 14px;
+  font-size: 13px;
+  color: #363534;
+  line-height: 20px;
+}
+.checkbox-confirm-register {
+  accent-color: blue;
+  width: 20px;
+  height: 20px;
+}
+.input-size {
+  width: 100%;
+  height: 60px;
+  padding-left: 20px;
+}
+@media (max-width: 320px) {
+  .form__name {
+    height: 40px;
+    margin-top: 10px;
+  }
+  .form__phoneField {
+    height: 40px;
+    margin: 25px 0;
+  }
+  .form__email {
+    height: 40px;
+  }
+  .select_city {
+    height: 40px;
+    margin: 25px 0;
+  }
+  .select_province {
+    height: 40px;
+    margin-bottom: 25px;
+  }
+  .form__footer {
+    margin-bottom: 30px;
+  }
+  .form__sex {
+    height: 40px;
+  }
+  .datePicker {
+    height: 40px;
+  }
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fontawesome/fonts/static/Montserrat-Bold.ttf");
+}
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: url("../fontawesome/fonts/static/Montserrat-Regular.ttf");
+}
+
+.select-wrapper {
+  -webkit-appearance: none;
+  appearance: none;
+  background: url(../fontawesome/image/dropdown.png);
+  background-color: #fff;
+  background-size: 15px;
+  background-repeat: no-repeat;
+  background-position: calc(100% - 30px) center;
+}

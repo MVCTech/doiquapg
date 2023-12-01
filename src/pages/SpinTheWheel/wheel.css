@@ -1,0 +1,301 @@
+div#bg {
+  margin: 0px auto;
+  position: relative;
+  z-index: 2;
+}
+
+.mainbox {
+  max-width: 414px;
+  width: 100%;
+  height: 400px;
+  box-sizing: border-box;
+  top: 25px;
+  margin: 0 auto;
+  z-index: 2;
+  right: 0;
+  padding: 5px;
+}
+
+.box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 50%;
+  top: 28px;
+  overflow: hidden;
+  transition: all ease 5s;
+  box-sizing: border-box;
+  background: url(../../assets/fontawesome/image/group_446.png) no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+span.segment {
+  width: 50%;
+  height: 50%;
+  display: inline-block;
+  position: absolute;
+}
+.span1 {
+  top: 85px;
+  left: -40px;
+}
+.span2 {
+  top: 95px;
+  right: -40px;
+}
+.span3 {
+  bottom: -30px;
+  left: 80px;
+}
+.span4 {
+  top: -25px;
+  left: 90px;
+}
+
+span.segment.span1.color-1,
+span.segment.span1.color-2 {
+  transform: rotate(-90deg);
+}
+
+span.segment.span2.color-1,
+span.segment.span2.color-2 {
+  transform: rotate(90deg);
+}
+
+span.segment.span3.color-1,
+span.segment.span3.color-2 {
+  transform: rotate(180deg);
+}
+
+span.segment.span4.color-1,
+span.segment.span4.color-2 {
+  transform: rotate(0deg);
+}
+
+.color-1 {
+  color: #ffff;
+  font-weight: bold;
+}
+.color-2 {
+  color: #003da5;
+  font-weight: bold;
+}
+
+.box2 {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-135deg);
+}
+
+.span1 i.segments {
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  top: 62%;
+  left: 44%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.span2 i.segments {
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  top: 60%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.span3 i.segments {
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  top: 60%;
+  left: 43%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.span4 i.segments {
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  top: 55%;
+  left: 52%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 0px;
+}
+
+.segments img {
+  max-width: 40px;
+  max-height: 50px;
+  margin-top: 10px;
+  top: 0px;
+  right: 35px;
+}
+.segments h6 {
+  display: block;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  left: 55px;
+  line-height: 13px;
+  text-align: center;
+  top: -23px;
+  width: 90px;
+}
+.spin {
+  outline: none;
+  position: absolute;
+  /* top: 57%; */
+  top: 53%;
+  transform: translate(-50%, -50%);
+  border: none;
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+  left: 50%;
+  background-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+.spin > img {
+  max-width: none !important;
+}
+
+button.spin {
+  border-radius: 30px;
+}
+
+.mainbox.animate:after {
+  animation: animateArrow 0.7s ease infinite;
+}
+@keyframes animateArrow {
+  50% {
+    right: -40px;
+  }
+}
+@media only screen and (max-width: 360px) {
+  .bg:before {
+    left: -16px;
+    background-position: -7px;
+  }
+  .mainbox {
+    left: -15px;
+  }
+  div#bg:after {
+    left: -11px;
+  }
+}
+@media (min-width: 361px) and (max-width: 375px) {
+  .bg:before {
+    left: -20px;
+  }
+  .mainbox {
+    left: 0;
+  }
+  div#bg:after {
+    left: -5px;
+  }
+}
+.wheel-text {
+  position: relative;
+}
+.btn-luotquay {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 10px;
+  width: 100%;
+  height: 48px;
+  background: #f6de8b;
+  border: 6px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #d73727;
+  margin-top: 60px;
+}
+
+.hetluotquay-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+
+  color: #f6de8b;
+  margin-top: 20px;
+}
+.spin-remain-container {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spin-remain-container.container {
+  min-height: 0;
+}
+
+.spin-remain-container .spin-remain {
+  padding: 16px 32px;
+  background: #efdb8e;
+  border: 4px solid #eed163;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+  color: #b12125;
+}
+
+@media only screen and (max-width: 375px) {
+  .segments h6 {
+    font-size: 12px;
+  }
+  .segments img {
+    max-width: 30px;
+  }
+  .span3 {
+    bottom: -20px;
+    left: 70px;
+  }
+  .span4 {
+    top: -20px;
+    left: 80px;
+  }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 350px) {
+  .span4 {
+    top: -10px;
+    left: 70px;
+  }
+  .span3 {
+    bottom: -10px;
+    left: 60px;
+  }
+}

@@ -1,0 +1,13 @@
+.container__contact-phonebgr {
+  background: url(../fontawesome/image/phone.png);
+  background-repeat: no-repeat;
+}
+.hotdeal-details {
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+.background-bottom-icon {
+  background: url(../fontawesome/image/background-bottom-list-rotation.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}

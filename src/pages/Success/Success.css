@@ -1,0 +1,22 @@
+.success {
+  background-color: #003da5;
+  background-image: url(../../assets/fontawesome/image/success_bg.png);
+  background-position: center;
+
+  background-repeat: no-repeat;
+}
+.success .temp {
+  background-image: url(../../assets/fontawesome/image/success_firework.png);
+  background-size: cover;
+}
+.success-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+  gap: 4px;
+  border: 1px solid #00a1df;
+  border-radius: 16px;
+  font-size: 13px;
+}

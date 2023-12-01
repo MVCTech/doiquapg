@@ -1,0 +1,76 @@
+.font-italic-mon {
+  font-family: Montserrat-Italic;
+}
+.font-thin {
+  font-family: Montserrat-Thin;
+}
+.font-bold-mon {
+  font-family: Montserrat;
+}
+.font-semibold-mon {
+  font-family: Montserrat-SemiBold;
+}
+.font-regular-mon {
+  font-family: Montserrat-Regular;
+}
+.font-light-mon {
+  font-family: Montserrat-Light;
+}
+.corlor-text-light {
+  color: #828282;
+}
+.corlor-text-white {
+  color: #ffff;
+}
+.corlor-text-darkblue {
+  color: #003da5;
+}
+.corlor-text-primaryblue {
+  color: #1d86fa;
+}
+.corlor-text-primarygreen {
+  color: #00af43;
+}
+.corlor-text-darkblack {
+  color: black;
+}
+.corlor-text-darkred {
+  color: red;
+}
+.corlor-text-darkwhite {
+  color: white;
+}
+.font-text-12 {
+  font-size: 12px;
+}
+.font-text-13 {
+  font-size: 13px;
+}
+@font-face {
+  font-family: "Montserrat-Italic";
+  src: url("../fontawesome/fonts/static/Montserrat-Italic.ttf");
+}
+@font-face {
+  font-family: "Montserrat-Thin";
+  src: url("../fontawesome/fonts/static/Montserrat-Thin.ttf");
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../fontawesome/fonts/static/Montserrat-Bold.ttf");
+}
+@font-face {
+  font-family: "Montserrat-Medium";
+  src: url("../fontawesome/fonts/static/Montserrat-Medium.ttf");
+}
+@font-face {
+  font-family: "Montserrat-SemiBold";
+  src: url("../fontawesome/fonts/static/Montserrat-SemiBold.ttf");
+}
+@font-face {
+  font-family: "Montserrat-Regular";
+  src: url("../fontawesome/fonts/static/Montserrat-Regular.ttf");
+}
+@font-face {
+  font-family: "Montserrat-Light";
+  src: url("../fontawesome/fonts/static/Montserrat-Light.ttf");
+}

@@ -1,0 +1,251 @@
+.bg-guide {
+  background: url(../fontawesome/image/background-guide-page.svg);
+  width: 100vw;
+  height: 100vh;
+  min-width: 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  background-size: 100%;
+  top: 0;
+}
+.header-info {
+  font-size: 20px;
+}
+.bg-bottom-guide {
+  position: relative;
+  top: 10%;
+  bottom: 0;
+  width: 100vw;
+  max-height: 100%;
+}
+.logo-ios {
+  background-image: url(../fontawesome/image/ios.svg);
+  width: 25px;
+  height: 28px;
+  background-repeat: no-repeat;
+}
+.logo-android {
+  background-image: url(../fontawesome/image/android.svg);
+  width: 25px;
+  height: 28px;
+  background-repeat: no-repeat;
+}
+
+.header-logo {
+  color: #828282;
+  font-size: 13px;
+  height: 40;
+}
+
+.style-carousel {
+  height: 324px;
+  margin-top: 16px;
+}
+.btn-next {
+  margin-top: 12px;
+  height: 15px;
+}
+
+.text-btn-cancel {
+  font-size: 13px;
+}
+.description-guide {
+  margin-top: 11px;
+  /* flex: 5; */
+}
+
+.title-description {
+  margin-left: 10px;
+  font-size: 13px;
+  line-height: 18px;
+  width: 80%;
+  word-wrap: break-word;
+  text-align: left;
+}
+.content-description {
+  line-height: 19px;
+}
+
+@media (max-width: 336px) {
+  .location-btn {
+    margin-top: 260px;
+    margin-bottom: 50px;
+  }
+}
+
+.webcam {
+  margin-left: 0px;
+  background-color: #333333;
+  /* height: 100vh; */
+}
+.webcamcontent {
+  /* margin-top: 80px; */
+  border: 2px solid #f89f2a;
+  border-radius: 20px;
+}
+.btn-webcam {
+  height: 76px;
+  width: 76px;
+  border-radius: 25px;
+  margin-top: 10px;
+  background-color: #1a5999;
+  border: 1px solid #ffffff;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 20px;
+}
+.btn-cancel {
+  height: 65px;
+  border: 0px solid;
+  width: 70px;
+  border-radius: 18px;
+  margin-right: 15px;
+  text-align: center;
+  margin-top: 10px;
+  background-color: #1a9ad1;
+  opacity: 1;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 14px;
+}
+.btn-gui {
+  height: 40px;
+  border: 0px solid;
+  width: 110px;
+  border-radius: 18px;
+  margin-left: 10px;
+  margin-top: 20px;
+  background-color: #fee1b9;
+  color: #fea32b;
+  font-weight: 700;
+}
+.popup-box-cam {
+  /* border-radius: 20px; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 100%;
+  /* margin-top: 0px; */
+  /* transform: translateY(-28%); */
+  padding: 0px 0px 15px 0px;
+  /* margin-top: 10px; */
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; */
+  background-color: #ffffff;
+}
+/* .popup-box-cam:before {
+  content: "";
+  background: url("../images/tick_icon.png");
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: -50px;
+  background-repeat: no-repeat;
+  background-size: contain;
+} */
+.popup-box-cam .close-btn {
+  cursor: pointer;
+  position: absolute;
+  top: -10px;
+  /* right: -8px; */
+  width: 35px;
+}
+.title-cam {
+  margin-top: 0px;
+  margin-bottom: 12px;
+  font-size: 20px;
+  font-weight: 200;
+  text-align: center;
+  line-height: 20px;
+}
+.content-cam {
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-size: 18px;
+  font-weight: 200;
+  text-align: center;
+  line-height: 20px;
+  width: 100%;
+}
+.img-cam {
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  margin-left: 2px;
+  margin-right: 4px;
+  margin-top: 4px;
+}
+.img-cam-only {
+  width: 80px;
+  height: 80px;
+  color: #ffffff;
+  /* margin-left: 2px;
+  margin-right: 4px;
+  margin-top: 4px; */
+  margin-top: 8px;
+  font-size: 40px;
+}
+.cam-hd {
+  margin-left: 8px;
+  font-weight: 400;
+  font-size: 19px;
+}
+.cam-hd1 {
+  margin-left: 12px;
+  font-weight: 500;
+  font-size: 19px;
+  border: 1px solid #0367c1;
+}
+.select-cam-phone {
+  width: 120px;
+  height: 50px;
+  margin-top: 12px;
+  border-radius: 18px;
+  margin-right: 15px;
+  background-color: #bbdfff;
+  color: #0367c1;
+  border: 1px solid #0367c1;
+}
+.style-choose {
+  font-size: 12px;
+}
+.help .fade {
+  padding-left: -10px;
+}
+.content-popup-condition {
+  position: relative;
+  top: 40%;
+  transform: translateY(-50%);
+}
+.border-imgbg {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+.bg_popup-cam {
+  position: relative;
+  /* top: -50px; */
+  z-index: 9999;
+  height: 590px;
+  background-color: #ffffff;
+  text-align: center;
+  border-radius: 20px;
+}
+.bg_popup-cam-guide {
+  position: relative;
+  /* top: -50px; */
+  z-index: 9999;
+  height: 530px;
+  background-color: #ffffff;
+  text-align: center;
+  border-radius: 20px;
+}
+.fontTextCheckCam {
+  font-size: 16px;
+  color: #333333;
+}

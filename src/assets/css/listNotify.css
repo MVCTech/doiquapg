@@ -1,0 +1,52 @@
+.containerNotify__background-itemChildName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.content-notify {
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.containerNotify__background-itemChildContent {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.containerNotify__background-itemChildTime {
+  font-size: 12px;
+  line-height: 16px;
+  color: #a9a9a9;
+}
+.containerNotify__background-item {
+  display: flex;
+  padding: 5px 25px 5px 25px;
+  height: 59px;
+}
+@media (max-width: 356px) {
+  .containerNotify__background-itemChildContent {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  .containerNotify__background-itemChildName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+  .containerNotify__background-itemChildTime {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+}

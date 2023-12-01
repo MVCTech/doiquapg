@@ -1,0 +1,62 @@
+.noaccess-content {
+  width: 100%;
+  padding: 15px;
+  border: 3px solid #f7de8c;
+  border-radius: 8px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  /* or 144% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  color: black;
+}
+
+.uploading-container {
+  height: 100vh;
+  background-color: #2276dc;
+  padding: 10vh 15px;
+}
+
+.uploading-img {
+  width: 100%;
+}
+
+.uploading-content {
+  width: 100%;
+  padding: 15px;
+  border: 3px solid #f7de8c;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: white;
+  color: black;
+}
+
+.qr-container {
+  position: absolute;
+  top: 50px;
+  right: 100px;
+  text-align: right;
+}
+.qr-container .scan-qr-text {
+  width: 250px;
+}
+
+.qr-container .qr-code {
+  width: 200px;
+}
+.qr-container .link-tc {
+  color: white;
+  line-height: 60px;
+}
