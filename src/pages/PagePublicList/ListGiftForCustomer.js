@@ -157,9 +157,12 @@ export default function ListGiftForCustomer() {
         </ul>
         <div className="px-5 text-[red] italic font-semibold-mon">
           Lưu ý (*): <span></span>
+          <div>- Lượng phân bổ quà tặng ở mỗi Siêu thị là khác nhau.</div>
+          <div>
+            - Chương trình sẽ kết thúc sớm hơn dự kiến do số lượng quà có hạn.
+          </div>
         </div>
       </div>
-      
     </div>
   );
 }
