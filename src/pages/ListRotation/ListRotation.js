@@ -23,6 +23,7 @@ export default function ListRotation() {
     luckyDrawService
       .getLuckyDrawList()
       .then((res) => {
+        console.log(res)
         setLuckyDrawList(res.lucky_draw_list);
       })
       .catch((err) => {
