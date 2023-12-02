@@ -49,6 +49,8 @@ export default function MainPopup({
   const handleClickOk = () => {};
   const handleNavigateSucess = () => {
     navigation(`/list-gift`);
+    localStorage.removeItem(WHEEL_LUOTQUAY)
+    localStorage.removeItem(WHEEL_PHANTHUONG)
   };
   const handleRotation = () => {
     navigation(`/list-rotation`);

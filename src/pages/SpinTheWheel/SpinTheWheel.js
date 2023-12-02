@@ -223,7 +223,9 @@ export default function SpinTheWheel() {
           setluotQuay(gift_no - count_draw);
           console.log(gift_no);
           console.log(count_draw);
-
+          if (gift_no - count_draw === 0) {
+            navigate("/list-rotation");
+          }
           localStorage.setItem(WHEEL_LUOTQUAY, "" + (gift_no - count_draw));
         }
       })
@@ -358,7 +360,8 @@ export default function SpinTheWheel() {
   };
   useEffect(() => {
     console.log(isAnnounce);
-  });
+    
+  }, []);
   return (
     <div>
       <div
