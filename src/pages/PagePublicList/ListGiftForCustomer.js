@@ -155,7 +155,11 @@ export default function ListGiftForCustomer() {
             )}
           </div>
         </ul>
+        <div className="px-5 text-[red] italic font-semibold-mon">
+          Lưu ý (*): <span></span>
+        </div>
       </div>
+      
     </div>
   );
 }
