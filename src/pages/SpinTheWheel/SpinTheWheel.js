@@ -167,10 +167,10 @@ export default function SpinTheWheel() {
         };
         localStorage.setItem("WINNING_GIFT", JSON.stringify(winningItem));
         let angle = array_angle[indexNewGiftList]?.angle;
-        setTrans("rotate(" + (angle + 360 * 6) + "deg)");
+        setTrans("rotate(" + (angle + 360 * 18) + "deg)");
         setTimeout(() => {
           handleChangeAnnounceStatus();
-        }, 6500);
+        }, 3000);
       })
       .catch((err) => {
         console.log(err)
