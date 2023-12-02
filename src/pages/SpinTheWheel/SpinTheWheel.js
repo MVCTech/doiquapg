@@ -10,7 +10,11 @@ import "./wheel.css";
 import ContentGiftPrize from "../../component/ConfirmPopupTnC/ContentGiftPrize";
 import MainPopup from "../../component/ConfirmPopupTnC/MainPopup";
 import BG_WHEEL from "../../assets/fontawesome/image/wheel-bg.png";
-import { WHEEL_HAS_LUOTQUAY, WHEEL_PHANTHUONG, WHEEL_LUOTQUAY } from "../../utils/KeyConstant";
+import {
+  WHEEL_HAS_LUOTQUAY,
+  WHEEL_PHANTHUONG,
+  WHEEL_LUOTQUAY,
+} from "../../utils/KeyConstant";
 
 const style = {
   color: "#130682",
@@ -118,7 +122,7 @@ export default function SpinTheWheel() {
   //   });
   //   setSegments(list_prizes);
   // };
-
+  const [render, setRender] = useState(false);
   useEffect(() => {
     console.log(id);
     luckyDrawService
@@ -135,7 +139,7 @@ export default function SpinTheWheel() {
         //     navigate(`/list-rotation`);
         //   }, 3000);
         // }
-        if(dataResponse.list_prizes !== undefined){
+        if (dataResponse.list_prizes !== undefined) {
           sethasWheel("TRUE");
           let list_prizes = dataResponse.list_prizes;
           let segmentsTemp = [];
@@ -151,11 +155,11 @@ export default function SpinTheWheel() {
               WHEEL_PHANTHUONG,
               JSON.stringify(dataResponse.list_win[count_draw])
             );
-            if(
+            if (
               list_prizes !== undefined &&
               list_prizes !== null &&
               list_prizes.length > 0
-            ){
+            ) {
               for (let i = 0; i < list_prizes.length; i++) {
                 let a = list_prizes[i].gift;
                 var check = false;
@@ -167,8 +171,8 @@ export default function SpinTheWheel() {
                   check: check,
                   gift_image: list_prizes[i].gift_image,
                 };
-                console.log(itemTemp)
-                if (list_prizes[i].gift_code.includes("biggift")) {
+                console.log(itemTemp);
+                if (!list_prizes[i].gift_code.includes("biggift")) {
                   if (!list_prizes[i].gift_code.includes("bighalfgift")) {
                     segmentsNormalGiftTemp.push(itemTemp);
                   } else {
@@ -181,8 +185,8 @@ export default function SpinTheWheel() {
               var segmentsTempList = segmentsTemp.concat(
                 segmentsBigHalfGiftTemp
               );
-              console.log(segmentsNormalGiftTemp)
-              console.log(segmentsBigHalfGiftTemp)
+              console.log(segmentsNormalGiftTemp);
+              console.log(segmentsBigHalfGiftTemp);
 
               if (segmentsTempList.length < soqua) {
                 a = 8 - segmentsTempList.length;
@@ -199,7 +203,7 @@ export default function SpinTheWheel() {
                 //   return 0.5 - Math.random();
                 // });
               }
-              console.log(segmentsTemp)
+              console.log(segmentsTemp);
               for (let a = 0; a < segmentsTemp.length; a++) {
                 console.log(segmentsTemp[a]);
                 if (segmentsTemp[a].gift_code === gift_code_win) {
@@ -215,22 +219,23 @@ export default function SpinTheWheel() {
             sethasWheel("FALSE");
             // setmessage(response.data.result.meta.message);
           }
-          console.log(segments)
           setsegments(segmentsTemp);
           setluotQuay(gift_no - count_draw);
-          localStorage.setItem(WHEEL_LUOTQUAY, "" + (gift_no - count_draw));
+          console.log(gift_no);
+          console.log(count_draw);
 
+          localStorage.setItem(WHEEL_LUOTQUAY, "" + (gift_no - count_draw));
         }
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         setIsDisable(true);
         toast.error(err);
         setTimeout(() => {
           navigate(`/list-rotation`);
         }, 3000);
       });
-  }, []);
+  }, [render]);
   const runWheel = () => {
     setIsSpinning(true);
     var array_toado = [
@@ -243,7 +248,7 @@ export default function SpinTheWheel() {
       { id: 7, toado: -270 },
       { id: 8, toado: -315 },
     ];
-    if (win != 0) {
+    if (win !== 0) {
       console.log(win);
       var item = array_toado?.find((i) => i.id === win);
       let toado = item?.toado;
@@ -265,30 +270,30 @@ export default function SpinTheWheel() {
     }
   };
   const redirectToWheelResult = () => {
+    setIsAnnounce(!isAnnounce);
+
     // navigate("/" + appCode + "/wheelresult/" + pgCode);
-    console.log("hello")
+    console.log("hello");
   };
   const countDraw = async () => {
-   
-
     luckyDrawService
       .postCountDraw(id)
       .then((response) => {
-        
-        // if (response.data !== undefined) {
-          // setcount_draw(json.result.data.count_draw);
-          // setgift_no(json.result.data.gift_no);
-          setluotQuay(response.gift_no - response.count_draw);
-          localStorage.setItem(
-            WHEEL_LUOTQUAY,
-            "" + (response.gift_no - response.count_draw)
-          );
+        console.log(response);
 
-          if (response.gift_no - response.count_draw >= 1) {
-            localStorage.setItem(WHEEL_HAS_LUOTQUAY, "TRUE");
-          } else {
-            localStorage.setItem(WHEEL_HAS_LUOTQUAY, "FAlSE");
-          }
+        // if (response.data !== undefined) {
+        // setcount_draw(json.result.data.count_draw);
+        // setgift_no(json.result.data.gift_no);
+        setluotQuay(response.gift_no - response.count_draw);
+        localStorage.setItem(
+          WHEEL_LUOTQUAY,
+          "" + (response.gift_no - response.count_draw)
+        );
+        if (response.gift_no - response.count_draw >= 1) {
+          localStorage.setItem(WHEEL_HAS_LUOTQUAY, "TRUE");
+        } else {
+          localStorage.setItem(WHEEL_HAS_LUOTQUAY, "FAlSE");
+        }
         // }
       })
       .catch(() => {
@@ -343,12 +348,17 @@ export default function SpinTheWheel() {
   // };
   const handleChangeAnnounceStatus = () => {
     setIsAnnounce(!isAnnounce);
-    setTrans("rotate(" + 0 + "deg)");
+    setRender(!render);
+    settransformBox("rotate(" + 0 + "deg)");
   };
   const handleEnableBtn = () => {
     setIsDisable(!isDisable);
+
     // getDataGift(severGiftList);
   };
+  useEffect(() => {
+    console.log(isAnnounce);
+  });
   return (
     <div>
       <div
@@ -457,7 +467,7 @@ export default function SpinTheWheel() {
                       onClick={() => {
                         runWheel();
                       }}
-                      disabled={isDisable ? "disabled" : ""}
+                      disabled={isSpinning}
                     >
                       {/* w-[320px] */}
                       <img className="-z-10  w-[70px]" src={spin_img} alt="" />
@@ -473,7 +483,7 @@ export default function SpinTheWheel() {
                 className="pointer-events-none color-button-enable border-0 text-[#333] 
                 px-[20px] py-[20px] text-center no-underline inline-block rounded-[16px] text-[16px] cursor-pointer not-italic font-[Montserrat-Light] font-black leading-5 z-50"
               >
-                {spinRemain >= 1
+                {luotQuay >= 1
                   ? `Bạn còn ${luotQuay} lượt quay`
                   : "Bạn đã hết lượt quay"}
               </button>
