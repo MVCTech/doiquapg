@@ -217,6 +217,8 @@ export default function GuideTakeAPhoto() {
   const [activeDeviceId, setActiveDeviceId] = useState(undefined);
   const [openCam, setOpenCam] = useState(true);
   const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
+  const [current, setCurrent] = useState("0");
+
   useEffect(() => {
     (async () => {
       const devices = await navigator.mediaDevices.enumerateDevices();
@@ -228,7 +230,17 @@ export default function GuideTakeAPhoto() {
       });
       setDevices(matching);
     })();
-  });
+    setTimeout(async () => {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoDevices = devices.filter((i) => i.kind == "videoinput");
+      console.log(videoDevices);
+      const font = ["Webcam", "back", "Camera mặt sau", "Back", "cực rộng"];
+      const matching = videoDevices.filter((l) => {
+        return font.some((term) => l.label.includes(term));
+      });
+      setDevices(matching);
+    }, 1000);
+  }, []);
   function urltoFile(url, filename, mimeType) {
     return fetch(url)
       .then(function (res) {
@@ -263,6 +275,10 @@ export default function GuideTakeAPhoto() {
   useEffect(() => {}, [isCheck === true]);
   const handlePopupQuestion = () => {
     setIsOpenPopupGuide(true);
+  };
+  const handleIndex = (id, index) => {
+    setActiveDeviceId(id);
+    setCurrent(index);
   };
   return (
     <>
@@ -306,25 +322,33 @@ export default function GuideTakeAPhoto() {
                 }}
               />
               {os === "iOS" ? null : (
-                <div className="relative flex justify-between items-center w-full bottom-44 bg-slate-500 py-1 px-4 rounded-3xl opacity-40">
-                  {/* <div className="bg-black rounded-[100%] p-1 text-yellow-500 opacity-70">0.5</div>
-                <div className="">1</div>
-                <div>2</div> */}
+                <div className="relative flex justify-between items-center w-28 bottom-44 bg-black px-4 rounded-3xl opacity-50">
                   {devices.map((d, index) => (
-                    <>
-                      <div
-                        className="bg-black rounded-[100%] p-1 text-yellow-500 opacity-70"
-                        key={d.deviceId}
-                        value={d.deviceId}
-                      >
-                        {index}
+                    <div
+                      key={index}
+                      className={`${
+                        parseInt(current) === index ? "bg-white" : ""
+                      } text-[12px] w-8 rounded-2xl h-8 flex justify-between 
+                      items-center opacity-100`}
+                    >
+                      <div className="flex justify-center flex-auto ">
+                        <button
+                          onClick={() => handleIndex(d.deviceId, index)}
+                          className={`${
+                            parseInt(current) === index ? "text-black" : "text-white"
+                          } font-bold-mon opacity-100`}
+                        >
+                          {d.label.includes("camera2 2")
+                            ? "0.5x"
+                            : d.label.includes("camera2 0")
+                            ? "1x"
+                            : d.label}
+                        </button>
                       </div>
-                      <br />
-                    </>
+                    </div>
                   ))}
                 </div>
               )}
-
               <div
                 style={{
                   backgroundColor: "#333333",
