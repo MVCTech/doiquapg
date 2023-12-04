@@ -274,7 +274,7 @@ export default function GuideTakeAPhoto() {
             <>
               <Camera
                 ref={camera}
-                aspectRatio={9 / 16.5}
+                aspectRatio={9 / 13.6}
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"
                 errorMessages={{
