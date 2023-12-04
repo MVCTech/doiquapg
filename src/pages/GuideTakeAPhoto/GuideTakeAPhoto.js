@@ -26,6 +26,7 @@ import {
 } from "../../utils/dataFormat";
 import ConfirmPopupGuideTakePhoto from "../../component/ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
 import { setAuthorization } from "../../services/apiService/configURL";
+import { getOS } from "../../services/deviceModel";
 
 export default function GuideTakeAPhoto() {
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
@@ -210,12 +211,24 @@ export default function GuideTakeAPhoto() {
         setIsUpload(false);
       });
   };
+  const [devices, setDevices] = useState([]);
 
   const [image, setImage] = useState(undefined);
   const [activeDeviceId, setActiveDeviceId] = useState(undefined);
   const [openCam, setOpenCam] = useState(true);
   const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
-
+  useEffect(() => {
+    (async () => {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoDevices = devices.filter((i) => i.kind == "videoinput");
+      console.log(videoDevices);
+      const font = ["Webcam", "back", "Camera mặt sau", "Back", "cực rộng"];
+      const matching = videoDevices.filter((l) => {
+        return font.some((term) => l.label.includes(term));
+      });
+      setDevices(matching);
+    })();
+  });
   function urltoFile(url, filename, mimeType) {
     return fetch(url)
       .then(function (res) {
@@ -235,7 +248,7 @@ export default function GuideTakeAPhoto() {
     }
   }, [image]);
   const camera = useRef(null);
-
+  const os = getOS();
   const handleCancelCam = () => {
     localStorage.removeItem(SET_CHECK_CAM);
     setImageFile(undefined);
@@ -274,7 +287,7 @@ export default function GuideTakeAPhoto() {
             <>
               <Camera
                 ref={camera}
-                aspectRatio={9 / 16.5}
+                aspectRatio={9 / 16}
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"
                 errorMessages={{
@@ -292,6 +305,25 @@ export default function GuideTakeAPhoto() {
                   localStorage.setItem(SET_CHECK_CAM, true);
                 }}
               />
+              {os === "iOS" ? null : (
+                <div className="relative flex justify-between items-center w-full bottom-44 bg-slate-500 py-1 px-4 rounded-3xl opacity-40">
+                  {/* <div className="bg-black rounded-[100%] p-1 text-yellow-500 opacity-70">0.5</div>
+                <div className="">1</div>
+                <div>2</div> */}
+                  {devices.map((d, index) => (
+                    <>
+                      <div
+                        className="bg-black rounded-[100%] p-1 text-yellow-500 opacity-70"
+                        key={d.deviceId}
+                        value={d.deviceId}
+                      >
+                        {index}
+                      </div>
+                      <br />
+                    </>
+                  ))}
+                </div>
+              )}
 
               <div
                 style={{
