@@ -26,6 +26,7 @@ import {
 } from "../../utils/dataFormat";
 import ConfirmPopupGuideTakePhoto from "../../component/ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
 import { setAuthorization } from "../../services/apiService/configURL";
+import { getOS } from "../../services/deviceModel";
 
 export default function GuideTakeAPhoto() {
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
@@ -210,12 +211,36 @@ export default function GuideTakeAPhoto() {
         setIsUpload(false);
       });
   };
+  const [devices, setDevices] = useState([]);
 
   const [image, setImage] = useState(undefined);
   const [activeDeviceId, setActiveDeviceId] = useState(undefined);
   const [openCam, setOpenCam] = useState(true);
   const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
+  const [current, setCurrent] = useState("0");
 
+  useEffect(() => {
+    (async () => {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoDevices = devices.filter((i) => i.kind == "videoinput");
+      console.log(videoDevices);
+      const font = ["Webcam", "back", "Camera mặt sau", "Back", "cực rộng"];
+      const matching = videoDevices.filter((l) => {
+        return font.some((term) => l.label.includes(term));
+      });
+      setDevices(matching);
+    })();
+    setTimeout(async () => {
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      const videoDevices = devices.filter((i) => i.kind == "videoinput");
+      console.log(videoDevices);
+      const font = ["Webcam", "back", "Camera mặt sau", "Back", "cực rộng"];
+      const matching = videoDevices.filter((l) => {
+        return font.some((term) => l.label.includes(term));
+      });
+      setDevices(matching);
+    }, 1000);
+  }, []);
   function urltoFile(url, filename, mimeType) {
     return fetch(url)
       .then(function (res) {
@@ -235,7 +260,7 @@ export default function GuideTakeAPhoto() {
     }
   }, [image]);
   const camera = useRef(null);
-
+  const os = getOS();
   const handleCancelCam = () => {
     localStorage.removeItem(SET_CHECK_CAM);
     setImageFile(undefined);
@@ -250,6 +275,10 @@ export default function GuideTakeAPhoto() {
   useEffect(() => {}, [isCheck === true]);
   const handlePopupQuestion = () => {
     setIsOpenPopupGuide(true);
+  };
+  const handleIndex = (id, index) => {
+    setActiveDeviceId(id);
+    setCurrent(index);
   };
   return (
     <>
@@ -274,7 +303,7 @@ export default function GuideTakeAPhoto() {
             <>
               <Camera
                 ref={camera}
-                aspectRatio={9 / 16.5}
+                aspectRatio={9 / 16}
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"
                 errorMessages={{
@@ -292,7 +321,34 @@ export default function GuideTakeAPhoto() {
                   localStorage.setItem(SET_CHECK_CAM, true);
                 }}
               />
-
+              {os === "iOS" ? null : (
+                <div className="relative flex justify-between items-center w-28 bottom-44 bg-black px-4 rounded-3xl opacity-50">
+                  {devices.map((d, index) => (
+                    <div
+                      key={index}
+                      className={`${
+                        parseInt(current) === index ? "bg-white" : ""
+                      } text-[12px] w-8 rounded-2xl h-8 flex justify-between 
+                      items-center opacity-100`}
+                    >
+                      <div className="flex justify-center flex-auto ">
+                        <button
+                          onClick={() => handleIndex(d.deviceId, index)}
+                          className={`${
+                            parseInt(current) === index ? "text-black" : "text-white"
+                          } font-bold-mon opacity-100`}
+                        >
+                          {d.label.includes("camera2 2")
+                            ? "0.5x"
+                            : d.label.includes("camera2 0")
+                            ? "1x"
+                            : d.label}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
               <div
                 style={{
                   backgroundColor: "#333333",
