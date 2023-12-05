@@ -1,5 +1,10 @@
+import { WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
+
 export default function ContentGiftPrize() {
-  const winningGift = JSON.parse(localStorage.getItem("WINNING_GIFT"));
+  const winningGift = JSON.parse(localStorage.getItem(
+    // "WINNING_GIFT"
+    WHEEL_PHANTHUONG
+    ));
   return (
     <p className="containerNotify__background-list ">
       <div className="text-center">

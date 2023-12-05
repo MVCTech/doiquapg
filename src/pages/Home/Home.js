@@ -36,6 +36,7 @@ import {
 } from "../../utils/dataFormat";
 import { LOGIN_TYPE } from "../../services/localService/localService";
 import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
+import { format } from "date-fns";
 
 export default function Home() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
@@ -110,6 +111,8 @@ export default function Home() {
     getCampaignClip();
     getCampaignTopAndDown();
     getHomerBanner();
+    const a = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx")
+    console.log(a)
   }, []);
 
   const handleTakePhoto = (status) => {

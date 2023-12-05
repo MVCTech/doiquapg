@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import phone_icon from "../../assets/fontawesome/image/phone-icon.png";
 import { useNavigate } from "react-router-dom";
 import BTN_NEXT_GUIDE from "../../assets/fontawesome/image/btn-cancel-guide.svg";
+import { WHEEL_LUOTQUAY, WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
 
 MainPopup.propTypes = {
   image: PropTypes.string,
@@ -41,11 +42,15 @@ export default function MainPopup({
   flag,
 }) {
   const navigation = useNavigate();
-  const winningGift = JSON.parse(localStorage.getItem("WINNING_GIFT"));
+  const luotQuay = localStorage.getItem(WHEEL_LUOTQUAY);
+
+  const winningGift = JSON.parse(localStorage.getItem(WHEEL_PHANTHUONG));
   let contact = localStorage.getItem("CONTACT");
   const handleClickOk = () => {};
   const handleNavigateSucess = () => {
     navigation(`/list-gift`);
+    localStorage.removeItem(WHEEL_LUOTQUAY)
+    localStorage.removeItem(WHEEL_PHANTHUONG)
   };
   const handleRotation = () => {
     navigation(`/list-rotation`);
@@ -109,7 +114,7 @@ export default function MainPopup({
                             defaultValue="Đồng ý"
                             value={btnAgree}
                             onClick={() => {
-                              if (winningGift?.spinRemain >= 1) {
+                              if (luotQuay >= 1) {
                                 handleChangeAnnounceStatus();
                                 handleEnableBtn();
                               } else {
@@ -117,10 +122,10 @@ export default function MainPopup({
                               }
                             }}
                           >
-                            {winningGift?.spinRemain >= 1 ? (
+                            {luotQuay >= 1 ? (
                               <>
                                 Quay tiếp
-                                <br /> (còn {winningGift.spinRemain} lượt quay)
+                                <br /> (còn {luotQuay} lượt quay)
                               </>
                             ) : (
                               <>Nhận quà ngay</>

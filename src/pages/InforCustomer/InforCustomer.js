@@ -18,6 +18,7 @@ import { setLogout } from "../../Redux/Action/userAction";
 import { setAuthorization } from "../../services/apiService/configURL";
 import LOCKAUTH from "../../assets/fontawesome/image/lock-auth-icon.png";
 import { luckyDrawService } from "../../services/apiService/LuckyDraw";
+import { WHEEL_LUOTQUAY, WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
 
 const TITLE = "Thông tin khách hàng";
 const clickFilter = `/list-notify/tick`;
@@ -56,7 +57,8 @@ export default function InforCustomer() {
           localStorage.removeItem("GCS_RESULT");
           localStorage.removeItem("PHONE_NUMBER");
           localStorage.removeItem("NAME_USER");
-
+          localStorage.removeItem(WHEEL_LUOTQUAY);
+          localStorage.removeItem(WHEEL_PHANTHUONG);
           navigation(
             `${
               login_type === "password" ? "/login-password" : "/login-password"

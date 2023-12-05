@@ -9,6 +9,7 @@ import "../../assets/css/font-text.css";
 import "../../assets/css/backgroundListNotify.css";
 import "../../assets/css/backgroundPhone.css";
 import HeaderBackground from "../UpdateCustomerInfo/HeaderBackground";
+import { WHEEL_LUOTQUAY, WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
 
 const TITLE = "Danh sách vòng quay";
 
@@ -17,9 +18,12 @@ export default function ListRotation() {
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
   const navigation = useNavigate();
   useEffect(() => {
+    localStorage.removeItem(WHEEL_LUOTQUAY);
+    localStorage.removeItem(WHEEL_PHANTHUONG);
     luckyDrawService
       .getLuckyDrawList()
       .then((res) => {
+        console.log(res)
         setLuckyDrawList(res.lucky_draw_list);
       })
       .catch((err) => {
