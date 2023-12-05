@@ -40,7 +40,6 @@ export default function GuideTakeAPhoto() {
   const [isOpen, setIsOpen] = useState(false);
   const [listPrize, setListPrize] = useState([]);
   const [statusLuckyDraw, setStatusLuckyDraw] = useState();
-
   const [so_ids, setSo_ids] = useState([]);
   const [isAskLogin, setIsAskLogin] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState(false);
@@ -62,8 +61,75 @@ export default function GuideTakeAPhoto() {
     window.scrollTo(0, 0);
     setAuthorization(token);
   }, []);
+  function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[arr.length - 1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
   const handleChangeImage = (event) => {
+    console.log(event);
     let fileUploaded = event;
+
+    if (fileUploaded) {
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const originalImage = new Image();
+        originalImage.src = e.target.result;
+
+        originalImage.onload = function () {
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+
+          canvas.width = originalImage.width;
+          canvas.height = originalImage.height;
+
+          context.drawImage(originalImage, 0, 0);
+
+          const imageData = context.getImageData(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+          );
+          const data = imageData.data;
+          for (let i = 0; i < data.length; i += 4) {
+            const grayscale = (data[i] + data[i + 1] + data[i + 2]) / 4.2;
+            data[i] = grayscale;
+            data[i + 1] = grayscale;
+            data[i + 2] = grayscale;
+          }
+
+          context.putImageData(imageData, 0, 0);
+
+          const outputImage = new Image();
+          outputImage.src = canvas.toDataURL();
+
+          console.log(canvas.toDataURL());
+          // Now you can use outputImage in your React component
+          // setImageFile(outputImage);
+          const img_convert = dataURLtoFile(
+            canvas.toDataURL(),
+            uuid() + uuid() + ".jpg"
+          );
+          // setImageFile(img_convert);
+          console.log(img_convert);
+          compressimage(img_convert);
+        };
+      };
+
+      reader.readAsDataURL(fileUploaded);
+    }
+  };
+  const compressimage = (event) => {
+    let fileUploaded = event;
+    console.log(fileUploaded)
     const fileUploadedSize = fileUploaded.size / 1024 / 1024;
     if (fileUploadedSize > 20) {
       new Compressor(fileUploaded, {
@@ -97,7 +163,6 @@ export default function GuideTakeAPhoto() {
       setImageFile(fileUploaded);
     }
   };
-
   const getCampaignDetail = (campaignId) => {
     campaignServices
       .getCampaignDetailApi(campaignId)
@@ -128,6 +193,7 @@ export default function GuideTakeAPhoto() {
     getOcrEndPoint(campaignId);
   }, [campaignId]);
   const pushImageToGCS = () => {
+    console.log(imageFile);
     let formDataGCS = new FormData();
     formDataGCS.append("file", imageFile);
     const fileName =
@@ -214,6 +280,7 @@ export default function GuideTakeAPhoto() {
   const [devices, setDevices] = useState([]);
 
   const [image, setImage] = useState(undefined);
+  console.log(image);
   const [activeDeviceId, setActiveDeviceId] = useState(undefined);
   const [openCam, setOpenCam] = useState(true);
   const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
@@ -258,6 +325,7 @@ export default function GuideTakeAPhoto() {
         handleChangeImage(file);
       });
     }
+    console.log(image);
   }, [image]);
   const camera = useRef(null);
   const os = getOS();
@@ -335,14 +403,16 @@ export default function GuideTakeAPhoto() {
                         <button
                           onClick={() => handleIndex(d.deviceId, index)}
                           className={`${
-                            parseInt(current) === index ? "text-black" : "text-white"
+                            parseInt(current) === index
+                              ? "text-black"
+                              : "text-white"
                           } font-bold-mon opacity-100`}
                         >
                           {d.label.includes("camera2 2")
                             ? "0.5x"
                             : d.label.includes("camera2 0")
                             ? "1x"
-                            : d.label}
+                            : "2x"}
                         </button>
                       </div>
                     </div>
@@ -479,11 +549,19 @@ export default function GuideTakeAPhoto() {
         <>
           {image !== undefined ? (
             <div>
-              <img
+              {/* <img
                 src={image}
                 className="w-full relative top-0"
                 alt="upload view"
-              />
+              /> */}
+              {imageFile ? (
+                <img
+                  src={URL.createObjectURL(imageFile)}
+                  className="w-full relative top-0"
+                  alt="upload view"
+                />
+              ) : // imageFile
+              null}
               <div className="grid grid-cols-2 gap-[12px] p-4 relative -top-32">
                 <button
                   onClick={(e) => onClickDeleteImg(e)}
