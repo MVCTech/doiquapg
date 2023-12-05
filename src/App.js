@@ -40,6 +40,7 @@ import ConfirmOtpRegister from "./pages/ConfirmOTP/ConfirmOtpRegister";
 import { useState } from "react";
 import { detectIncognito } from "detectincognitojs";
 import { useEffect } from "react";
+import GuideTakeAPhotoDefault from "./pages/GuideTakeAPhoto/GuideTakeAPhotoDefault";
 
 function App() {
   let { token } = userDataLocal.get();
@@ -97,6 +98,10 @@ function App() {
                 <Route
                   path="/guide-takeaphoto/:campaignId?"
                   element={<GuideTakeAPhoto />}
+                />
+                <Route
+                  path="/guide-takeaphoto-default/:campaignId?"
+                  element={<GuideTakeAPhotoDefault />}
                 />
                 <Route
                   path="/participate-history/:tick?"

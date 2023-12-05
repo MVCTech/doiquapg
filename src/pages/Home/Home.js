@@ -11,13 +11,13 @@ import ConfirmPopupGuideTakePhoto from "../../component/ConfirmPopupGuideTakePho
 import "../../assets/css/font-text.css";
 import "../../assets/css/Home.css";
 import "../../assets/css/background__Footer.css";
+import IconNotify from "../../assets/fontawesome/image/icon_notify.svg";
 import TAKE_PHOTO from "../../assets/fontawesome/image/takephoto.svg";
 import INFO from "../../assets/fontawesome/image/i.svg";
 import VONG__QUAY from "../../assets/fontawesome/image/vong_quay.svg";
 import GIFT from "../../assets/fontawesome/image/gift.svg";
 import LOGO_PG from "../../assets/fontawesome/image/logo_png.png";
 import Advantace from "../../assets/fontawesome/image/advantace.png";
-import IconNotify from "../../assets/fontawesome/image/icon_notify.svg";
 import IconGuideHd from "../../assets/fontawesome/image/iconguide-hd.png";
 import NEXT from "../../assets/fontawesome/image/next.png";
 import RIGHT_NEXT from "../../assets/fontawesome/image/right-next.jpg";
@@ -116,9 +116,9 @@ export default function Home() {
   }, []);
 
   const handleTakePhoto = (status) => {
-    setIsOpenPopupGuide(true);
-    setIsGuidePopup(status);
-    // navigation(`/guide-takeaphoto`);
+    // setIsOpenPopupGuide(true);
+    // setIsGuidePopup(status);
+    navigation(`/guide-takeaphoto-default`);
   };
   const handleGift = () => {
     if (token) {

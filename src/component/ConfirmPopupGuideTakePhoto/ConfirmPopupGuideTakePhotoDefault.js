@@ -17,6 +17,7 @@ import { SET_CHECK_CAM } from "../../services/localService/localService";
 import RIGHT_NEXT from "../../assets/fontawesome/image/right-next.jpg";
 import LEFT_BACK from "../../assets/fontawesome/image/left-back.jpg";
 import PHONE_CONTACT from "../../assets/fontawesome/image/phone-contact.png";
+import Compressor from "compressorjs";
 
 const images = [
   {
@@ -47,25 +48,55 @@ const images = [
   },
 ];
 
-export default function ConfirmPopupGuideTakePhoto({
+export default function ConfirmPopupGuideTakePhotoDefault({
   isGuidePopup,
   setIsOpenPopupGuide,
+  setImageFile,
 }) {
-  const navigate = useNavigate();
-  const [activeDeviceId, setActiveDeviceId] = useState(undefined);
-  const camera = useRef(null);
+  let refInputUpload = useRef(null);
   localStorage.setItem(SET_CHECK_CAM, false);
-  const hotline = localStorage.getItem("CONTACT");
-  const openCamera = () => {
-    if (isGuidePopup === false) {
-      // navigate(`/guide-takeaphoto`);
-      navigate(`/guide-takeaphoto-default`);
+  const navigate = useNavigate();
+  const appCode = localStorage.getItem("CAMPAIGN_CODE");
 
-    }
-    setIsOpenPopupGuide(false);
-  };
   const handleClosePopup = () => {
-    setIsOpenPopupGuide(false);
+    // setIsOpenPopupGuide(false);
+    navigate(`/${appCode}`);
+  };
+  const handleChangeImage = (event) => {
+    let fileUploaded = event.target.files[0];
+    console.log(fileUploaded);
+    const fileUploadedSize = fileUploaded.size / 1024 / 1024;
+    if (fileUploadedSize > 20) {
+      new Compressor(fileUploaded, {
+        quality: 0.4,
+        success: (res) => {
+          setImageFile(res);
+        },
+      });
+    } else if (fileUploadedSize > 10 && fileUploadedSize <= 20) {
+      new Compressor(fileUploaded, {
+        quality: 0.5,
+        success: (res) => {
+          setImageFile(res);
+        },
+      });
+    } else if (fileUploadedSize > 6 && fileUploadedSize <= 10) {
+      new Compressor(fileUploaded, {
+        quality: 0.7,
+        success: (res) => {
+          setImageFile(res);
+        },
+      });
+    } else if (fileUploadedSize > 3 && fileUploadedSize <= 6) {
+      new Compressor(fileUploaded, {
+        quality: 0.8,
+        success: (res) => {
+          setImageFile(res);
+        },
+      });
+    } else {
+      setImageFile(fileUploaded);
+    }
   };
   return (
     <div
@@ -222,14 +253,24 @@ export default function ConfirmPopupGuideTakePhoto({
                                   className=" h-6 w-6"
                                 />
                               </div>
-
-                              <button
-                                onClick={() => openCamera()}
+                              <input
+                                type="file"
+                                hidden
+                                id="actual-btn"
+                                className="w-full"
+                                style={{ display: "none" }}
+                                onChange={(e) => handleChangeImage(e)}
+                                capture
+                                accept="image/*"
+                                ref={refInputUpload}
+                              />
+                              <label
+                                htmlFor="actual-btn"
                                 className="-ml-3 text-btn-cancel w-full font-semibold-mon btn-text corlor-text-white flex justify-center items-center"
                               >
                                 Bỏ qua
                                 <br /> hướng dẫn
-                              </button>
+                              </label>
                             </div>
                           </div>
                         </div>
@@ -241,29 +282,6 @@ export default function ConfirmPopupGuideTakePhoto({
             </div>
           </div>
         </div>
-      </div>
-      <div className="hidden">
-        <Camera
-          ref={camera}
-          permission={true}
-          permissionDenied={true}
-          aspectRatio={0}
-          videoSourceDeviceId={activeDeviceId}
-          facingMode="environment"
-          errorMessages={{
-            noCameraAccessible:
-              "No camera device accessible. Please connect your camera or try a different browser.",
-            permissionDenied:
-              "Permission denied. Please refresh and give camera permission.",
-            switchCamera:
-              "It is not possible to switch camera to different one because there is only one video device accessible.",
-            canvas: "Canvas is not supported.",
-          }}
-          videoReadyCallback={() => {
-            console.log("Video feed ready.");
-            localStorage.setItem(SET_CHECK_CAM, true);
-          }}
-        />
       </div>
     </div>
   );

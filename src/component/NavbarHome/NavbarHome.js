@@ -80,7 +80,7 @@ export default function NavbarHome() {
           </li>
 
           <li className="icon-nav-home col-span-1">
-            {location?.pathname === `/guide-takeaphoto` ? (
+            {location?.pathname === `/guide-takeaphoto` || location?.pathname === `/guide-takeaphoto-default` ? (
               <img src={ICON_TAKEPHOTO_COLOR} className="w-20 h-12" />
             ) : (
               <div className="flex justify-center">
