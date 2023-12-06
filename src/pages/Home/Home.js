@@ -118,7 +118,6 @@ export default function Home() {
   const handleTakePhoto = (status) => {
     setIsOpenPopupGuide(true);
     setIsGuidePopup(status);
-    // navigation(`/guide-takeaphoto`);
   };
   const handleGift = () => {
     if (token) {

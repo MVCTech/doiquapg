@@ -212,7 +212,6 @@ export default function GuideTakeAPhoto() {
       });
   };
   const [devices, setDevices] = useState([]);
-
   const [image, setImage] = useState(undefined);
   const [activeDeviceId, setActiveDeviceId] = useState(undefined);
   const [openCam, setOpenCam] = useState(true);
@@ -280,6 +279,7 @@ export default function GuideTakeAPhoto() {
     setActiveDeviceId(id);
     setCurrent(index);
   };
+  
   return (
     <>
       {isUpload ? (

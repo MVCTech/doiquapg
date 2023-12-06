@@ -51,14 +51,16 @@ export default function ConfirmPopupGuideTakePhoto({
   isGuidePopup,
   setIsOpenPopupGuide,
 }) {
-  const navigate = useNavigate();
+  const navigation = useNavigate();
   const [activeDeviceId, setActiveDeviceId] = useState(undefined);
   const camera = useRef(null);
   localStorage.setItem(SET_CHECK_CAM, false);
   const hotline = localStorage.getItem("CONTACT");
   const openCamera = () => {
     if (isGuidePopup === false) {
-      navigate(`/guide-takeaphoto`);
+      // navigate(`/guide-takeaphoto`);
+    navigation(`/guide-takeaphoto-new`);
+
     }
     setIsOpenPopupGuide(false);
   };
@@ -241,7 +243,7 @@ export default function ConfirmPopupGuideTakePhoto({
           </div>
         </div>
       </div>
-      <div className="hidden">
+      {/* <div className="hidden">
         <Camera
           ref={camera}
           permission={true}
@@ -263,7 +265,7 @@ export default function ConfirmPopupGuideTakePhoto({
             localStorage.setItem(SET_CHECK_CAM, true);
           }}
         />
-      </div>
+      </div> */}
     </div>
   );
 }
