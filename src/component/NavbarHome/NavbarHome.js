@@ -24,8 +24,9 @@ export default function NavbarHome() {
   const [isGuidePopup, setIsGuidePopup] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState();
   const handleClickMenuTakePhoto = (status) => {
-    setIsGuidePopup(status);
-    setIsOpenPopupGuide(true);
+    // setIsGuidePopup(status);
+    // setIsOpenPopupGuide(true);
+    navigation(`/guide-takeaphoto-default`);
   };
   const handleClickMenuProfile = () => {
     if (token) {

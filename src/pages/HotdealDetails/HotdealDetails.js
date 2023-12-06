@@ -97,7 +97,7 @@ export default function HotdealDetails() {
       <div className="flex justify-center mb-[80px] ">
         <Link
           className="color-button-primary font-semibold-mon my-[15px] text-white py-4 px-8 rounded-2xl cursor-pointer"
-          to={`/guide-takeaphoto/${campaignDetail?.id}`}
+          to={`/guide-takeaphoto-default/${campaignDetail?.id}`}
         >
           Tham gia ngay
         </Link>

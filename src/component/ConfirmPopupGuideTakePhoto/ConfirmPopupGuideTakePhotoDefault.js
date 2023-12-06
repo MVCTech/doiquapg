@@ -65,7 +65,7 @@ export default function ConfirmPopupGuideTakePhotoDefault({
   const handleChangeImage = (event) => {
     let fileUploaded = event.target.files[0];
     console.log(fileUploaded);
-    const fileUploadedSize = fileUploaded.size / 1024 / 1024;
+    const fileUploadedSize = fileUploaded.size / 1024;
     if (fileUploadedSize > 20) {
       new Compressor(fileUploaded, {
         quality: 0.4,
@@ -97,6 +97,9 @@ export default function ConfirmPopupGuideTakePhotoDefault({
     } else {
       setImageFile(fileUploaded);
     }
+  };
+  const onClickUpload = async () => {
+    refInputUpload.current?.click();
   };
   return (
     <div
@@ -265,7 +268,8 @@ export default function ConfirmPopupGuideTakePhotoDefault({
                                 ref={refInputUpload}
                               />
                               <label
-                                htmlFor="actual-btn"
+                                // htmlFor="actual-btn"
+                                onClick={() => onClickUpload()}
                                 className="-ml-3 text-btn-cancel w-full font-semibold-mon btn-text corlor-text-white flex justify-center items-center"
                               >
                                 Bỏ qua
