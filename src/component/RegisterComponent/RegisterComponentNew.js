@@ -228,8 +228,9 @@ export default function RegisterComponentNew({ updateInfo }) {
             type={isShowPass ? "text" : "password"}
             {...register("password", {
               pattern: {
-                value: /^(?=.{6,})(?=.*\d)/,
-                message: "Vui lòng nhập ít nhất 6 kí tự bao gồm ít nhất 1 số",
+                value: /^(?=.*\d)(?=.*[a-z]).{6,19}$/,
+                message:
+                  "Vui lòng nhập ít nhất 6 đến 19 kí và tự bao gồm ít nhất 1 số",
               },
               validate: (val) => {
                 console.log(watch("name").replace(" ", ""));

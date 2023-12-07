@@ -280,8 +280,17 @@ build/static/css/main.2ad927ef.css.map
 build/static/js/main.da17d984.js
 build/static/js/main.da17d984.js.LICENSE.txt
 build/static/js/main.da17d984.js.map
+<<<<<<< HEAD
 build/static/css/main.b14336aa.css
 build/static/css/main.b14336aa.css.map
 build/static/js/main.71872b07.js
 build/static/js/main.71872b07.js.LICENSE.txt
 build/static/js/main.71872b07.js.map
+=======
+build/static/js/main.3c736714.js
+build/static/js/main.3c736714.js.LICENSE.txt
+build/static/js/main.3c736714.js.map
+build/static/js/main.417dcd33.js
+build/static/js/main.417dcd33.js.LICENSE.txt
+build/static/js/main.417dcd33.js.map
+>>>>>>> origin/develop

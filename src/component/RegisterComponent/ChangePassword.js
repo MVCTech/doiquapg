@@ -45,7 +45,6 @@ export default function ChangePassword() {
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
   const [checkAgree1, setCheckAgree1] = useState(false);
-  const [checkAgree2, setCheckAgree2] = useState(false);
   const [isShowPass, setIsShowPass] = useState(false);
   const [isShowPassAuth, setIsShowPassAuth] = useState(false);
   const {
@@ -106,9 +105,9 @@ export default function ChangePassword() {
                   {...register("password", {
                     required: "Không được để trống",
                     pattern: {
-                      value: /^(?=.{6,})(?=.*\d)/,
+                      value: /^(?=.*\d)(?=.*[a-z]).{6,19}$/,
                       message:
-                        "Vui lòng nhập ít nhất 6 kí tự bao gồm ít nhất 1 số",
+                        "Vui lòng nhập ít nhất 6 đến 19 kí và tự bao gồm ít nhất 1 số",
                     },
                   })}
                 />
