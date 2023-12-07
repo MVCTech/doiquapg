@@ -69,14 +69,10 @@ function LoginPassword() {
         if (gcsResult) {
           console.log(phoneData);
           if (phoneData === null) {
-            
-            let  phoneCheck = phoneFormat?.phone;
-            gcsResult = {...gcsResult, phoneCheck}
-            console.log(gcsResult)
-            localStorage.setItem(
-              "GCS_RESULT",
-              JSON.stringify(gcsResult)
-            );
+            let phoneCheck = phoneFormat?.phone;
+            gcsResult = { ...gcsResult, phoneCheck };
+            console.log(gcsResult);
+            localStorage.setItem("GCS_RESULT", JSON.stringify(gcsResult));
             setTriggerSubmitReceipt(true);
           } else if (phoneData === gcsResult?.phoneCheck) {
             setTriggerSubmitReceipt(true);
@@ -90,7 +86,6 @@ function LoginPassword() {
       .catch((err) => {
         toast.error(err);
         localStorage.removeItem("GCS_RESULT");
-
       })
       .finally(() => {
         console.log("finally");
@@ -212,9 +207,9 @@ function LoginPassword() {
                   {...register("password", {
                     required: "Không được để trống",
                     pattern: {
-                      value: /^(?=.{6,})(?=.*\d)/,
+                      value: /^(?=.*\d)(?=.*[a-z]).{6,20}$/,
                       message:
-                        "Vui lòng nhập ít nhất 6 kí tự bao gồm ít nhất 1 số",
+                        "Vui lòng nhập ít nhất 6 đến 20 kí và tự bao gồm ít nhất 1 số",
                     },
                   })}
                 />
