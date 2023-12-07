@@ -360,7 +360,6 @@ export default function SpinTheWheel() {
   };
   useEffect(() => {
     console.log(isAnnounce);
-    
   }, []);
   return (
     <div>
@@ -482,7 +481,8 @@ export default function SpinTheWheel() {
             <div className="flex justify-center box-border text-[#333] font-light-mon relative top-16">
               <button
                 style={style}
-                type="button"
+                // type="button"
+
                 className="pointer-events-none color-button-enable border-0 text-[#333] 
                 px-[20px] py-[20px] text-center no-underline inline-block rounded-[16px] text-[16px] cursor-pointer not-italic font-[Montserrat-Light] font-black leading-5 z-50"
               >

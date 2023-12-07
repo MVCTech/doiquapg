@@ -54,13 +54,16 @@ function LoginPassword() {
     console.log(gcsResult);
     const phoneFormat = {
       phone: data.phone,
-      password: data.password,
+      password: data?.password,
+      name: data?.name,
+      login_type: "otp",
     };
     userServices
       .postUserLogin(phoneFormat)
       .then((res) => {
         console.log(res);
         localStorage.setItem("phoneData", data.phone);
+        localStorage.setItem("PHONE_NUMBER", JSON.stringify(phoneFormat));
         userDataLocal.set(res);
         dispatch(setUserData(res));
         setAuthorization(res.token);
@@ -126,7 +129,8 @@ function LoginPassword() {
       />
       <div className="w-full bg-white rounded-[30px_30px_0_0] absolute top-20 z-50">
         <div className="text-[#333333] text-[13px] mt-7 px-3 text-center font-italic-mon">
-          Nhập tài khoản của bạn để tham gia chương trình
+          Nhập tên và số điện thoại của bạn để nhận mã OTP và tham gia chương
+          trình
         </div>
         <div className="flex justify-center items-center px-[25px] mt-[40px] max-h-full ">
           <div className="block -mt-10 w-full">
