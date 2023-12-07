@@ -63,7 +63,7 @@ export default function ConfirmOtpRegister({ updateInfo }) {
     setOtp(e);
     setOtpParams({ otp: e });
   };
-  const [minutes, setMinutes] = useState(1);
+  const [minutes, setMinutes] = useState(3);
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
@@ -123,7 +123,7 @@ export default function ConfirmOtpRegister({ updateInfo }) {
         toast.error(err);
       })
       .finally(() => {});
-    setMinutes(1);
+    setMinutes(3);
     setSeconds(0);
   };
 
