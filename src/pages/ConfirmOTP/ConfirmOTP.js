@@ -50,9 +50,7 @@ function ConfirmOTP() {
     }
   }, []);
   const handleBack = (e) => {
-    navigation(
-      `${login_type === "password" ? "/login-password" : "/login-password"}`
-    );
+    navigation(`${login_type === "password" ? "/login" : "/login"}`);
   };
   const handleClickShowInfoGift = () => {
     userServices

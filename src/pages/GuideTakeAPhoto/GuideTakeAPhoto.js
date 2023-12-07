@@ -139,9 +139,7 @@ export default function GuideTakeAPhoto() {
     formDataGCS.append("fileName", fileName);
     formDataGCS.append("ocrBase", ocrEndpoint);
     if (!token) {
-      navigate(
-        `${login_type === "password" ? "/login-password" : "/login-password"}`
-      );
+      navigate(`${login_type === "password" ? "/login" : "/login"}`);
     } else {
       setIsUpload(true);
     }
@@ -335,7 +333,9 @@ export default function GuideTakeAPhoto() {
                         <button
                           onClick={() => handleIndex(d.deviceId, index)}
                           className={`${
-                            parseInt(current) === index ? "text-black" : "text-white"
+                            parseInt(current) === index
+                              ? "text-black"
+                              : "text-white"
                           } font-bold-mon opacity-100`}
                         >
                           {d.label.includes("camera2 2")
@@ -511,11 +511,7 @@ export default function GuideTakeAPhoto() {
                   }}
                   handleOk={() => {
                     navigate(
-                      `${
-                        login_type === "password"
-                          ? "/login-password"
-                          : "/login-password"
-                      }`
+                      `${login_type === "password" ? "/login" : "/login"}`
                     );
                   }}
                 />

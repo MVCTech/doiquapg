@@ -21,9 +21,7 @@ function RegisterNew() {
     <div>
       <HeaderBackground
         TITLE={TITLE}
-        buttonBack={`${
-          back === "tick" ? `/infor-customer` : `/login-password`
-        }`}
+        buttonBack={`${back === "tick" ? `/infor-customer` : `/login`}`}
       />
       <div className=" w-full bg-white rounded-[30px_30px_0_0] absolute top-[80px] z-50">
         <div className="flex justify-center items-center px-[25px] max-h-full">

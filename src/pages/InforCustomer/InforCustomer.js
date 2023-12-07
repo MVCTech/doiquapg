@@ -59,11 +59,7 @@ export default function InforCustomer() {
           localStorage.removeItem("NAME_USER");
           localStorage.removeItem(WHEEL_LUOTQUAY);
           localStorage.removeItem(WHEEL_PHANTHUONG);
-          navigation(
-            `${
-              login_type === "password" ? "/login-password" : "/login-password"
-            }`
-          );
+          navigation(`${login_type === "password" ? "/login" : "/login"}`);
         })
         .catch((err) => {
           console.log(err);

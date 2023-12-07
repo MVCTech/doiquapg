@@ -91,6 +91,7 @@ export default function ConfirmPopupGuideTakePhoto({
                             autoPlay
                             centerMode={false}
                             showArrows={false}
+                            stopOnHover={true}
                             infiniteLoop={true}
                             showThumbs={false}
                             showStatus={false}

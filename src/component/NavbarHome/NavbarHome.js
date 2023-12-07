@@ -36,16 +36,17 @@ export default function NavbarHome() {
       }
     } else {
       navigation(
-        `${login_type === "password" ? "/login-password" : "/login-password"}`
+        `${login_type === "password" ? "/login" : "/login"}`
       );
     }
   };
+  
   const handleClickMenuGift = () => {
     if (token) {
       navigation(`/list-gift`);
     } else {
       navigation(
-        `${login_type === "password" ? "/login-password" : "/login-password"}`
+        `${login_type === "password" ? "/login" : "/login"}`
       );
     }
   };

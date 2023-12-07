@@ -69,14 +69,10 @@ function LoginPassword() {
         if (gcsResult) {
           console.log(phoneData);
           if (phoneData === null) {
-            
-            let  phoneCheck = phoneFormat?.phone;
-            gcsResult = {...gcsResult, phoneCheck}
-            console.log(gcsResult)
-            localStorage.setItem(
-              "GCS_RESULT",
-              JSON.stringify(gcsResult)
-            );
+            let phoneCheck = phoneFormat?.phone;
+            gcsResult = { ...gcsResult, phoneCheck };
+            console.log(gcsResult);
+            localStorage.setItem("GCS_RESULT", JSON.stringify(gcsResult));
             setTriggerSubmitReceipt(true);
           } else if (phoneData === gcsResult?.phoneCheck) {
             setTriggerSubmitReceipt(true);
@@ -90,7 +86,6 @@ function LoginPassword() {
       .catch((err) => {
         toast.error(err);
         localStorage.removeItem("GCS_RESULT");
-
       })
       .finally(() => {
         console.log("finally");
