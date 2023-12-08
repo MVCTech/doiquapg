@@ -129,6 +129,7 @@ export default function CheckPermission({
                       centerMode={false}
                       showArrows={false}
                       infiniteLoop={true}
+                      stopOnHover={true}
                       showThumbs={false}
                       showStatus={false}
                       preventMovementUntilSwipeScrollTolerance={false}

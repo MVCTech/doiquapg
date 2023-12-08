@@ -41,6 +41,7 @@ export default function ConfirmOtpRegister({ updateInfo }) {
   const navigation = useNavigate();
   const [checkAgree1, setCheckAgree1] = useState(false);
   const location = useLocation();
+  const { otp_expired_minutes } = userDataLocal.get();
   const back = location.pathname.split("/")[2];
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
   const phoneData = JSON.parse(localStorage.getItem("PHONE_NUMBER" || "{}"));
@@ -71,7 +72,6 @@ export default function ConfirmOtpRegister({ updateInfo }) {
       if (seconds > 0) {
         setSeconds(seconds - 1);
       }
-
       if (seconds === 0) {
         if (minutes === 0) {
           clearInterval(interval);
@@ -81,7 +81,6 @@ export default function ConfirmOtpRegister({ updateInfo }) {
         }
       }
     }, 1000);
-
     return () => {
       clearInterval(interval);
     };
@@ -109,30 +108,47 @@ export default function ConfirmOtpRegister({ updateInfo }) {
       name: phoneData?.name,
       phone: phoneData?.phone,
       password: phoneData?.password,
+      login_type: "otp",
     };
     userServices
-      .postRegister(phoneFormat)
+      .postUserLogin(phoneFormat)
       .then((res) => {
         console.log(res);
+        localStorage.setItem("PHONE_NUMBER", JSON.stringify(phoneFormat));
         userDataLocal.set(res);
         dispatch(setUserData(res));
-        toast.success("Gửi lại thành công");
-        localStorage.removeItem("PHONE_NUMBER");
+        setAuthorization(res.token);
+        if (gcsResult) {
+          console.log(phoneData);
+          if (phoneData === null) {
+            let phoneCheck = phoneFormat?.phone;
+            gcsResult = { ...gcsResult, phoneCheck };
+            localStorage.setItem("GCS_RESULT", JSON.stringify(gcsResult));
+            setTriggerSubmitReceipt(true);
+          } else if (phoneData === gcsResult?.phoneCheck) {
+            setTriggerSubmitReceipt(true);
+          } else {
+            // navigation(`/${appCode}`);
+          }
+        } else {
+          // navigation(`/${appCode}`);
+        }
+        setMinutes(3);
+        setSeconds(0);
+        navigation(`/confirm-otp-register`);
       })
       .catch((err) => {
         toast.error(err);
+        localStorage.removeItem("GCS_RESULT");
       })
-      .finally(() => {});
-    setMinutes(3);
-    setSeconds(0);
+      .finally(() => {
+        console.log("finally");
+      });
   };
 
   return (
     <div>
-      <HeaderBackground
-        TITLE={TITLE}
-        buttonBack={`${back === "tick" ? `/infor-customer` : `/register-new`}`}
-      />
+      <HeaderBackground TITLE={TITLE} buttonBack={`/login`} />
       <div className=" w-full bg-white rounded-[30px_30px_0_0] absolute top-[80px] z-50">
         <div className="flex justify-center items-center px-[25px] max-h-full">
           <div className="block ">

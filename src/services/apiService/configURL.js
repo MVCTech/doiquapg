@@ -39,14 +39,12 @@ export const checkPhoneStatus = {
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    console.log(response)
+    console.log(response);
     if (response.data.result && response.data.result.meta) {
       if (!response.data.result.meta.status) {
         if (response.data.result.meta.status_code === 403) {
           window.location.assign(
-            `${
-              login_type === "password" ? "/login-password" : "/login-password"
-            }`
+            `${login_type === "password" ? "/login" : "/login"}`
           );
         } else {
           localStorage.removeItem("GCS_RESULT");

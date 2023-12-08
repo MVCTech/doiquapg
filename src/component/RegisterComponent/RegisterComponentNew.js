@@ -68,7 +68,7 @@ export default function RegisterComponentNew({ updateInfo }) {
         })
         .catch((error) => {
           toast.warn(error);
-          navigation("/login-password");
+          navigation("/login");
         });
     } else {
       toast.error("Mật khẩu xác thực không trùng nhau");
@@ -114,7 +114,7 @@ export default function RegisterComponentNew({ updateInfo }) {
   }, [checkAgree1, checkAgree2]);
 
   const handleLogin = () => {
-    navigation("/login-password");
+    navigation("/login");
   };
   return (
     <>

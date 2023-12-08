@@ -27,6 +27,7 @@ import {
 import ConfirmPopupGuideTakePhoto from "../../component/ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
 import { setAuthorization } from "../../services/apiService/configURL";
 import { getOS } from "../../services/deviceModel";
+import { handleChangeImage } from "../../utils/compressImage";
 
 export default function GuideTakeAPhoto() {
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
@@ -40,21 +41,23 @@ export default function GuideTakeAPhoto() {
   const [isOpen, setIsOpen] = useState(false);
   const [listPrize, setListPrize] = useState([]);
   const [statusLuckyDraw, setStatusLuckyDraw] = useState();
-
   const [so_ids, setSo_ids] = useState([]);
   const [isAskLogin, setIsAskLogin] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState(false);
   const [isGuidePopup, setIsGuidePopup] = useState(false);
-
+  const camera = useRef(null);
+  const os = getOS();
+  const [devices, setDevices] = useState([]);
+  const [image, setImage] = useState(undefined);
+  const [activeDeviceId, setActiveDeviceId] = useState(undefined);
+  const [openCam, setOpenCam] = useState(true);
+  const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
+  const [current, setCurrent] = useState("0");
+  const [isCheck, setIsCheck] = useState(false);
   const navigate = useNavigate();
   let { token } = userDataLocal.get();
+
   let { campaignId } = useParams();
-  let refInputUpload = useRef(null);
-
-  const onClickUpload = (event) => {
-    refInputUpload.current?.click();
-  };
-
   const handlePopupErrorOk = () => {
     navigate(`/${appCode}`);
   };
@@ -62,41 +65,6 @@ export default function GuideTakeAPhoto() {
     window.scrollTo(0, 0);
     setAuthorization(token);
   }, []);
-  const handleChangeImage = (event) => {
-    let fileUploaded = event;
-    const fileUploadedSize = fileUploaded.size / 1024 / 1024;
-    if (fileUploadedSize > 20) {
-      new Compressor(fileUploaded, {
-        quality: 0.4, // 0.6 can also be used, but its not recommended to go below.
-        success: (res) => {
-          setImageFile(res);
-        },
-      });
-    } else if (fileUploadedSize > 10 && fileUploadedSize <= 20) {
-      new Compressor(fileUploaded, {
-        quality: 0.5, // 0.6 can also be used, but its not recommended to go below.
-        success: (res) => {
-          setImageFile(res);
-        },
-      });
-    } else if (fileUploadedSize > 6 && fileUploadedSize <= 10) {
-      new Compressor(fileUploaded, {
-        quality: 0.7, // 0.6 can also be used, but its not recommended to go below.
-        success: (res) => {
-          setImageFile(res);
-        },
-      });
-    } else if (fileUploadedSize > 3 && fileUploadedSize <= 6) {
-      new Compressor(fileUploaded, {
-        quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
-        success: (res) => {
-          setImageFile(res);
-        },
-      });
-    } else {
-      setImageFile(fileUploaded);
-    }
-  };
 
   const getCampaignDetail = (campaignId) => {
     campaignServices
@@ -139,9 +107,7 @@ export default function GuideTakeAPhoto() {
     formDataGCS.append("fileName", fileName);
     formDataGCS.append("ocrBase", ocrEndpoint);
     if (!token) {
-      navigate(
-        `${login_type === "password" ? "/login-password" : "/login-password"}`
-      );
+      navigate(`${login_type === "password" ? "/login" : "/login"}`);
     } else {
       setIsUpload(true);
     }
@@ -211,35 +177,20 @@ export default function GuideTakeAPhoto() {
         setIsUpload(false);
       });
   };
-  const [devices, setDevices] = useState([]);
 
-  const [image, setImage] = useState(undefined);
-  const [activeDeviceId, setActiveDeviceId] = useState(undefined);
-  const [openCam, setOpenCam] = useState(true);
-  const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
-  const [current, setCurrent] = useState("0");
-
+  const getDeviceId = async () => {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const videoDevices = devices.filter((i) => i.kind == "videoinput");
+    console.log(videoDevices);
+    const font = ["Webcam", "back", "Camera mặt sau", "Back", "cực rộng"];
+    const matching = videoDevices.filter((l) => {
+      return font.some((term) => l.label.includes(term));
+    });
+    setDevices(matching);
+  };
   useEffect(() => {
-    (async () => {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const videoDevices = devices.filter((i) => i.kind == "videoinput");
-      console.log(videoDevices);
-      const font = ["Webcam", "back", "Camera mặt sau", "Back", "cực rộng"];
-      const matching = videoDevices.filter((l) => {
-        return font.some((term) => l.label.includes(term));
-      });
-      setDevices(matching);
-    })();
-    setTimeout(async () => {
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const videoDevices = devices.filter((i) => i.kind == "videoinput");
-      console.log(videoDevices);
-      const font = ["Webcam", "back", "Camera mặt sau", "Back", "cực rộng"];
-      const matching = videoDevices.filter((l) => {
-        return font.some((term) => l.label.includes(term));
-      });
-      setDevices(matching);
-    }, 1000);
+    getDeviceId();
+    setTimeout(getDeviceId(), 1000);
   }, []);
   function urltoFile(url, filename, mimeType) {
     return fetch(url)
@@ -255,12 +206,13 @@ export default function GuideTakeAPhoto() {
       urltoFile(image, uuid() + uuid() + ".jpg", "image/jpeg").then(function (
         file
       ) {
-        handleChangeImage(file);
+        const a = handleChangeImage(file);
+        console.log(a);
+        setImageFile(a);
       });
     }
   }, [image]);
-  const camera = useRef(null);
-  const os = getOS();
+
   const handleCancelCam = () => {
     localStorage.removeItem(SET_CHECK_CAM);
     setImageFile(undefined);
@@ -270,8 +222,6 @@ export default function GuideTakeAPhoto() {
     navigate(`/${appCode}`);
   };
 
-  const [isCheck, setIsCheck] = useState(false);
-  const [popupGuide, setPopupGuide] = useState(true);
   useEffect(() => {}, [isCheck === true]);
   const handlePopupQuestion = () => {
     setIsOpenPopupGuide(true);
@@ -335,14 +285,16 @@ export default function GuideTakeAPhoto() {
                         <button
                           onClick={() => handleIndex(d.deviceId, index)}
                           className={`${
-                            parseInt(current) === index ? "text-black" : "text-white"
+                            parseInt(current) === index
+                              ? "text-black"
+                              : "text-white"
                           } font-bold-mon opacity-100`}
                         >
                           {d.label.includes("camera2 2")
                             ? "0.5x"
                             : d.label.includes("camera2 0")
                             ? "1x"
-                            : d.label}
+                            : "2x"}
                         </button>
                       </div>
                     </div>
@@ -466,7 +418,6 @@ export default function GuideTakeAPhoto() {
                   dataIOS={permissions_iphone}
                   typePopup={"permissionCam"}
                   setCheckCam={setIsCheck}
-                  setPopupGuide={setPopupGuide}
                   isCheckCam={check_cam}
                 />
               ) : null}
@@ -511,11 +462,7 @@ export default function GuideTakeAPhoto() {
                   }}
                   handleOk={() => {
                     navigate(
-                      `${
-                        login_type === "password"
-                          ? "/login-password"
-                          : "/login-password"
-                      }`
+                      `${login_type === "password" ? "/login" : "/login"}`
                     );
                   }}
                 />

@@ -23,7 +23,7 @@ export default function ListRotation() {
     luckyDrawService
       .getLuckyDrawList()
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setLuckyDrawList(res.lucky_draw_list);
       })
       .catch((err) => {
@@ -40,14 +40,18 @@ export default function ListRotation() {
   return (
     <div className="contain">
       <HeaderBackground TITLE={TITLE} buttonBack={`/${appCode}`} />
-      <div className="containerNotify__background bg-[#fff] max-h-full absolute rounded-[30px_30px_0_0] top-20 h-[88%] w-full z-10">
+      <div
+        className="containerNotify__background bg-[#fff] max-h-full absolute 
+      rounded-[30px_30px_0_0] top-20 h-[88%] w-full z-10"
+      >
         <ul className="containerNotify__background-list pt-8 box-border z-20">
           {luckyDrawList?.map((item) => (
             <li
               key={item.so_id}
-              className={`mx-[25px] rounded-2xl flex items-center h-[126px] bg-[#F0F0F0] mb-4 overflow-hidden ${
-                item.remaining_draw > 0 ? "" : "filter grayscale"
-              }`}
+              className={`mx-[25px] rounded-2xl flex items-center h-[126px]
+               bg-[#F0F0F0] mb-4 overflow-hidden ${
+                 item.remaining_draw > 0 ? "" : "filter grayscale"
+               }`}
             >
               <div
                 className="w-full flex"

@@ -280,12 +280,31 @@ build/static/css/main.2ad927ef.css.map
 build/static/js/main.da17d984.js
 build/static/js/main.da17d984.js.LICENSE.txt
 build/static/js/main.da17d984.js.map
+<<<<<<< HEAD
+build/static/css/main.b14336aa.css
+build/static/css/main.b14336aa.css.map
+build/static/js/main.71872b07.js
+build/static/js/main.71872b07.js.LICENSE.txt
+build/static/js/main.71872b07.js.map
+=======
 build/static/js/main.3c736714.js
 build/static/js/main.3c736714.js.LICENSE.txt
 build/static/js/main.3c736714.js.map
 build/static/js/main.417dcd33.js
 build/static/js/main.417dcd33.js.LICENSE.txt
 build/static/js/main.417dcd33.js.map
+<<<<<<< HEAD
 build/static/js/main.32f2b2a5.js
 build/static/js/main.32f2b2a5.js.LICENSE.txt
 build/static/js/main.32f2b2a5.js.map
+=======
+>>>>>>> origin/develop
+build/static/js/main.6d104e15.js
+build/static/js/main.6d104e15.js.LICENSE.txt
+build/static/js/main.6d104e15.js.map
+>>>>>>> feature/Change_Login_By_Otp
+build/static/css/main.4e07a2fa.css
+build/static/css/main.4e07a2fa.css.map
+build/static/js/main.be39f304.js
+build/static/js/main.be39f304.js.LICENSE.txt
+build/static/js/main.be39f304.js.map

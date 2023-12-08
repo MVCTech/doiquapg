@@ -13,7 +13,7 @@ export default function ProtectedRoute({ children }) {
   if (!token) {
     return (
       <Navigate
-        to={`${login_type === "password" ? "/login-password" : "/login-password"}`}
+        to={`${login_type === "password" ? "/login" : "/login"}`}
         replace
       />
     );
