@@ -16,12 +16,6 @@ import {
   WHEEL_LUOTQUAY,
 } from "../../utils/KeyConstant";
 
-const style = {
-  color: "#130682",
-  fontSize: "16px",
-  fontHeight: "20px",
-  fontWeight: "600",
-};
 export default function SpinTheWheel() {
   // const [segments, setSegments] = useState([]);
   const [hasWheel, sethasWheel] = useState("TRUE");
@@ -32,14 +26,8 @@ export default function SpinTheWheel() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [soqua, setsoqua] = useState(8);
 
-  const [spinRemain, setSpinRemain] = useState(0);
-  const [newGiftList, setNewGiftList] = useState([]);
-  const [giftListWin, setGiftListWin] = useState([]);
-  const [trans, setTrans] = useState("");
   const [isDisable, setIsDisable] = useState(false);
   const [isAnnounce, setIsAnnounce] = useState(false);
-  const [severGiftList, setSeverGiftList] = useState([]);
-  const appCode = localStorage.getItem("CAMPAIGN_CODE");
   let navigate = useNavigate();
   const { id } = useParams();
   const [transformBox, settransformBox] = useState("");
@@ -181,6 +169,7 @@ export default function SpinTheWheel() {
                 }
                 segmentsTemp.push(itemTemp);
               }
+              console.log(segmentsTemp);
               let a = 0;
               var segmentsTempList = segmentsTemp.concat(
                 segmentsBigHalfGiftTemp
@@ -471,6 +460,14 @@ export default function SpinTheWheel() {
                       }}
                       disabled={isSpinning}
                     >
+                      {/* <div className="h-[63px] w-[63px] bg-yellow-400 rounded-[100%] relative left-1/2 -translate-x-1/2">
+                        <div
+                          className="h-14 w-14 bg-[#00A1DF] rounded-[100%] relative
+                        top-1/2 -translate-y-1/2 left-[50%] -translate-x-1/2 text-white font-bold-mon flex justify-center items-center"
+                        >
+                          QUAY
+                        </div>
+                      </div> */}
                       {/* w-[320px] */}
                       <img className="-z-10  w-[70px]" src={spin_img} alt="" />
                     </button>
@@ -480,11 +477,8 @@ export default function SpinTheWheel() {
             </div>
             <div className="flex justify-center box-border text-[#333] font-light-mon relative top-16">
               <button
-                style={style}
-                // type="button"
-
-                className="pointer-events-none color-button-enable border-0 text-[#333] 
-                px-[20px] py-[20px] text-center no-underline inline-block rounded-[16px] text-[16px] cursor-pointer not-italic font-[Montserrat-Light] font-black leading-5 z-50"
+                className=" bg-[#003DA5] text-[#ffffff] 
+                px-[20px] py-[20px] rounded-[16px] text-[16px] z-50 font-semibold-mon"
               >
                 {luotQuay >= 1
                   ? `Bạn còn ${luotQuay} lượt quay`

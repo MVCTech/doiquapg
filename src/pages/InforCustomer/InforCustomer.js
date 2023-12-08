@@ -98,7 +98,7 @@ export default function InforCustomer() {
               <img src={ICON_RIGHT} />
             </div>
           </NavLink>
-          <li
+          {/* <li
             className="content-info-li font-regular-mon mt-3 py-1 rounded-xl"
             onClick={handleChangePassword}
           >
@@ -109,7 +109,7 @@ export default function InforCustomer() {
             <div className="ml-auto mr-6">
               <img src={ICON_RIGHT} />
             </div>
-          </li>
+          </li> */}
           <li
             className="content-info-li font-regular-mon mt-3 py-1 rounded-xl"
             onClick={handleHistory}

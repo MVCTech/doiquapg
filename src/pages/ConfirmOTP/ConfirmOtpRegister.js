@@ -64,7 +64,7 @@ export default function ConfirmOtpRegister({ updateInfo }) {
     setOtp(e);
     setOtpParams({ otp: e });
   };
-  const [minutes, setMinutes] = useState(otp_expired_minutes);
+  const [minutes, setMinutes] = useState(3);
   const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function ConfirmOtpRegister({ updateInfo }) {
         } else {
           // navigation(`/${appCode}`);
         }
-        setMinutes(otp_expired_minutes);
+        setMinutes(3);
         setSeconds(0);
         navigation(`/confirm-otp-register`);
       })
@@ -148,10 +148,7 @@ export default function ConfirmOtpRegister({ updateInfo }) {
 
   return (
     <div>
-      <HeaderBackground
-        TITLE={TITLE}
-        buttonBack={`${back === "tick" ? `/infor-customer` : `/register-new`}`}
-      />
+      <HeaderBackground TITLE={TITLE} buttonBack={`/login`} />
       <div className=" w-full bg-white rounded-[30px_30px_0_0] absolute top-[80px] z-50">
         <div className="flex justify-center items-center px-[25px] max-h-full">
           <div className="block ">
