@@ -159,7 +159,10 @@ export default function SpinTheWheel() {
                   check: check,
                   gift_image: list_prizes[i].gift_image,
                 };
-                console.log(itemTemp);
+                console.log(
+                  itemTemp,
+                  !list_prizes[i].gift_code.includes("biggift")
+                );
                 if (!list_prizes[i].gift_code.includes("biggift")) {
                   if (!list_prizes[i].gift_code.includes("bighalfgift")) {
                     segmentsNormalGiftTemp.push(itemTemp);
@@ -187,21 +190,20 @@ export default function SpinTheWheel() {
                     ]
                   );
                 }
-                segmentsTemp = segmentsTempList.concat(array);
-                // segmentsTemp = data.sort(function () {
-                //   return 0.5 - Math.random();
-                // });
+                console.log(array);
+                console.log(segmentsTempList);
+                let array_segment = [segmentsTempList, array];
+                console.log(array_segment);
+                segmentsTemp = interleave(segmentsTempList, array);
+                console.log(segmentsTemp);
               }
-              console.log(segmentsTemp);
               for (let a = 0; a < segmentsTemp.length; a++) {
-                console.log(segmentsTemp[a]);
                 if (segmentsTemp[a].gift_code === gift_code_win) {
                   check = true;
                   winStateTemp = a + 1;
                 }
                 segmentsTemp[a] = { ...segmentsTemp[a], id: a + 1 };
               }
-              console.log(winStateTemp);
               setwin(winStateTemp);
             }
           } else {
@@ -227,6 +229,8 @@ export default function SpinTheWheel() {
         }, 3000);
       });
   }, [render]);
+  const interleave = ([x, ...xs], ys) => (x ? [x, ...interleave(ys, xs)] : ys);
+
   const runWheel = () => {
     setIsSpinning(true);
     var array_toado = [
