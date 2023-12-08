@@ -26,6 +26,7 @@ import { setAuthorization } from "./services/apiService/configURL";
 import {
   isLocalhost,
   isMobileDevice,
+  isSupportedBrowser,
   isWebKitBrowser,
 } from "./services/deviceModel";
 import NoAccessBrowser from "./pages/NoAccessBrowser/NoAccessBrowser";
@@ -46,17 +47,17 @@ function App() {
   setAuthorization(token);
   let access = false;
   let mobileDevice = isMobileDevice();
-  let webKitBrowser = isWebKitBrowser();
-  const [isPrivate, setIsPrivate] = useState(false)
-  useEffect(()=>{
+  let webKitBrowser = isSupportedBrowser();
+  const [isPrivate, setIsPrivate] = useState(false);
+  useEffect(() => {
     detectIncognito().then((result) => {
       if (result.isPrivate === false) {
-        setIsPrivate(true)
+        setIsPrivate(true);
       }
     });
-  },[])
+  }, []);
 
-  if ((mobileDevice && !webKitBrowser) || isLocalhost()) {
+  if ((mobileDevice && webKitBrowser) || isLocalhost()) {
     access = true;
   }
   const queryClient = new QueryClient();
