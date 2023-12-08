@@ -22,6 +22,7 @@ import { setAuthorization } from "../../services/apiService/configURL";
 import HeaderBackground from "../UpdateCustomerInfo/HeaderBackground";
 import Footer from "../../component/Footer/Footer";
 import PROFILE from "../../assets/fontawesome/image/profile-icon.png";
+import { Consent } from "../../utils/consent";
 
 const TITLE = "Đăng nhập";
 const style = {
@@ -39,14 +40,6 @@ function LoginPassword() {
   let dispatch = useDispatch();
   const [checkAgree1, setCheckAgree1] = useState(false);
   const [checkAgree2, setCheckAgree2] = useState(false);
-
-  const handleAgree = (e) => {
-    if (e === "ag1") {
-      setCheckAgree1(!checkAgree1);
-    } else if (e === "ag2") {
-      setCheckAgree2(!checkAgree2);
-    }
-  };
 
   const [triggerSubmitReceipt, setTriggerSubmitReceipt] = useState(false);
   const onSubmit = (data) => {
@@ -143,7 +136,43 @@ function LoginPassword() {
                 style={style}
               >
                 <div className="ml-3">
-                  <img src={PHONE} className="w-5" />
+                  <img src={PROFILE} className="w-5" />
+                </div>
+                <input
+                  className="form__name input-hidden input-size font-regular-mon input-data bg-[#ffffff]"
+                  placeholder="Nhập tên của bạn"
+                  // type={isShowPass ? "text" : "password"}
+                  {...register("name", {
+                    required: "Không được để trống",
+                  })}
+                />
+              </div>
+              <div className="font-normal z-0 -mt-3 text-[red] text-[13px] text-center">
+                <ErrorMessage
+                  errors={errors}
+                  name="name"
+                  render={({ messages }) => {
+                    setShow(false);
+                    return messages
+                      ? Object.entries(messages).map(([type, message]) => (
+                          <p
+                            key={type}
+                            className="bg-[#EEE6E7] pt-2.5 -mt-1 z-0 rounded-bl-xl rounded-br-xl
+                             border-[#F63440] border-[1px]"
+                          >
+                            {message}
+                          </p>
+                        ))
+                      : null;
+                  }}
+                />
+              </div>
+              <div
+                className="flex items-center mt-7 relative z-10 bg-[#ffffff]"
+                style={style}
+              >
+                <div className="ml-2 bg-[#ffffff]">
+                  <img src={PHONE} className="w-6" />
                 </div>
                 <input
                   className="form__name input-hidden input-size font-regular-mon input-data "
@@ -178,137 +207,17 @@ function LoginPassword() {
                   }}
                 />
               </div>
-              <div
-                className="flex items-center mt-7 relative z-10 bg-[#ffffff]"
-                style={style}
-              >
-                <div className="ml-3 bg-[#ffffff]">
-                  <img src={PROFILE} className="w-6" />
-                </div>
-                <input
-                  className="form__name input-hidden input-size font-regular-mon input-data bg-[#ffffff]"
-                  placeholder="Nhập tên của bạn"
-                  // type={isShowPass ? "text" : "password"}
-                  {...register("name", {
-                    required: "Không được để trống",
-                  })}
-                />
-              </div>
-              <div className="font-normal z-0 -mt-3 text-[red] text-[13px] text-center">
-                <ErrorMessage
-                  errors={errors}
-                  name="name"
-                  render={({ messages }) => {
-                    setShow(false);
-                    return messages
-                      ? Object.entries(messages).map(([type, message]) => (
-                          <p
-                            key={type}
-                            className="bg-[#EEE6E7] pt-2.5 -mt-1 z-0 rounded-bl-xl rounded-br-xl
-                             border-[#F63440] border-[1px]"
-                          >
-                            {message}
-                          </p>
-                        ))
-                      : null;
-                  }}
-                />
-              </div>
-              <div className="flex justify-between text-[16px] mt-7 text-center font-semibold-mon">
+              <div className="flex justify-between text-[16px] mt-7 text-left font-semibold-mon">
                 Chúng tôi sẽ gửi mã đến số điện thoại này thông qua ứng dụng
                 Zalo hoặc tin nhắn SMS trong vài phút tới
               </div>
               <div className="mt-5 text-center text-[red]">{textNotify}</div>
-              <div className="mt-5 flex font-light-mon">
-                <div>
-                  <input
-                    id="default-checkbox"
-                    type="checkbox"
-                    defaultChecked={checkAgree1}
-                    value={checkAgree1}
-                    onClick={(e) => handleAgree("ag1")}
-                    className="checkbox-confirm-register w-3 h-3 text-blue-600"
-                  />
-                </div>
-                <label
-                  htmlFor="check"
-                  className="text-[#333333] mr-[10px] text-[13px]"
-                >
-                  {" "}
-                </label>
-                <label
-                  htmlFor="check"
-                  className={"corlor-text-darkblack font-semibold-mon"}
-                >
-                  Tôi đồng ý
-                </label>
-              </div>
-              <div className="font-regular-mon text-[13px]">
-                P&G Việt Nam và đơn vị cung cấp dịch vụ của P&G có thể xử lý dữ
-                liệu cá nhân của bạn nhằm mục đích đánh giá điều kiện bạn tham
-                chương trình khuyến mại, liên hệ trao giải thưởng, quản lý và
-                báo cáo kết quả của chương trình theo quy định của luật pháp.
-                Nếu bạn từ chối đồng ý, bạn sẽ không thể tham gia chương trình
-                này. 
-              </div>
-
-              <div className="mt-5 flex font-light-mon">
-                <div>
-                  <input
-                    id="default-checkbox"
-                    type="checkbox"
-                    defaultChecked={checkAgree2}
-                    value={checkAgree2}
-                    onClick={(e) => handleAgree("ag2")}
-                    className="checkbox-confirm-register w-3 h-3 text-blue-600"
-                  />
-                </div>
-                <label
-                  htmlFor="check"
-                  className="text-[#333333] mr-[10px] text-[13px]"
-                >
-                  {" "}
-                </label>
-                <label
-                  htmlFor="check"
-                  className={"corlor-text-darkblack font-semibold-mon"}
-                >
-                  Tôi đồng ý
-                </label>
-              </div>
-              <div className="font-regular-mon text-[13px]">
-                P&G Việt Nam và đơn vị cung cấp dịch vụ của P&G có thể xử lý dữ
-                liệu cá nhân của bạn nhằm mục đích gửi cho bạn thông tin quảng
-                bá, tiếp thị về các sản phẩm, thông tin chương trình khuyến mại
-                và sự kiện của P&G. Các thông tin này sẽ được gửi qua tin nhắn
-                với tần suất tối đa 4 lần/tháng. Sự đồng ý của bạn sẽ thay thế
-                các lựa chọn từ chối quảng cáo trước đó (bao gồm cả việc bạn đã
-                đăng ký danh sách không nhận cuộc gọi quảng cáo "Do not call
-                list”), và bạn sẽ thông báo cho P&G biết nếu muốn từ chối nhận
-                quảng cáo. 
-              </div>
-              <div className="font-regular-mon mt-2 text-[13px]">
-                Bạn quyết định việc đánh dấu vào các ô bên trên để xác nhận đồng
-                ý cho chúng tôi sử dụng dữ liệu cá nhân của bạn. Lựa chọn từ
-                chối của bạn có thể ảnh hưởng đến việc bạn được nhận sản
-                phẩm/dịch vụ mà chúng tôi cung cấp theo chương trình, cũng như
-                giới hạn trải nghiệm mà bạn có được khi tham gia chương trình
-                này. P&G sẽ chia sẻ dữ liệu cá nhân của bạn với đơn vị cung cấp
-                dịch vụ được P&G ủy quyền thực hiện chương trình và/hoặc chuyển
-                dữ liệu cá nhân của bạn đến một địa điểm bên ngoài Việt Nam cho
-                các mục đích xử lý được mô tả trên đây. P&G không bán dữ liệu cá
-                nhân của bạn cho bên thứ ba. Bằng cách đánh dấu vào các ô ở
-                trên, bạn đồng ý cho P&G được thu thập, sử dụng, xử lý và chuyển
-                dữ liệu cá nhân của bạn theo Chính sách quyền riêng tư của chúng
-                tôi, chi tiết tại{" "}
-                <a
-                  href="https://www.pg.com/privacy/english/privacy_statement.shtml."
-                  target="_blank"
-                  className="dont-break-out text-[#003DA5] font-semibold-mon"
-                >
-                  https://www.pg.com/privacy/english/privacy_statement.shtml.
-                </a>
-              </div>
+              <Consent
+                checkAgree1={checkAgree1}
+                checkAgree2={checkAgree2}
+                setCheckAgree1={setCheckAgree1}
+                setCheckAgree2={setCheckAgree2}
+              />
               <div className="flex justify-center py-[56px] box-border text-[#333] font-light-mon">
                 {checkAgree1 && checkAgree2 ? (
                   <input
