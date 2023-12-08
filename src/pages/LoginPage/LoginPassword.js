@@ -208,15 +208,9 @@ function LoginPassword() {
                   {...register("password", {
                     required: "Không được để trống",
                     pattern: {
-<<<<<<< HEAD
                       value: /^(?=.*\d).{6,19}$/,
                       message:
                         "Vui lòng nhập ít nhất 6 đến 19 kí tự bao gồm ít nhất 1 số",
-=======
-                      value: /^(?=.{6,})(?=.*\d)/,
-                      message:
-                        "Vui lòng nhập ít nhất 6 kí tự bao gồm ít nhất 1 số",
->>>>>>> feature/Change_Login_By_Otp
                     },
                   })}
                 />
