@@ -111,8 +111,8 @@ export default function Home() {
     getCampaignClip();
     getCampaignTopAndDown();
     getHomerBanner();
-    const a = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx")
-    console.log(a)
+    const a = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
+    console.log(a);
   }, []);
 
   const handleTakePhoto = (status) => {
@@ -226,13 +226,15 @@ export default function Home() {
           </div>
           <div className="mt-[5px] w-full px-4">
             <Carousel
+              className="max-w-[100vw] w-full m-auto"
               autoPlay
-              centerMode={true}
-              showArrows={true}
-              emulateTouch={true}
-              showThumbs={false}
-              stopOnHover={true}
               swipeable={true}
+              emulateTouch={false}
+              centerMode={false}
+              showArrows={true}
+              stopOnHover={true}
+              infiniteLoop={true}
+              showThumbs={false}
               showStatus={false}
               showIndicators={false}
               preventMovementUntilSwipeScrollTolerance={true}

@@ -47,15 +47,14 @@ function App() {
   let access = false;
   let mobileDevice = isMobileDevice();
   let webKitBrowser = isWebKitBrowser();
-  const [isPrivate, setIsPrivate] = useState(false)
-  useEffect(()=>{
+  const [isPrivate, setIsPrivate] = useState(false);
+  useEffect(() => {
     detectIncognito().then((result) => {
       if (result.isPrivate === false) {
-        setIsPrivate(true)
+        setIsPrivate(true);
       }
     });
-  },[])
-
+  }, []);
   if ((mobileDevice && !webKitBrowser) || isLocalhost()) {
     access = true;
   }
