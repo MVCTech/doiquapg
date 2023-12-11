@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import ConfirmPopupGuideTakePhoto from "../ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
+import NewConfirmPopup from "../ConfirmPopupGuideTakePhoto/NewConfirmPopup";
 
 export default function NavbarHome() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
@@ -35,19 +36,15 @@ export default function NavbarHome() {
         navigation(`/infor-customer`);
       }
     } else {
-      navigation(
-        `${login_type === "password" ? "/login" : "/login"}`
-      );
+      navigation(`${login_type === "password" ? "/login" : "/login"}`);
     }
   };
-  
+
   const handleClickMenuGift = () => {
     if (token) {
       navigation(`/list-gift`);
     } else {
-      navigation(
-        `${login_type === "password" ? "/login" : "/login"}`
-      );
+      navigation(`${login_type === "password" ? "/login" : "/login"}`);
     }
   };
   return (
@@ -160,7 +157,7 @@ export default function NavbarHome() {
             </div>
           </li>
           {isOpenPopupGuide ? (
-            <ConfirmPopupGuideTakePhoto
+            <NewConfirmPopup
               isGuidePopup={isGuidePopup}
               setIsOpenPopupGuide={setIsOpenPopupGuide}
             />

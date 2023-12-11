@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
 import wheel_text from "../../assets/fontawesome/image/wheel-text.png";
-import spin_img from "../../assets/fontawesome/image/rotaryNeedle1.png";
+import spin_img from "../../assets/fontawesome/image/rotaryNeedle2.png";
 import { useNavigate, useParams } from "react-router";
 import { luckyDrawService } from "../../services/apiService/LuckyDraw";
 import { toast } from "react-toastify";
@@ -464,16 +464,7 @@ export default function SpinTheWheel() {
                       }}
                       disabled={isSpinning}
                     >
-                      {/* <div className="h-[63px] w-[63px] bg-yellow-400 rounded-[100%] relative left-1/2 -translate-x-1/2">
-                        <div
-                          className="h-14 w-14 bg-[#00A1DF] rounded-[100%] relative
-                        top-1/2 -translate-y-1/2 left-[50%] -translate-x-1/2 text-white font-bold-mon flex justify-center items-center"
-                        >
-                          QUAY
-                        </div>
-                      </div> */}
-                      {/* w-[320px] */}
-                      <img className="-z-10  w-[70px]" src={spin_img} alt="" />
+                      <img className="-z-10 w-[380px]" src={spin_img} alt="" />
                     </button>
                   </div>
                 </div>

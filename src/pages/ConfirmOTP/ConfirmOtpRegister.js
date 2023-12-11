@@ -150,7 +150,7 @@ export default function ConfirmOtpRegister({ updateInfo }) {
     <div>
       <HeaderBackground TITLE={TITLE} buttonBack={`/login`} />
       <div className=" w-full bg-white rounded-[30px_30px_0_0] absolute top-[80px] z-50">
-        <div className="flex justify-center items-center px-[25px] max-h-full">
+        <div className="flex justify-center items-center px-[15px] max-h-full">
           <div className="block ">
             <div className="text-center font-italic-mon text-[13px] mt-5">
               Một mã xác định gồm 6 chữ số đã gửi đến số điện thoại{" "}
@@ -158,8 +158,15 @@ export default function ConfirmOtpRegister({ updateInfo }) {
                 {phoneData?.phone}
               </span>
             </div>
+            <div className="text-center font-italic-mon text-[13px] px-2 mt-5">
+              Chúng tôi sẽ gửi mã OTP đến số điện thoại này qua{" "}
+              <span className="font-bold-mon italic">ứng dụng Zalo</span>
+              &nbsp; hoặc{" "}
+              <span className="font-bold-mon italic"> tin nhắn SMS</span> trong
+              vài phút tới.
+            </div>
             <div className="container__input">
-              <div className="container__input-otp flex justify-center mt-3 flex-col -mb-6 items-center">
+              <div className="container__input-otp flex justify-center flex-col -mb-6 items-center">
                 <OtpInput
                   className="otp-element text-[#333]"
                   value={otp}

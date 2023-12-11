@@ -121,9 +121,11 @@ function LoginPassword() {
         buttonBack={`${back === "tick" ? `/infor-customer` : `/${appCode}`}`}
       />
       <div className="w-full bg-white rounded-[30px_30px_0_0] absolute top-20 z-50">
-        <div className="text-[#333333] text-[13px] mt-7 px-3 text-center font-italic-mon">
-          Nhập tên và số điện thoại của bạn để nhận mã OTP và tham gia chương
-          trình
+        <div className="text-[#333333] text-[13px] mt-7 px-3 text-justify font-italic-mon">
+          Nhập tên và số điện thoại của bạn để tham gia chương trình. Chúng tôi
+          sẽ gửi mã OTP đến số điện thoại này qua{" "}
+          <span className="font-bold-mon italic">ứng dụng Zalo </span> hoặc tin
+          nhắn SMS trong vài phút tới.
         </div>
         <div className="flex justify-center items-center px-[25px] mt-[40px] max-h-full ">
           <div className="block -mt-10 w-full">
@@ -141,7 +143,6 @@ function LoginPassword() {
                 <input
                   className="form__name input-hidden input-size font-regular-mon input-data bg-[#ffffff]"
                   placeholder="Nhập tên của bạn"
-                  // type={isShowPass ? "text" : "password"}
                   {...register("name", {
                     required: "Không được để trống",
                   })}
@@ -207,10 +208,7 @@ function LoginPassword() {
                   }}
                 />
               </div>
-              <div className="flex justify-between text-[16px] mt-7 text-left font-semibold-mon">
-                Chúng tôi sẽ gửi mã đến số điện thoại này thông qua ứng dụng
-                Zalo hoặc tin nhắn SMS trong vài phút tới
-              </div>
+
               <div className="mt-5 text-center text-[red]">{textNotify}</div>
               <Consent
                 checkAgree1={checkAgree1}
