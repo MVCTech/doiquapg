@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 import uuid from "react-uuid";
-import Compressor from "compressorjs";
 import GiftIconImg from "../../assets/fontawesome/image/gift.png";
 import HOI from "../../assets/fontawesome/image/hoi.png";
 import { campaignServices } from "../../services/apiService/campaignServices";
@@ -24,10 +23,10 @@ import {
   permissions_android,
   permissions_iphone,
 } from "../../utils/dataFormat";
-import ConfirmPopupGuideTakePhoto from "../../component/ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
 import { setAuthorization } from "../../services/apiService/configURL";
 import { getOS } from "../../services/deviceModel";
 import { handleChangeImage } from "../../utils/compressImage";
+import NewConfirmPopup from "../../component/ConfirmPopupGuideTakePhoto/NewConfirmPopup";
 
 export default function GuideTakeAPhoto() {
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
@@ -494,7 +493,7 @@ export default function GuideTakeAPhoto() {
         </>
       )}
       {isOpenPopupGuide ? (
-        <ConfirmPopupGuideTakePhoto
+        <NewConfirmPopup
           isGuidePopup={isGuidePopup}
           setIsOpenPopupGuide={setIsOpenPopupGuide}
         />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -19,6 +19,7 @@ import LOGO_PG from "../../assets/fontawesome/image/logo_png.png";
 import Advantace from "../../assets/fontawesome/image/advantace.png";
 import IconNotify from "../../assets/fontawesome/image/icon_notify.svg";
 import IconGuideHd from "../../assets/fontawesome/image/iconguide-hd.png";
+import JOIN from "../../assets/fontawesome/image/join.png";
 import NEXT from "../../assets/fontawesome/image/next.png";
 import RIGHT_NEXT from "../../assets/fontawesome/image/right-next.jpg";
 import LEFT_BACK from "../../assets/fontawesome/image/left-back.jpg";
@@ -29,6 +30,7 @@ import ICON_DOTS from "../../assets/fontawesome/image/icon-dots.svg";
 import { useQuery } from "react-query";
 import ICON_DOTS_PRIMARY from "../../assets/fontawesome/image/icon-dots-primary.svg";
 import {
+  dataGuideJoin,
   image_android,
   image_ios,
   permissions_android,
@@ -37,6 +39,8 @@ import {
 import { LOGIN_TYPE } from "../../services/localService/localService";
 import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
 import { format } from "date-fns";
+import NewConfirmPopup from "../../component/ConfirmPopupGuideTakePhoto/NewConfirmPopup";
+import PopupGeneral from "../../component/PopupPermissionCamera/PopupGeneral";
 
 export default function Home() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
@@ -52,6 +56,7 @@ export default function Home() {
   const [campaignTop, setCampaignTop] = useState([]);
   const [campaignDown, setCampaignDown] = useState([]);
   const [isGuidePopup, setIsGuidePopup] = useState(false);
+  const [isJoinPopup, setIsJoinPopup] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState(false);
 
   const getRunningCampaign = () => {
@@ -114,7 +119,10 @@ export default function Home() {
     const a = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
     console.log(a);
   }, []);
-
+  const handleJoin = (status) => {
+    // setIsGuidePopup(status);
+    setIsJoinPopup(true);
+  };
   const handleTakePhoto = (status) => {
     setIsOpenPopupGuide(true);
     setIsGuidePopup(status);
@@ -147,6 +155,7 @@ export default function Home() {
   const handleOpenPopupPermission = () => {
     setPopupGuide(true);
   };
+
   return (
     <div>
       <div className="mt-2.5">
@@ -161,36 +170,42 @@ export default function Home() {
               <img src={IconNotify} className="w-12" onClick={handleHistory} />
             </div>
           </div>
-          <div className="mt-5 hscroll flex justify-around px-5">
+          <div className="mt-5 hscroll flex justify-around px-3">
             <div
               className="w-20 background-menu"
               onClick={() => handleTakePhoto(false)}
             >
-              <div className="h-16 w-16 rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={TAKE_PHOTO}
-                  className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+                  className="relative w- top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
-              <div className="menu-bar font-semibold-mon">Chụp hình</div>
+              <div className="menu-bar font-bold-mon">
+                Chụp hình
+                <br /> hóa đơn
+              </div>
             </div>
-            <div className="w-20 background-menu" onClick={handleRotation}>
-              <div className="h-16 w-16 rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+            <div
+              className="h-[65px] w-[65px] background-menu"
+              onClick={handleRotation}
+            >
+              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={VONG__QUAY}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
-              <div className="menu-bar font-semibold-mon">Vòng quay</div>
+              <div className="menu-bar font-bold-mon">Vòng quay</div>
             </div>
             <div className="w-20 background-menu" onClick={handleGift}>
-              <div className="h-16 w-16 rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={GIFT}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
-              <div className="menu-bar font-semibold-mon">Quà của tôi</div>
+              <div className="menu-bar font-bold-mon">Quà của tôi</div>
             </div>
             {/* <div
               className="w-20 background-menu"
@@ -201,26 +216,26 @@ export default function Home() {
                   className="w-10 relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
-              <div className="menu-bar font-semibold-mon">
+              <div className="menu-bar font-bold-mon">
                 Săn mã
                 <br />
                 giảm giá
               </div>
             </div> */}
             <div className="w-20 background-menu" onClick={handlePrizeRule}>
-              <div className="h-16 w-16 rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={INFO}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
-              <div className="menu-bar font-semibold-mon">
+              <div className="menu-bar font-bold-mon">
                 Thể lệ
                 <br /> chương trình
               </div>
             </div>
           </div>
-          <div className="mt-[5px] w-full px-4">
+          <div className="mt-[15px] w-full px-4">
             <Carousel
               className="max-w-[100vw] w-full m-auto"
               autoPlay
@@ -314,6 +329,27 @@ export default function Home() {
             <div className="mt-3 border-hd px-3 py-4 rounded-xl">
               <div
                 className="border-grid shadow-border h-32 bg-white"
+                onClick={() => handleJoin(true)}
+              >
+                <div className="grid grid-cols-12 h-[90px] gap-1 bg-white">
+                  <div className="col-span-2 flex items-center">
+                    <img src={JOIN} className="w-16" />
+                  </div>
+                  <div className="col-span-8 text-[15px] font-bold-mon py-4">
+                    <div>Hướng dẫn tham gia chương trình</div>
+                    <div className="text-[11px] h-0 font-regular-mon mt-2">
+                      Hướng dẫn chi tiết tham gia chương trình
+                    </div>
+                  </div>
+                  <div className="col-span-2 py-3 pl-4">
+                    <div className="border-iconnext py-4 pl-2">
+                      <img src={NEXT} className="w-6" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="mt-4 border-grid shadow-border h-32 bg-white"
                 onClick={() => handleTakePhoto(true)}
               >
                 <div className="grid grid-cols-12 h-[90px] gap-1 bg-white">
@@ -381,9 +417,17 @@ export default function Home() {
         </ul>
       </div>
       {isOpenPopupGuide ? (
-        <ConfirmPopupGuideTakePhoto
+        <NewConfirmPopup
           isGuidePopup={isGuidePopup}
           setIsOpenPopupGuide={setIsOpenPopupGuide}
+        />
+      ) : null}
+      {isJoinPopup ? (
+        <PopupGeneral
+          backgroundButton={true}
+          data={dataGuideJoin}
+          title={"HƯỚNG DẪN THAM GIA CHƯƠNG TRÌNH"}
+          setPopupGuide={setIsJoinPopup}
         />
       ) : null}
       {isOpenPermission ? (
@@ -395,9 +439,9 @@ export default function Home() {
         />
       ) : null}
       {isOpenGhim ? (
-        <CheckPermission
-          dataAndroid={image_android}
-          dataIOS={image_ios}
+        <PopupGeneral
+          title={"HƯỚNG DẪN THAM GIA CHƯƠNG TRÌNH"}
+          data={image_ios}
           typePopup={"ghimWebsite"}
           setPopupGuide={setPopupGhim}
         />
