@@ -106,7 +106,34 @@ export default function GuideTakeAPhoto() {
     formDataGCS.append("fileName", fileName);
     formDataGCS.append("ocrBase", ocrEndpoint);
     if (!token) {
-      navigate(`${login_type === "password" ? "/login" : "/login"}`);
+      setIsUpload(true);
+      ocrServices
+        .uploadImageToOCR(formDataGCS)
+        .then((res) => {
+          if (campaignId) {
+            console.log(campaignId);
+            res.data.campaign_id = campaignId;
+          }
+          const dataGcs = {
+            phoneCheck: phoneData,
+          };
+          let mergeDataGcsAndPhone = Object.assign(dataGcs, res.data);
+          localStorage.setItem(
+            "GCS_RESULT",
+            JSON.stringify(mergeDataGcsAndPhone)
+          );
+          navigate(`${login_type === "password" ? "/login" : "/login"}`);
+        })
+        .then((res) => {
+          if (token) {
+            let gcsResult = JSON.parse(localStorage.getItem("GCS_RESULT"));
+            submitReceipt(gcsResult);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsUpload(false);
+        });
     } else {
       setIsUpload(true);
     }

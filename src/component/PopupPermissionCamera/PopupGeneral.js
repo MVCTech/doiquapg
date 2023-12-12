@@ -59,11 +59,11 @@ export default function PopupGeneral({
                     <div className="py-2 -mb-5 px-5 text-[16px]">{title}</div>
                     <Carousel
                       className="style-carousel"
-                      autoPlay
                       centerMode={false}
                       showArrows={false}
                       infiniteLoop={true}
                       stopOnHover={true}
+                      width={"100%"}
                       showThumbs={false}
                       showStatus={false}
                       preventMovementUntilSwipeScrollTolerance={false}
@@ -89,7 +89,7 @@ export default function PopupGeneral({
                               backgroundButton
                                 ? {
                                     display: "inline-block",
-                                    padding: "40px 4px",
+                                    padding: "55px 4px",
                                   }
                                 : {
                                     display: "inline-block",
@@ -113,7 +113,8 @@ export default function PopupGeneral({
                           key={index}
                           style={{
                             position: "relative",
-                            padding: "0px 10px",
+                            padding: "0px 5px",
+                            width: "100%",
                           }}
                         >
                           <div>
@@ -121,7 +122,7 @@ export default function PopupGeneral({
                               src={item.url}
                               style={
                                 backgroundButton
-                                  ? { height: "255px", width: "380px" }
+                                  ? { height: "290px", width: "250px" }
                                   : { height: "305px", width: "380px" }
                               }
                               className="rounded-2xl bg-center bg-cover duration-500"
@@ -136,7 +137,7 @@ export default function PopupGeneral({
                             >
                               <div
                                 className="title-gu font-semibold-mon w-full"
-                                style={{ marginTop: "28px", fontSize: "12px" }}
+                                style={{ marginTop: "48px", fontSize: "12px" }}
                               >
                                 <div
                                   dangerouslySetInnerHTML={{
@@ -163,7 +164,7 @@ export default function PopupGeneral({
                               padding: "10px",
                               position: "relative",
                               zIndex: "99999",
-                              top: "20px",
+                              top: "75px",
                               borderRadius: "8px",
                               backgroundColor: "#FFFDEE",
                             }
@@ -177,7 +178,15 @@ export default function PopupGeneral({
                           </div>
                           <div className="font-regular-mon ml-2 text-left text-[#4F4F4F] text-[12px]">
                             Liên hệ Hotline để được hướng dẫn chi tiết Số
-                            hotline (028) 36222399
+                            hotline{" "}
+                            <span>
+                              <a
+                                href="tel:02836222399"
+                                className="font-bold-mon"
+                              >
+                                (028) 36222399
+                              </a>
+                            </span>
                           </div>
                         </div>
                       ) : null}

@@ -175,10 +175,10 @@ export default function Home() {
               className="w-20 background-menu"
               onClick={() => handleTakePhoto(false)}
             >
-              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={TAKE_PHOTO}
-                  className="relative w- top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+                  className="relative w-[75px] top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
               <div className="menu-bar font-bold-mon">
@@ -187,10 +187,10 @@ export default function Home() {
               </div>
             </div>
             <div
-              className="h-[65px] w-[65px] background-menu"
+              className="h-[75px] w-[75px] background-menu"
               onClick={handleRotation}
             >
-              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={VONG__QUAY}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
@@ -199,7 +199,7 @@ export default function Home() {
               <div className="menu-bar font-bold-mon">Vòng quay</div>
             </div>
             <div className="w-20 background-menu" onClick={handleGift}>
-              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={GIFT}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
@@ -223,7 +223,7 @@ export default function Home() {
               </div>
             </div> */}
             <div className="w-20 background-menu" onClick={handlePrizeRule}>
-              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={INFO}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
@@ -235,7 +235,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="mt-[15px] w-full px-4">
+          <div className="mt-[25px] w-full px-4">
             <Carousel
               className="max-w-[100vw] w-full m-auto"
               autoPlay
@@ -439,9 +439,9 @@ export default function Home() {
         />
       ) : null}
       {isOpenGhim ? (
-        <PopupGeneral
-          title={"HƯỚNG DẪN THAM GIA CHƯƠNG TRÌNH"}
-          data={image_ios}
+        <CheckPermission
+          dataAndroid={image_android}
+          dataIOS={image_ios}
           typePopup={"ghimWebsite"}
           setPopupGuide={setPopupGhim}
         />
