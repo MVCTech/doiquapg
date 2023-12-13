@@ -11,12 +11,17 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ConfirmPopupLogin from "../../component/ConfirmPopupLogin/ConfirmPopupLogin";
 import CheckPermission from "../../component/PopupPermissionCamera/CheckPermission";
-import { image_android, image_ios } from "../../utils/dataFormat";
+import {
+  image_android,
+  image_ios,
+  permissions_android,
+  permissions_iphone,
+} from "../../utils/dataFormat";
 import { userServices } from "../../services/apiService/userServices";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../Redux/Action/userAction";
 import { setAuthorization } from "../../services/apiService/configURL";
-import LOCKAUTH from "../../assets/fontawesome/image/lock-auth-icon.png";
+import CAMX from "../../assets/fontawesome/image/cam-x.png";
 import { luckyDrawService } from "../../services/apiService/LuckyDraw";
 import { WHEEL_LUOTQUAY, WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
 
@@ -75,7 +80,10 @@ export default function InforCustomer() {
         console.log(err);
       });
   }, []);
-
+  const [camx, setCamx] = useState(false);
+  const handleCam = () => {
+    setCamx(true);
+  };
   return (
     <div>
       <HeaderBackground
@@ -136,6 +144,18 @@ export default function InforCustomer() {
           </li>
           <li
             className="content-info-li font-regular-mon py-1 mt-3 rounded-xl"
+            onClick={handleCam}
+          >
+            <div className="icon-infor-li">
+              <img src={CAMX} className="w-4" />
+            </div>
+            <div>Cách cấp quyền máy ảnh</div>
+            <div className="ml-auto mr-6">
+              <img src={ICON_RIGHT} />
+            </div>
+          </li>
+          <li
+            className="content-info-li font-regular-mon py-1 mt-3 rounded-xl"
             onClick={handleLogout}
           >
             <div className="py-[15px] px-4">
@@ -165,6 +185,14 @@ export default function InforCustomer() {
           dataIOS={image_ios}
           typePopup={"ghimWebsite"}
           setPopupGuide={setPopupGuide}
+        />
+      ) : null}
+      {camx ? (
+        <CheckPermission
+          dataAndroid={permissions_android}
+          dataIOS={permissions_iphone}
+          typePopup={"permissionCam"}
+          setPopupGuide={setCamx}
         />
       ) : null}
       <NavbarHome />

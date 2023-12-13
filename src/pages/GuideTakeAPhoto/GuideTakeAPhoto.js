@@ -124,6 +124,28 @@ export default function GuideTakeAPhoto() {
           );
           navigate(`${login_type === "password" ? "/login" : "/login"}`);
         })
+        .catch((err) => {
+          console.log(err);
+          setIsUpload(false);
+        });
+    } else {
+      setIsUpload(true);
+      ocrServices
+        .uploadImageToOCR(formDataGCS)
+        .then((res) => {
+          if (campaignId) {
+            console.log(campaignId);
+            res.data.campaign_id = campaignId;
+          }
+          const dataGcs = {
+            phoneCheck: phoneData,
+          };
+          let mergeDataGcsAndPhone = Object.assign(dataGcs, res.data);
+          localStorage.setItem(
+            "GCS_RESULT",
+            JSON.stringify(mergeDataGcsAndPhone)
+          );
+        })
         .then((res) => {
           if (token) {
             let gcsResult = JSON.parse(localStorage.getItem("GCS_RESULT"));
@@ -134,35 +156,7 @@ export default function GuideTakeAPhoto() {
           console.log(err);
           setIsUpload(false);
         });
-    } else {
-      setIsUpload(true);
     }
-    ocrServices
-      .uploadImageToOCR(formDataGCS)
-      .then((res) => {
-        if (campaignId) {
-          console.log(campaignId);
-          res.data.campaign_id = campaignId;
-        }
-        const dataGcs = {
-          phoneCheck: phoneData,
-        };
-        let mergeDataGcsAndPhone = Object.assign(dataGcs, res.data);
-        localStorage.setItem(
-          "GCS_RESULT",
-          JSON.stringify(mergeDataGcsAndPhone)
-        );
-      })
-      .then((res) => {
-        if (token) {
-          let gcsResult = JSON.parse(localStorage.getItem("GCS_RESULT"));
-          submitReceipt(gcsResult);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsUpload(false);
-      });
   };
   const onClickDeleteImg = (e) => {
     setImageFile(undefined);
@@ -196,6 +190,8 @@ export default function GuideTakeAPhoto() {
         localStorage.removeItem("GCS_RESULT");
       })
       .catch((err) => {
+        localStorage.removeItem("GCS_RESULT");
+
         setErrMsg(err);
         setIsShowModalErr(true);
       })
@@ -212,12 +208,27 @@ export default function GuideTakeAPhoto() {
     const matching = videoDevices.filter((l) => {
       return font.some((term) => l.label.includes(term));
     });
-    setDevices(matching);
+    const a = [];
+    console.log(matching);
+    console.log(matching?.reverse());
+    // if (os !== "iOS") {
+
+    // }
+    setDevices(matching?.reverse());
   };
   useEffect(() => {
     getDeviceId();
-    setTimeout(getDeviceId(), 1000);
+    // setTimeout(getDeviceId(), 1000);
   }, []);
+  useEffect(() => {
+    if (os !== "iOS") {
+      setTimeout(() => {
+        console.log(devices);
+        console.log(devices.length);
+        setActiveDeviceId(devices[devices.length - 1]?.deviceId);
+      }, 600);
+    }
+  }, [devices]);
   function urltoFile(url, filename, mimeType) {
     return fetch(url)
       .then(function (res) {
@@ -253,6 +264,7 @@ export default function GuideTakeAPhoto() {
     setIsOpenPopupGuide(true);
   };
   const handleIndex = (id, index) => {
+    console.log(id);
     setActiveDeviceId(id);
     setCurrent(index);
   };
@@ -279,7 +291,7 @@ export default function GuideTakeAPhoto() {
             <>
               <Camera
                 ref={camera}
-                aspectRatio={9 / 16}
+                aspectRatio={activeDeviceId ? 9 / 16 : 0 / 16}
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"
                 errorMessages={{

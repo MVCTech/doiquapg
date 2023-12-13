@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 import NavbarHome from "../../component/NavbarHome/NavbarHome";
 import { homeServices } from "../../services/apiService/homeServices";
 import CarouselMiddleItem from "./CarouselMiddleItem";
-import ConfirmPopupGuideTakePhoto from "../../component/ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
 import "../../assets/css/font-text.css";
 import "../../assets/css/Home.css";
 import "../../assets/css/background__Footer.css";
@@ -16,6 +15,8 @@ import INFO from "../../assets/fontawesome/image/i.svg";
 import VONG__QUAY from "../../assets/fontawesome/image/vong_quay.svg";
 import GIFT from "../../assets/fontawesome/image/gift.svg";
 import LOGO_PG from "../../assets/fontawesome/image/logo_png.png";
+import LIKE from "../../assets/fontawesome/image/like.png";
+import LIKED from "../../assets/fontawesome/image/liked.png";
 import Advantace from "../../assets/fontawesome/image/advantace.png";
 import IconNotify from "../../assets/fontawesome/image/icon_notify.svg";
 import IconGuideHd from "../../assets/fontawesome/image/iconguide-hd.png";
@@ -23,8 +24,6 @@ import JOIN from "../../assets/fontawesome/image/join.png";
 import NEXT from "../../assets/fontawesome/image/next.png";
 import RIGHT_NEXT from "../../assets/fontawesome/image/right-next.jpg";
 import LEFT_BACK from "../../assets/fontawesome/image/left-back.jpg";
-import PERMISSIONCAM from "../../assets/fontawesome/image/permission-cam.png";
-import ICONGHIM from "../../assets/fontawesome/image/iconghim-website.png";
 import CheckPermission from "../../component/PopupPermissionCamera/CheckPermission";
 import ICON_DOTS from "../../assets/fontawesome/image/icon-dots.svg";
 import { useQuery } from "react-query";
@@ -58,6 +57,7 @@ export default function Home() {
   const [isGuidePopup, setIsGuidePopup] = useState(false);
   const [isJoinPopup, setIsJoinPopup] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState(false);
+  const [permission, setCameraPermission] = useState(false);
 
   const getRunningCampaign = () => {
     homeServices
@@ -312,18 +312,6 @@ export default function Home() {
               })}
             </Carousel>
           </div>
-          {/* <div className="rounded-2xl mt-[21px] px-5 max-w-[100vw] h-[213px] text-xs m-auto relative group">
-            <iframe
-              width="100%"
-              height="213px"
-              style={{ fontSize: "3px", borderRadius: "16px" }}
-              src={campaignClip}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-              allowFullScreen
-              title="Embedded youtube"
-            ></iframe>
-          </div> */}
           <div className="mt-3 px-5">
             <h2 className="font-bold-mon text-[20px]">Hướng Dẫn</h2>
             <div className="mt-3 border-hd px-3 py-4 rounded-xl">
@@ -369,7 +357,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 border-grid shadow-border">
+              {/* <div className="mt-4 border-grid shadow-border">
                 <div
                   className="grid grid-cols-12 gap-1 bg-white"
                   onClick={handleOpenPopupPermission}
@@ -410,8 +398,9 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
+            <div>{permission}</div>
             <div className="h-20"></div>
           </div>
         </ul>

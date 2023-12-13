@@ -95,40 +95,36 @@ export default function NewConfirmPopup({ isGuidePopup, setIsOpenPopupGuide }) {
                             <li className="flex justify-start items-start">
                               <div className="w-2 h-2 bg-[#96C61C] rounded-2xl mt-1"></div>
                               <div className="ml-1">
-                                Chụp toàn bộ hóa đơn đủ sáng và rõ nét
+                                Chụp hóa đơn{" "}
+                                <span className="font-bold-mon">gốc</span> và
+                                chụp{" "}
+                                <span className="font-bold-mon">toàn bộ</span>{" "}
+                                hóa đơn: đủ sáng rõ nét
                               </div>
                             </li>
                             <li className="flex w-full">
                               <div className="w-2 h-2 bg-[#96C61C] rounded-2xl mt-1"></div>
                               <div className="ml-1 w-full">
-                                Nếu hóa đơn dài, cần gấp lại để hiển thị rõ sản
-                                phẩm và số lượng
+                                Nếu hóa đơn dài, cần{" "}
+                                <span className="font-bold-mon">gấp lại</span>{" "}
+                                để hiển thị rõ:{" "}
+                                <span className="font-bold-mon">
+                                  tên sản phẩm
+                                </span>{" "}
+                                và{" "}
+                                <span className="font-bold-mon">
+                                  số lượng, tên siêu thị, số hóa đơn, ngày mua
+                                </span>
                               </div>
                             </li>
                             <li className="flex justify-start items-start">
                               <div className="w-2 h-2 bg-[#96C61C] rounded-2xl mt-1"></div>
                               <div className="pl-1">
-                                Nền phía sau trơn - đơn giản
-                              </div>
-                            </li>
-                            <li className="flex w-full">
-                              <div className="w-2 h-2 bg-[#96C61C] rounded-2xl mt-1"></div>
-                              <div className="ml-1 w-full">
-                                Chụp hóa đơn GỐC và chụp TOÀN BỘ hóa đơn
-                              </div>
-                            </li>
-                            <li className="flex justify-start items-start">
-                              <div className="w-2 h-2 bg-[#96C61C] rounded-2xl mt-1"></div>
-                              <div className="ml-1">
-                                Thấy rõ Tên siêu thị, số hóa đơn, sản phẩm, ngày
-                                mua.
-                              </div>
-                            </li>
-                            <li className="flex w-full">
-                              <div className="w-2 h-2 bg-[#96C61C] rounded-2xl mt-1"></div>
-                              <div className="ml-1 w-full">
-                                Gấp hóa đơn lại để hiển thị rõ tên sản phẩm và
-                                số lượng.
+                                Nền phía sau hình{" "}
+                                <span className="font-bold-mon">
+                                  {" "}
+                                  trơn - đơn giản
+                                </span>
                               </div>
                             </li>
                           </ul>

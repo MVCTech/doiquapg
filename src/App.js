@@ -76,7 +76,7 @@ function App() {
         pauseOnHover
       />
       {access && isPrivate ? (
-        <div className="App">
+        <div className="App font-regular-mon">
           <BrowserRouter>
             <QueryClientProvider client={queryClient}>
               <Routes>
