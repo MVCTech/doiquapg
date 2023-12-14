@@ -47,6 +47,7 @@ export default function Home() {
   const { token } = JSON.parse(localStorage.getItem("USER_DATA_LOCAL") || "{}");
   let appCode = window.location.pathname.split("/")[1];
   localStorage.setItem("CAMPAIGN_CODE", appCode);
+  const phoneData = JSON.parse(localStorage.getItem("PHONE_NUMBER" || "{}"));
   const navigation = useNavigate();
   const [listCampaign, setListCampaign] = useState();
   const [isOpenPermission, setPopupGuide] = useState(false);
@@ -155,7 +156,6 @@ export default function Home() {
   const handleOpenPopupPermission = () => {
     setPopupGuide(true);
   };
-
   return (
     <div>
       <div className="mt-2.5">
@@ -164,14 +164,28 @@ export default function Home() {
       <div className="containerNotify__background bg-[#fff] absolute rounded-[30px_30px_0_0] top-4 h-[93%] w-full z-10">
         <ul className="containerNotify__background-list pt-3 box-border  z-30">
           <div className="w-full px-5 max-w-[430px]">
-            <div className="flex justify-between max-w-[430px] relative">
-              <img src={LOGO_PG} className="w-12 h-12" />
+            <div className="flex justify-between w-full max-w-[430px] relative">
+              <div className="flex w-full">
+                <img src={LOGO_PG} className="w-12 h-12" />
+                <div className="ml-2">
+                  <div className="font-semibold-mon">Hi</div>
+                  <div>{phoneData?.phone ? phoneData?.phone : null}</div>
+                </div>
+              </div>
+              <div className="flex justify-end w-full">
+                <img
+                  src={IconNotify}
+                  className="w-12"
+                  onClick={handleHistory}
+                />
+              </div>
+            </div>
+            <div className="w-full flex justify-center my-4">
               <img src={Advantace} className="w-9/12" />
-              <img src={IconNotify} className="w-12" onClick={handleHistory} />
             </div>
           </div>
           <div className="mt-5 hscroll flex justify-around px-3">
-            <div
+            <button
               className="w-20 background-menu"
               onClick={() => handleTakePhoto(false)}
             >
@@ -185,8 +199,8 @@ export default function Home() {
                 Chụp hình
                 <br /> hóa đơn
               </div>
-            </div>
-            <div
+            </button>
+            <button
               className="h-[75px] w-[75px] background-menu"
               onClick={handleRotation}
             >
@@ -197,8 +211,11 @@ export default function Home() {
                 />
               </div>
               <div className="menu-bar font-bold-mon">Vòng quay</div>
-            </div>
-            <div className="w-20 background-menu" onClick={handleGift}>
+            </button>
+            <button
+              className="h-[75px] w-[75px] background-menu"
+              onClick={handleGift}
+            >
               <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={GIFT}
@@ -206,23 +223,11 @@ export default function Home() {
                 />
               </div>
               <div className="menu-bar font-bold-mon">Quà của tôi</div>
-            </div>
-            {/* <div
-              className="w-20 background-menu"
+            </button>
+            <button
+              className="h-[75px] w-[75px] background-menu"
+              onClick={handlePrizeRule}
             >
-              <div className="h-16 w-16 rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
-                <img
-                  src={SALE}
-                  className="w-10 relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
-                />
-              </div>
-              <div className="menu-bar font-bold-mon">
-                Săn mã
-                <br />
-                giảm giá
-              </div>
-            </div> */}
-            <div className="w-20 background-menu" onClick={handlePrizeRule}>
               <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={INFO}
@@ -233,7 +238,7 @@ export default function Home() {
                 Thể lệ
                 <br /> chương trình
               </div>
-            </div>
+            </button>
           </div>
           <div className="mt-[25px] w-full px-4">
             <Carousel

@@ -41,6 +41,7 @@ import ConfirmOtpRegister from "./pages/ConfirmOTP/ConfirmOtpRegister";
 import { useState } from "react";
 import { detectIncognito } from "detectincognitojs";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 function App() {
   let { token } = userDataLocal.get();
@@ -61,9 +62,43 @@ function App() {
     access = true;
   }
   const queryClient = new QueryClient();
+  const scrollCheck = document.querySelector("#scroll-check");
+  const keyboardCheck = document.querySelector("#keyboard-check");
+
+  document.addEventListener("keydown", function (e) {
+    if (
+      keyboardCheck.checked &&
+      e.ctrlKey &&
+      (e.keyCode == "61" ||
+        e.keyCode == "107" ||
+        e.keyCode == "173" ||
+        e.keyCode == "109" ||
+        e.keyCode == "187" ||
+        e.keyCode == "189")
+    ) {
+      e.preventDefault();
+    }
+  });
+  document.addEventListener(
+    "wheel",
+    function (e) {
+      if (scrollCheck.checked && e.ctrlKey) {
+        e.preventDefault();
+      }
+    },
+    {
+      passive: false,
+    }
+  );
 
   return (
     <>
+      <Helmet>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+      </Helmet>
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -75,6 +110,10 @@ function App() {
         draggable
         pauseOnHover
       />
+      <div class="control">
+        <input type="checkbox" id="scroll-check" hidden checked />
+        <input type="checkbox" id="keyboard-check" hidden checked />
+      </div>
       {access && isPrivate ? (
         <div className="App font-regular-mon">
           <BrowserRouter>

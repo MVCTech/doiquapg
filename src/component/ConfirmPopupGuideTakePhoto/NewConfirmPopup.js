@@ -1,53 +1,17 @@
-import { Carousel } from "react-responsive-carousel";
-import ICON_DOTS from "../../assets/fontawesome/image/icon-dots.svg";
-import ICON_DOTS_PRIMARY from "../../assets/fontawesome/image/icon-dots-primary.svg";
 import BTN_NEXT_GUIDE from "../../assets/fontawesome/image/btn-cancel-guide.svg";
 import B1_TAKEAPHOTO from "../../assets/fontawesome/image/hd1.png";
 import GUIDE_IMAGE from "../../assets/fontawesome/image/guide-image.png";
-
 import B2_TAKEAPHOTO from "../../assets/fontawesome/image/hd2.png";
 import B3_TAKEAPHOTO from "../../assets/fontawesome/image/hd3.png";
 import ICON_EXPLAIN from "../../assets/fontawesome/image/icon-explain.svg";
 import ICON_RETURN from "../../assets/fontawesome/image/icon-return.png";
-import CarouselTakeAPhoto from "../../pages/GuideTakeAPhoto/CarouselTakeAPhoto";
 import { useNavigate } from "react-router-dom";
 import HEADER_POPUP_PHONE from "../../assets/fontawesome/image/header_popup_phone.png";
 import { Camera } from "../Camera";
 import { useRef } from "react";
 import { useState } from "react";
 import { SET_CHECK_CAM } from "../../services/localService/localService";
-import RIGHT_NEXT from "../../assets/fontawesome/image/right-next.jpg";
-import LEFT_BACK from "../../assets/fontawesome/image/left-back.jpg";
 import PHONE_CONTACT from "../../assets/fontawesome/image/phone-contact.png";
-
-const images = [
-  {
-    id: 1,
-    url: B1_TAKEAPHOTO,
-    title: `<ul>
-      <li>Chụp hóa đơn GỐC và chụp TOÀN BỘ hóa đơn</li>
-      <li>Thấy rõ Tên siêu thị, số hóa đơn, sản phẩm, ngày mua.</li></ul>​`,
-  },
-  {
-    id: 2,
-    url: B2_TAKEAPHOTO,
-    title: `
-      <ul>
-      <li>Chụp hóa đơn RÕ RÀNG trong điều kiện ánh sáng tốt</li>
-      <li>Nền phía sau trơn - đơn giản</li>
-      <li>Chú ý không dùng tay che hóa đơn</li>
-      </ul>`,
-  },
-  {
-    id: 3,
-    url: B3_TAKEAPHOTO,
-    title: `
-      <ul>
-      <li>Gấp hóa đơn lại để hiển thị rõ phần tên sản phẩm và số lượng</li>
-     
-      </ul>`,
-  },
-];
 
 export default function NewConfirmPopup({ isGuidePopup, setIsOpenPopupGuide }) {
   const navigate = useNavigate();

@@ -226,7 +226,7 @@ export default function GuideTakeAPhoto() {
         console.log(devices);
         console.log(devices.length);
         setActiveDeviceId(devices[devices.length - 1]?.deviceId);
-      }, 600);
+      }, 650);
     }
   }, [devices]);
   function urltoFile(url, filename, mimeType) {
@@ -291,7 +291,9 @@ export default function GuideTakeAPhoto() {
             <>
               <Camera
                 ref={camera}
-                aspectRatio={activeDeviceId ? 9 / 16 : 0 / 16}
+                aspectRatio={
+                  activeDeviceId ? 9 / 16 : os === "iOS" ? 9 / 16 : 7 / 15
+                }
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"
                 errorMessages={{
