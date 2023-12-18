@@ -295,6 +295,7 @@ export default function SpinTheWheel() {
         console.log(err);
         toast.error(err);
         setIsSpinning(false);
+        navigate(`/list-rotation`);
       });
   };
   // const runWheel = () => {

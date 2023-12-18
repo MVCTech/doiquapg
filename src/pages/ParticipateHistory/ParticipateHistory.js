@@ -21,6 +21,7 @@ export default function ParticipateHistory() {
     historyService
       .getListHistory()
       .then((res) => {
+        console.log(res);
         setListHistory(res.history);
       })
       .catch((err) => {

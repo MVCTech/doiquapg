@@ -7,6 +7,7 @@ import "../../assets/css/backgroundPhone.css";
 import "../../assets/css/backgroundListNotify.css";
 import "../../assets/css/font-text.css";
 import "../../assets/css/backgroundButton.css";
+import "./HotdealDetail.css";
 import Footer from "../../component/Footer/Footer";
 import { formatDate } from "../../utils/format";
 
