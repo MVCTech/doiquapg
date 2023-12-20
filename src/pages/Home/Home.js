@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -7,7 +7,6 @@ import "slick-carousel/slick/slick-theme.css";
 import NavbarHome from "../../component/NavbarHome/NavbarHome";
 import { homeServices } from "../../services/apiService/homeServices";
 import CarouselMiddleItem from "./CarouselMiddleItem";
-import ConfirmPopupGuideTakePhoto from "../../component/ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
 import "../../assets/css/font-text.css";
 import "../../assets/css/Home.css";
 import "../../assets/css/background__Footer.css";
@@ -16,6 +15,8 @@ import INFO from "../../assets/fontawesome/image/i.svg";
 import VONG__QUAY from "../../assets/fontawesome/image/vong_quay.svg";
 import GIFT from "../../assets/fontawesome/image/gift.svg";
 import LOGO_PG from "../../assets/fontawesome/image/logo_png.png";
+import LIKE from "../../assets/fontawesome/image/like.png";
+import LIKED from "../../assets/fontawesome/image/liked.png";
 import Advantace from "../../assets/fontawesome/image/advantace.png";
 import IconNotify from "../../assets/fontawesome/image/icon_notify.svg";
 import IconGuideHd from "../../assets/fontawesome/image/iconguide-hd.png";
@@ -23,8 +24,6 @@ import JOIN from "../../assets/fontawesome/image/join.png";
 import NEXT from "../../assets/fontawesome/image/next.png";
 import RIGHT_NEXT from "../../assets/fontawesome/image/right-next.jpg";
 import LEFT_BACK from "../../assets/fontawesome/image/left-back.jpg";
-import PERMISSIONCAM from "../../assets/fontawesome/image/permission-cam.png";
-import ICONGHIM from "../../assets/fontawesome/image/iconghim-website.png";
 import CheckPermission from "../../component/PopupPermissionCamera/CheckPermission";
 import ICON_DOTS from "../../assets/fontawesome/image/icon-dots.svg";
 import { useQuery } from "react-query";
@@ -48,6 +47,7 @@ export default function Home() {
   const { token } = JSON.parse(localStorage.getItem("USER_DATA_LOCAL") || "{}");
   let appCode = window.location.pathname.split("/")[1];
   localStorage.setItem("CAMPAIGN_CODE", appCode);
+  const phoneData = JSON.parse(localStorage.getItem("PHONE_NUMBER" || "{}"));
   const navigation = useNavigate();
   const [listCampaign, setListCampaign] = useState();
   const [isOpenPermission, setPopupGuide] = useState(false);
@@ -58,6 +58,7 @@ export default function Home() {
   const [isGuidePopup, setIsGuidePopup] = useState(false);
   const [isJoinPopup, setIsJoinPopup] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState(false);
+  const [permission, setCameraPermission] = useState(false);
 
   const getRunningCampaign = () => {
     homeServices
@@ -155,7 +156,6 @@ export default function Home() {
   const handleOpenPopupPermission = () => {
     setPopupGuide(true);
   };
-
   return (
     <div>
       <div className="mt-2.5">
@@ -164,66 +164,71 @@ export default function Home() {
       <div className="containerNotify__background bg-[#fff] absolute rounded-[30px_30px_0_0] top-4 h-[93%] w-full z-10">
         <ul className="containerNotify__background-list pt-3 box-border  z-30">
           <div className="w-full px-5 max-w-[430px]">
-            <div className="flex justify-between max-w-[430px] relative">
-              <img src={LOGO_PG} className="w-12 h-12" />
+            <div className="flex justify-between w-full max-w-[430px] relative">
+              <div className="flex w-full">
+                <img src={LOGO_PG} className="w-12 h-12" />
+                <div className="ml-2">
+                  <div className="font-semibold-mon">Hi</div>
+                  <div>{phoneData?.phone ? phoneData?.phone : null}</div>
+                </div>
+              </div>
+              <div className="flex justify-end w-full">
+                <img
+                  src={IconNotify}
+                  className="w-12"
+                  onClick={handleHistory}
+                />
+              </div>
+            </div>
+            <div className="w-full flex justify-center my-4">
               <img src={Advantace} className="w-9/12" />
-              <img src={IconNotify} className="w-12" onClick={handleHistory} />
             </div>
           </div>
           <div className="mt-5 hscroll flex justify-around px-3">
-            <div
+            <button
               className="w-20 background-menu"
               onClick={() => handleTakePhoto(false)}
             >
-              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={TAKE_PHOTO}
-                  className="relative w- top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
+                  className="relative w-[75px] top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
               <div className="menu-bar font-bold-mon">
                 Chụp hình
                 <br /> hóa đơn
               </div>
-            </div>
-            <div
-              className="h-[65px] w-[65px] background-menu"
+            </button>
+            <button
+              className="h-[75px] w-[75px] background-menu"
               onClick={handleRotation}
             >
-              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={VONG__QUAY}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
               <div className="menu-bar font-bold-mon">Vòng quay</div>
-            </div>
-            <div className="w-20 background-menu" onClick={handleGift}>
-              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+            </button>
+            <button
+              className="h-[75px] w-[75px] background-menu"
+              onClick={handleGift}
+            >
+              <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={GIFT}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
               <div className="menu-bar font-bold-mon">Quà của tôi</div>
-            </div>
-            {/* <div
-              className="w-20 background-menu"
+            </button>
+            <button
+              className="h-[75px] w-[75px] background-menu"
+              onClick={handlePrizeRule}
             >
-              <div className="h-16 w-16 rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
-                <img
-                  src={SALE}
-                  className="w-10 relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
-                />
-              </div>
-              <div className="menu-bar font-bold-mon">
-                Săn mã
-                <br />
-                giảm giá
-              </div>
-            </div> */}
-            <div className="w-20 background-menu" onClick={handlePrizeRule}>
-              <div className="h-[65px] w-[65px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
+              <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
                 <img
                   src={INFO}
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
@@ -233,9 +238,9 @@ export default function Home() {
                 Thể lệ
                 <br /> chương trình
               </div>
-            </div>
+            </button>
           </div>
-          <div className="mt-[15px] w-full px-4">
+          <div className="mt-[25px] w-full px-4">
             <Carousel
               className="max-w-[100vw] w-full m-auto"
               autoPlay
@@ -312,18 +317,6 @@ export default function Home() {
               })}
             </Carousel>
           </div>
-          {/* <div className="rounded-2xl mt-[21px] px-5 max-w-[100vw] h-[213px] text-xs m-auto relative group">
-            <iframe
-              width="100%"
-              height="213px"
-              style={{ fontSize: "3px", borderRadius: "16px" }}
-              src={campaignClip}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-              allowFullScreen
-              title="Embedded youtube"
-            ></iframe>
-          </div> */}
           <div className="mt-3 px-5">
             <h2 className="font-bold-mon text-[20px]">Hướng Dẫn</h2>
             <div className="mt-3 border-hd px-3 py-4 rounded-xl">
@@ -369,7 +362,7 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              <div className="mt-4 border-grid shadow-border">
+              {/* <div className="mt-4 border-grid shadow-border">
                 <div
                   className="grid grid-cols-12 gap-1 bg-white"
                   onClick={handleOpenPopupPermission}
@@ -410,8 +403,9 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
+            <div>{permission}</div>
             <div className="h-20"></div>
           </div>
         </ul>
@@ -439,9 +433,9 @@ export default function Home() {
         />
       ) : null}
       {isOpenGhim ? (
-        <PopupGeneral
-          title={"HƯỚNG DẪN THAM GIA CHƯƠNG TRÌNH"}
-          data={image_ios}
+        <CheckPermission
+          dataAndroid={image_android}
+          dataIOS={image_ios}
           typePopup={"ghimWebsite"}
           setPopupGuide={setPopupGhim}
         />

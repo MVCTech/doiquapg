@@ -9,7 +9,7 @@ export default function TabGift({ item, key, index }) {
             : { backgroundColor: "#ffffff" }
         }
       >
-        <td className="font-regular-mon w-48">{item.gift}</td>
+        <td className="font-regular-mon pl-1 w-48">{item.gift}</td>
         <td className=" flex justify-center mt-1">
           <div className="border-table-listgift mt-1 ml-0"> {item.plan}</div>
         </td>

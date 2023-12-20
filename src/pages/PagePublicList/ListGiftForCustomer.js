@@ -155,13 +155,13 @@ export default function ListGiftForCustomer() {
             )}
           </div>
         </ul>
-        <div className="px-5 text-[red] italic font-semibold-mon relative z-50 h-40">
+        {/* <div className="px-5 text-[red] italic font-semibold-mon relative z-50 h-40">
           Lưu ý (*): <span></span>
           <div>- Lượng phân bổ quà tặng ở mỗi Siêu thị là khác nhau.</div>
           <div className="text-[red]">
             - Chương trình sẽ kết thúc sớm hơn dự kiến do số lượng quà có hạn.
           </div>
-        </div>
+        </div> */}
         <div className="h-20"></div>
       </div>
       <div className="h-20"></div>

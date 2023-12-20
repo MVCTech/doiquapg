@@ -63,6 +63,8 @@ export default function SubmitReceipt({ trigger }) {
         localStorage.removeItem("GCS_RESULT");
       })
       .catch((err) => {
+        localStorage.removeItem("GCS_RESULT");
+
         setErrMsg(err);
         setIsShowModalErr(true);
       })

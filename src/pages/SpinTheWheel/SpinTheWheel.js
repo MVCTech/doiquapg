@@ -291,8 +291,11 @@ export default function SpinTheWheel() {
         }
         // }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err);
+        toast.error(err);
         setIsSpinning(false);
+        navigate(`/list-rotation`);
       });
   };
   // const runWheel = () => {

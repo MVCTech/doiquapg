@@ -55,15 +55,14 @@ export default function PopupGeneral({
                   className="border-imgbg absolute -top-5 left-1/2 -translate-x-1/2"
                 />
                 <div className="bg_popup-cam-guide z-50">
-                  <div className="fontTextCheckCam font-bold-mon">
-                    <div className="py-2 -mb-5 px-5 text-[16px]">{title}</div>
+                  <div className="fontTextCheckCam font-bold-mon relative">
                     <Carousel
-                      className="style-carousel"
-                      autoPlay
+                      className="style-carousel h-full"
                       centerMode={false}
                       showArrows={false}
                       infiniteLoop={true}
                       stopOnHover={true}
+                      width={"100%"}
                       showThumbs={false}
                       showStatus={false}
                       preventMovementUntilSwipeScrollTolerance={false}
@@ -74,10 +73,13 @@ export default function PopupGeneral({
                         label
                       ) => {
                         const defStyle = (
-                          <img src={ICON_DOTS} className="w-3 h-3" />
+                          <img src={ICON_DOTS} className="w-3 h-3 mt-8" />
                         );
                         const defStylePrimary = (
-                          <img src={ICON_DOTS_PRIMARY} className="w-3 h-3" />
+                          <img
+                            src={ICON_DOTS_PRIMARY}
+                            className="w-3 h-3 mt-8"
+                          />
                         );
                         const style = isSelected
                           ? { ...defStylePrimary }
@@ -85,17 +87,14 @@ export default function PopupGeneral({
                         return (
                           <span
                             className=""
-                            style={
-                              backgroundButton
-                                ? {
-                                    display: "inline-block",
-                                    padding: "40px 4px",
-                                  }
-                                : {
-                                    display: "inline-block",
-                                    padding: "60px 4px",
-                                  }
-                            }
+                            style={{
+                              display: "inline-block",
+                              padding: "0px 4px",
+                              relative: "absolute",
+                              top: "100px",
+                              height: "10px",
+                              zIndex: "999999",
+                            }}
                             onClick={onClickHandler}
                             onKeyDown={onClickHandler}
                             key={index}
@@ -113,30 +112,26 @@ export default function PopupGeneral({
                           key={index}
                           style={{
                             position: "relative",
-                            padding: "0px 10px",
+                            padding: "20px 5px",
+                            width: "100%",
                           }}
                         >
                           <div>
-                            <img
-                              src={item.url}
-                              style={
-                                backgroundButton
-                                  ? { height: "255px", width: "380px" }
-                                  : { height: "305px", width: "380px" }
-                              }
-                              className="rounded-2xl bg-center bg-cover duration-500"
-                            />
                             <div
                               style={{
                                 display: "flex",
                                 justifyContent: "center",
                                 width: "90%",
-                                marginTop: "5px",
+                                marginTop: "0px",
                               }}
                             >
                               <div
                                 className="title-gu font-semibold-mon w-full"
-                                style={{ marginTop: "28px", fontSize: "12px" }}
+                                style={{
+                                  marginTop: "8px",
+                                  fontSize: "12px",
+                                  marginBottom: "5px",
+                                }}
                               >
                                 <div
                                   dangerouslySetInnerHTML={{
@@ -146,91 +141,101 @@ export default function PopupGeneral({
                                 ></div>
                               </div>
                             </div>
+                            <img
+                              src={item.url}
+                              style={{ height: "310px", width: "250px" }}
+                              className="rounded-2xl relative top-0 bg-center bg-cover duration-500"
+                            />
                           </div>
                         </div>
                       ))}
                     </Carousel>
                   </div>
-                  <div className="px-3">
-                    <div
+                  {/* <div className="px-3"> */}
+                  <div
+                    style={
+                      backgroundButton
+                        ? {
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            margin: "0 10px",
+                            flexDirection: "column",
+                            padding: "10px",
+                            position: "relative",
+                            zIndex: "99999",
+                            top: "115px",
+                            borderRadius: "8px",
+                            backgroundColor: "#FFFDEE",
+                          }
+                        : {}
+                    }
+                  >
+                    {backgroundButton ? (
+                      <div className="flex ">
+                        <div>
+                          <img src={PHONE_CONTACT} />
+                        </div>
+                        <div className="font-regular-mon ml-2 text-left text-[#4F4F4F] text-[12px]">
+                          Liên hệ Hotline để được hướng dẫn chi tiết Số hotline{" "}
+                          <span>
+                            <a href="tel:02836222399" className="font-bold-mon">
+                              (028) 36222399
+                            </a>
+                          </span>
+                        </div>
+                      </div>
+                    ) : null}
+
+                    <button
+                      className="font-bold-mon"
                       style={
                         backgroundButton
                           ? {
+                              padding: "5px 10px",
+                              marginTop: "5px",
+                              marginBottom: "0px",
+                              borderRadius: "10px",
+                              backgroundColor: "#003DA5",
+                              color: "white",
                               display: "flex",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              flexDirection: "column",
-                              padding: "10px",
-                              position: "relative",
-                              zIndex: "99999",
-                              top: "20px",
-                              borderRadius: "8px",
-                              backgroundColor: "#FFFDEE",
+                              fontSize: "12px",
+                              justifyItems: "center",
                             }
-                          : {}
+                          : {
+                              position: "absolute",
+                              bottom: "10px",
+                              padding: "5px 10px",
+                              marginTop: "5px",
+                              marginBottom: "0px",
+                              borderRadius: "10px",
+                              backgroundColor: "#003DA5",
+                              color: "white",
+                              left: "50%",
+                              transform: "translateX(-50%)",
+                              display: "flex",
+                              fontSize: "12px",
+                              justifyItems: "center",
+                            }
                       }
+                      onClick={checkPopup}
                     >
-                      {backgroundButton ? (
-                        <div className="flex ">
-                          <div>
-                            <img src={PHONE_CONTACT} />
-                          </div>
-                          <div className="font-regular-mon ml-2 text-left text-[#4F4F4F] text-[12px]">
-                            Liên hệ Hotline để được hướng dẫn chi tiết Số
-                            hotline (028) 36222399
-                          </div>
-                        </div>
-                      ) : null}
-
-                      <button
-                        className="font-bold-mon"
-                        style={
-                          backgroundButton
-                            ? {
-                                padding: "5px 10px",
-                                marginTop: "5px",
-                                marginBottom: "0px",
-                                borderRadius: "10px",
-                                backgroundColor: "#003DA5",
-                                color: "white",
-                                display: "flex",
-                                fontSize: "12px",
-                                justifyItems: "center",
-                              }
-                            : {
-                                position: "absolute",
-                                bottom: "10px",
-                                padding: "5px 10px",
-                                marginTop: "5px",
-                                marginBottom: "0px",
-                                borderRadius: "10px",
-                                backgroundColor: "#003DA5",
-                                color: "white",
-                                left: "50%",
-                                transform: "translateX(-50%)",
-                                display: "flex",
-                                fontSize: "12px",
-                                justifyItems: "center",
-                              }
-                        }
-                        onClick={checkPopup}
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyItems: "center",
+                          marginTop: "6px",
+                          marginRight: "10px",
+                        }}
                       >
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyItems: "center",
-                            marginTop: "6px",
-                            marginRight: "10px",
-                          }}
-                        >
-                          <img src={BTN_NEXT_GUIDE} />
-                        </div>
-                        Bỏ qua <br />
-                        hướng dẫn
-                      </button>
-                    </div>
+                        <img src={BTN_NEXT_GUIDE} />
+                      </div>
+                      Bỏ qua <br />
+                      hướng dẫn
+                    </button>
                   </div>
                 </div>
+                {/* </div> */}
               </div>
             </div>
           </div>

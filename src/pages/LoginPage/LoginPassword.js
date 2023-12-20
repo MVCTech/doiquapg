@@ -86,7 +86,7 @@ function LoginPassword() {
       })
       .catch((err) => {
         toast.error(err);
-        localStorage.removeItem("GCS_RESULT");
+        // localStorage.removeItem("GCS_RESULT");
       })
       .finally(() => {
         console.log("finally");
