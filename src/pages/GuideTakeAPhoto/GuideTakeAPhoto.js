@@ -297,8 +297,7 @@ export default function GuideTakeAPhoto() {
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"
                 errorMessages={{
-                  noCameraAccessible:
-                    "No camera device accessible. Please connect your camera or try a different browser.",
+                  noCameraAccessible: "",
                   permissionDenied:
                     "Permission denied. Please refresh and give camera permission.",
                   switchCamera:
