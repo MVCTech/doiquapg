@@ -46,6 +46,7 @@ axiosInstance.interceptors.response.use(
           window.location.assign(
             `${login_type === "password" ? "/login" : "/login"}`
           );
+          localStorage.removeItem(USER_DATA_LOCAL);
         } else {
           // localStorage.removeItem("GCS_RESULT");
         }

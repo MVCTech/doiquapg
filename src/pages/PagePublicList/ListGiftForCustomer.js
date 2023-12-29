@@ -102,7 +102,7 @@ export default function ListGiftForCustomer() {
                       <th className="border-head rounded-tl-xl pl-5 text-left">
                         Tên quà
                       </th>
-                      <th className="border-head">Tổng quà</th>
+                      <th className="border-head w-24">Tổng quà</th>
                       <th className="border-head">Đã ra</th>
                       <th className="border-head rounded-tr-xl">Còn lại</th>
                     </tr>

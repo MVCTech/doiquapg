@@ -44,7 +44,10 @@ import PopupGeneral from "../../component/PopupPermissionCamera/PopupGeneral";
 export default function Home() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
   document.body.style.backgroundColor = "white";
-  const { token } = JSON.parse(localStorage.getItem("USER_DATA_LOCAL") || "{}");
+  const { token, phone } = JSON.parse(
+    localStorage.getItem("USER_DATA_LOCAL") || "{}"
+  );
+  console.log(phone);
   let appCode = window.location.pathname.split("/")[1];
   localStorage.setItem("CAMPAIGN_CODE", appCode);
   const phoneData = JSON.parse(localStorage.getItem("PHONE_NUMBER" || "{}"));
@@ -169,7 +172,7 @@ export default function Home() {
                 <img src={LOGO_PG} className="w-12 h-12" />
                 <div className="ml-2">
                   <div className="font-semibold-mon">Hi</div>
-                  <div>{phoneData?.phone ? phoneData?.phone : null}</div>
+                  <div>{phone ? phone : null}</div>
                 </div>
               </div>
               <div className="flex justify-end w-full">
