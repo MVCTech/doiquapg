@@ -7,6 +7,8 @@ import phone_icon from "../../assets/fontawesome/image/phone-icon.png";
 import { useNavigate } from "react-router-dom";
 import BTN_NEXT_GUIDE from "../../assets/fontawesome/image/btn-cancel-guide.svg";
 import { WHEEL_LUOTQUAY, WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
+import { userServices } from "../../services/apiService/userServices";
+import { toast } from "react-toastify";
 
 MainPopup.propTypes = {
   image: PropTypes.string,
@@ -49,18 +51,65 @@ export default function MainPopup({
   const handleClickOk = () => {};
   const handleNavigateSucess = () => {
     navigation(`/list-gift`);
-    localStorage.removeItem(WHEEL_LUOTQUAY)
-    localStorage.removeItem(WHEEL_PHANTHUONG)
+    localStorage.removeItem(WHEEL_LUOTQUAY);
+    localStorage.removeItem(WHEEL_PHANTHUONG);
   };
   const handleRotation = () => {
     navigation(`/list-rotation`);
+    let info = { so_ids: soIds };
+    userServices
+      .postUpdateConsultant(info)
+      .then((res) => {
+        console.log(res);
+        if (statusLuckyDraw === true) {
+          console.log(res);
+          console.log(res.so_ids.length);
+
+          if (res.so_ids.length !== 1) {
+            navigation("/list-rotation");
+          } else {
+            navigation(`/wheel/${soIds}`);
+          }
+        } else {
+          navigation("/list-rotation");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Đã xảy ra lỗi. Vui lòng thử lại sau");
+      });
   };
   const handleLuckyDraw = () => {
-    if (soIds.length !== 1) {
-      navigation(`/list-rotation`);
-    } else {
-      navigation(`/wheel/${soIds}`);
-    }
+    let info = { so_ids: soIds };
+    console.log(info);
+    console.log(soIds);
+
+    userServices
+      .postUpdateConsultant(info)
+      .then((res) => {
+        console.log(res);
+        if (statusLuckyDraw === true) {
+          console.log(res);
+          console.log(res.so_ids.length);
+
+          if (res.so_ids.length !== 1) {
+            navigation("/list-rotation");
+          } else {
+            navigation(`/wheel/${soIds}`);
+          }
+        } else {
+          navigation("/list-gift");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Đã xảy ra lỗi. Vui lòng thử lại sau");
+      });
+    // if (soIds.length !== 1) {
+    //   navigation(`/list-rotation`);
+    // } else {
+    //   navigation(`/wheel/${soIds}`);
+    // }
   };
   return (
     <div className="z-50">

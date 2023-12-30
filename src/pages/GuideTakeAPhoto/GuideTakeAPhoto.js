@@ -165,9 +165,64 @@ export default function GuideTakeAPhoto() {
   };
   const submitReceipt = (gcsResult) => {
     let formData = new FormData();
-    formData.append("gsutil_url", gcsResult.gsutil_url);
-    formData.append("public_url", gcsResult.public_url);
-    formData.append("ocr_result", gcsResult.data);
+    // formData.append("gsutil_url", gcsResult.gsutil_url);
+    // formData.append("public_url", gcsResult.public_url);
+    // formData.append("ocr_result", gcsResult.data);
+    formData.append(
+      "gsutil_url",
+      "gs://mvcpro_vn/fd79f1a2-dd01-b3be-8805-5b25affd6f97_30-12-2023-13-22-27_454672bb-2e26-89f4-fca2-d17c4fb645c1432389c0-37d1-46e2-61cb-73fa700755e9.jpg"
+    );
+    formData.append(
+      "public_url",
+      "https://storage.googleapis.com/mvcpro_vn/fd79f1a2-dd01-b3be-8805-5b25affd6f97_30-12-2023-13-22-27_454672bb-2e26-89f4-fca2-d17c4fb645c1432389c0-37d1-46e2-61cb-73fa700755e9.jpg"
+    );
+    formData.append(
+      "ocr_result",
+      `{
+      "customer_name": "Coopmart Rach Mieu",
+      "counter": "20",
+      "cashier": "13017632-Thi",
+      "date_time": "11/12/2023 17:00:03",
+      "order_number": "32729",
+      "barcode": "0013002023121132729",
+      "tax_number": "0308123011",
+      "runtime": "1.67",
+      "product_list": [
+          {
+              "barcode": "4987176200747",
+              "description": "NGAriel Ctren downy NH T2.5k",
+              "quantity": 1,
+              "unitPrice": "169900",
+              "lineTotalNet": "169900"
+          },
+          {
+              "barcode": "4987176126665",
+              "description": "NX DOWNY yeuthuong",
+              "quantity": 1,
+              "unitPrice": "187000",
+              "lineTotalNet": "187000"
+          },
+          {
+              "barcode": "4902430284264",
+              "description": "XB SAFEGUARD th,moc 125g/130",
+              "quantity": 1,
+              "unitPrice": "19500",
+              "lineTotalNet": "19500"
+          },
+          {
+              "barcode": "4902430411776",
+              "description": "DG H&S SachGau BacHa 350/330",
+              "quantity": 1,
+              "unitPrice": "123000",
+              "lineTotalNet": "123000"
+          }
+      ],
+      "promotion": true,
+      "received_creceipt_datetime": "2023-12-30 13:22:28",
+      "response_result_datetime": "2023-12-30 13:22:29",
+      "chain": "coopmart"
+  }`
+    );
     formData.append(
       "request_id",
       uuid() + "-" + format(new Date(), "ddMMyyyyHHmmss")
