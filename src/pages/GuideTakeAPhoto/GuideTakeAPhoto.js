@@ -27,6 +27,7 @@ import { setAuthorization } from "../../services/apiService/configURL";
 import { getOS } from "../../services/deviceModel";
 import { handleChangeImage } from "../../utils/compressImage";
 import NewConfirmPopup from "../../component/ConfirmPopupGuideTakePhoto/NewConfirmPopup";
+import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
 
 export default function GuideTakeAPhoto() {
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
@@ -78,6 +79,7 @@ export default function GuideTakeAPhoto() {
     homeServices
       .getRunningCampaignTopAndDown(appCode)
       .then((res) => {
+        console.log(res);
         setOcrEndpoint(res.ocr_endpoint);
       })
       .catch((err) => {});
@@ -594,6 +596,7 @@ export default function GuideTakeAPhoto() {
           setIsOpenPopupGuide={setIsOpenPopupGuide}
         />
       ) : null}
+      <IconPhoneAndZalo />
     </>
   );
 }

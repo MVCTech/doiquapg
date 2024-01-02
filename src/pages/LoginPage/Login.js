@@ -23,6 +23,7 @@ import HeaderBackground from "../UpdateCustomerInfo/HeaderBackground";
 import Footer from "../../component/Footer/Footer";
 import PROFILE from "../../assets/fontawesome/image/profile-icon.png";
 import { Consent } from "../../utils/consent";
+import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
 
 const TITLE = "Đăng nhập";
 const style = {
@@ -276,6 +277,8 @@ function LoginPassword() {
         </div>
         <Footer />
       </div>
+      <IconPhoneAndZalo />
+
       <SubmitReceipt trigger={triggerSubmitReceipt}></SubmitReceipt>
     </div>
   );

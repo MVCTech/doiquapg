@@ -24,6 +24,7 @@ import { setAuthorization } from "../../services/apiService/configURL";
 import CAMX from "../../assets/fontawesome/image/cam-x.png";
 import { luckyDrawService } from "../../services/apiService/LuckyDraw";
 import { WHEEL_LUOTQUAY, WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
+import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
 
 const TITLE = "Thông tin khách hàng";
 const clickFilter = `/list-notify/tick`;
@@ -168,6 +169,8 @@ export default function InforCustomer() {
           </li>
         </ul>
       </div>
+      <IconPhoneAndZalo />
+
       {isPopupLogout ? (
         <ConfirmPopupLogin
           titlePopup={"Bạn có muốn đăng xuất thiết bị này"}
