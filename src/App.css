@@ -84,6 +84,14 @@
   outline-offset: 0px;
   outline: none;
 }
+.input-hidden-link {
+  background-color: transparent;
+}
+.input-hidden-link:focus {
+  border: none;
+  outline-offset: 0px;
+  outline: none;
+}
 .border-hd {
   background-color: #f0f0f0;
 }

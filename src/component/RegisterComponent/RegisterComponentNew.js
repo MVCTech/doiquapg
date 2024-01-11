@@ -43,6 +43,7 @@ export default function RegisterComponentNew({ updateInfo }) {
   const {
     register,
     watch,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm({
