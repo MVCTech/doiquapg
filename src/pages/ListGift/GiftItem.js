@@ -53,17 +53,27 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
               Bạn đã trúng phần quà là
             </div>
             <div className="font-semibold-mon text-[16px] ">{infor.gift}</div>
-            {infor.exchange_status_str !== "Chưa nhận" ? (
-              <div className="item-status font-regular-mon text-[#00AF43]">
-                Đã nhận{" "}
-                {infor?.urbox_details === "" ? null : (
-                  <Fragment>{infor?.urbox_details}</Fragment>
-                )}
-              </div>
+            {infor?.reject_receive_gift ? (
+              <>
+                <div className="item-status font-regular-mon text-red-600 ">
+                  Khách hàng từ chối nhận quà
+                </div>
+              </>
             ) : (
-              <div className="item-status font-regular-mon text-red-600 ">
-                {infor.exchange_status_str}
-              </div>
+              <>
+                {infor.exchange_status_str !== "Chưa nhận" ? (
+                  <div className="item-status font-regular-mon text-[#00AF43]">
+                    Đã nhận{" "}
+                    {infor?.urbox_details === "" ? null : (
+                      <Fragment>{infor?.urbox_details}</Fragment>
+                    )}
+                  </div>
+                ) : (
+                  <div className="item-status font-regular-mon text-red-600 ">
+                    {infor.exchange_status_str}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
