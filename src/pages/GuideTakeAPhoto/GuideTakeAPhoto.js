@@ -350,7 +350,7 @@ export default function GuideTakeAPhoto() {
               <Camera
                 ref={camera}
                 aspectRatio={
-                  activeDeviceId ? 9 / 16 : os === "iOS" ? 9 / 16 : 7 / 15
+                  activeDeviceId ? 9 / 15 : os === "iOS" ? 9 / 15 : 7 / 15
                 }
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"
