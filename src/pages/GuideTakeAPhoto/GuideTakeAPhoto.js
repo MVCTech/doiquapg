@@ -54,6 +54,9 @@ export default function GuideTakeAPhoto() {
   const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
   const [current, setCurrent] = useState("0");
   const [isCheck, setIsCheck] = useState(false);
+  const [width, setWidth] = useState();
+  const [height, setHeight] = useState();
+
   const navigate = useNavigate();
   let { token } = userDataLocal.get();
 
@@ -64,6 +67,8 @@ export default function GuideTakeAPhoto() {
   useEffect(() => {
     window.scrollTo(0, 0);
     setAuthorization(token);
+    setHeight(window.screen.availHeight);
+    setWidth(window.screen.availWidth);
   }, []);
 
   const getCampaignDetail = (campaignId) => {
@@ -350,7 +355,13 @@ export default function GuideTakeAPhoto() {
               <Camera
                 ref={camera}
                 aspectRatio={
-                  activeDeviceId ? 9 / 15 : os === "iOS" ? 9 / 15 : 7 / 15
+                  activeDeviceId
+                    ? 7 / 15
+                    : os === "iOS"
+                    ? width < 392
+                      ? 8 / 15
+                      : 9 / 15
+                    : 8 / 15
                 }
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"

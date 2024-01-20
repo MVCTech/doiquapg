@@ -70,7 +70,7 @@ body {
 .hscroll {
   overflow-x: scroll;
   overflow-y: hidden;
-  height: 120px;
+  height: 130px;
   white-space: nowrap;
 }
 .menu-bar {

@@ -114,6 +114,7 @@ export default function Home() {
         console.log(err);
       });
   };
+
   useEffect(() => {
     window.scrollTo(0, 0);
     getRunningCampaign();
