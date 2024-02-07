@@ -17,7 +17,6 @@ import {
 } from "../../utils/KeyConstant";
 
 export default function SpinTheWheel() {
-  // const [segments, setSegments] = useState([]);
   const [hasWheel, sethasWheel] = useState("TRUE");
   const [luotPhanThuong, setluotPhanThuong] = useState();
   const [win, setwin] = useState(0);
@@ -25,91 +24,11 @@ export default function SpinTheWheel() {
   const [luotQuay, setluotQuay] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const [soqua, setsoqua] = useState(8);
-
   const [isDisable, setIsDisable] = useState(false);
   const [isAnnounce, setIsAnnounce] = useState(false);
   let navigate = useNavigate();
   const { id } = useParams();
   const [transformBox, settransformBox] = useState("");
-
-  // const getRandomInt = (min, max) => {
-  //   let byteArray = new Uint8Array(1);
-  //   window.crypto.getRandomValues(byteArray);
-  //   // Convert to decimal
-  //   let randomNum = "0." + byteArray[0].toString();
-
-  //   // Get number in range
-  //   randomNum = Math.floor(randomNum * (max - min)) + min;
-
-  //   return randomNum;
-  // };
-
-  // const shuffleGiftList = (array) => {
-  //   let byteArray = new Uint8Array(1);
-  //   window.crypto.getRandomValues(byteArray);
-
-  //   // Convert to decimal
-  //   let randomNum = "0." + byteArray[0].toString();
-  //   let currentIndex = array.length,
-  //     randomIndex;
-
-  //   // While there remain elements to shuffle.
-  //   while (currentIndex != 0) {
-  //     // Pick a remaining element.
-  //     randomIndex = Math.floor(randomNum * currentIndex);
-  //     currentIndex--;
-
-  //     // And swap it with the current element.
-  //     [array[currentIndex], array[randomIndex]] = [
-  //       array[randomIndex],
-  //       array[currentIndex],
-  //     ];
-  //   }
-
-  //   return array;
-  // };
-
-  // const createNewGiftArrayForWheel = (severGiftList) => {
-  //   let newGiftList = [];
-
-  //   if (severGiftList.length > 8) {
-  //     severGiftList = severGiftList.slice(0, 8);
-  //   }
-  //   let notBigGiftList = severGiftList.filter((gift) => {
-  //     return gift.gift_code !== "bighalfgift_vangpnj";
-  //   });
-  //   let bigGiftList = severGiftList.filter((gift) => {
-  //     return gift.gift_code === "bighalfgift_vangpnj";
-  //   });
-  //   if (severGiftList.length < 8) {
-  //     let lackLenght = 8 - severGiftList.length;
-  //     while (lackLenght > 0) {
-  //       notBigGiftList = [
-  //         ...notBigGiftList,
-  //         notBigGiftList[getRandomInt(0, notBigGiftList.length)],
-  //       ];
-
-  //       lackLenght--;
-  //     }
-  //   }
-
-  //   newGiftList = [...shuffleGiftList([...bigGiftList, ...notBigGiftList])];
-
-  //   setNewGiftList(newGiftList);
-
-  //   return newGiftList;
-  // };
-  // const getDataGift = (severGiftList) => {
-  //   let list_prizes = createNewGiftArrayForWheel(severGiftList);
-  //   list_prizes = list_prizes.map(function (item, index) {
-  //     return {
-  //       id: index + 1,
-  //       text: item.gift,
-  //       img: item.gift_image,
-  //     };
-  //   });
-  //   setSegments(list_prizes);
-  // };
   const [render, setRender] = useState(false);
   useEffect(() => {
     console.log(id);
@@ -117,16 +36,6 @@ export default function SpinTheWheel() {
       .postDrawLuckyGift(id)
       .then((dataResponse) => {
         console.log(dataResponse);
-        // setSpinRemain(res.gift_no - res.count_draw);
-        // getDataGift(res.list_prizes);
-        // setSeverGiftList(res.list_prizes);
-        // setGiftListWin(res.list_win);
-        // let spinRemain = res.gift_no - res.count_draw;
-        // if (spinRemain <= 0) {
-        //   setTimeout(() => {
-        //     navigate(`/list-rotation`);
-        //   }, 3000);
-        // }
         if (dataResponse.list_prizes !== undefined) {
           sethasWheel("TRUE");
           let list_prizes = dataResponse.list_prizes;
@@ -208,7 +117,6 @@ export default function SpinTheWheel() {
             }
           } else {
             sethasWheel("FALSE");
-            // setmessage(response.data.result.meta.message);
           }
           setsegments(segmentsTemp);
           setluotQuay(gift_no - count_draw);
@@ -255,10 +163,8 @@ export default function SpinTheWheel() {
       setTimeout(function () {
         countDraw();
       }, 3000);
-      // chờ thời gian set lại phần thưởng
       setTimeout(function () {
         element.classList.remove("animate");
-        // setisredirectToWheelResult(true);
         setIsSpinning(false);
         redirectToWheelResult(); // set qua lun phần thưởng ko dừng
       }, 6000); //3000 = 3 second
@@ -266,8 +172,6 @@ export default function SpinTheWheel() {
   };
   const redirectToWheelResult = () => {
     setIsAnnounce(!isAnnounce);
-
-    // navigate("/" + appCode + "/wheelresult/" + pgCode);
     console.log("hello");
   };
   const countDraw = async () => {
@@ -276,9 +180,6 @@ export default function SpinTheWheel() {
       .then((response) => {
         console.log(response);
 
-        // if (response.data !== undefined) {
-        // setcount_draw(json.result.data.count_draw);
-        // setgift_no(json.result.data.gift_no);
         setluotQuay(response.gift_no - response.count_draw);
         localStorage.setItem(
           WHEEL_LUOTQUAY,
@@ -298,52 +199,6 @@ export default function SpinTheWheel() {
         navigate(`/list-rotation`);
       });
   };
-  // const runWheel = () => {
-  //   setIsDisable(true);
-  //   luckyDrawService
-  //     .postCountDraw(id)
-  //     .then((res) => {
-  //       console.log(res);
-  //       let spinRemain = res.gift_no - res.count_draw;
-  //       setSpinRemain(spinRemain);
-  //       let array_angle = [
-  //         { id: 1, angle: 0 },
-  //         { id: 2, angle: -42 },
-  //         { id: 3, angle: -86 },
-  //         { id: 4, angle: -132 },
-  //         { id: 5, angle: -177 },
-  //         { id: 6, angle: -222 },
-  //         { id: 7, angle: -267 },
-  //         { id: 8, angle: -312 },
-  //       ];
-
-  //       let indexWinnigGift = giftListWin.findIndex((item) => {
-  //         return res.count_draw === item.index;
-  //       });
-  //       let indexNewGiftList = newGiftList.findIndex((item) => {
-  //         return giftListWin[indexWinnigGift].gift_code === item.gift_code;
-  //       });
-  //       let winningItem = {
-  //         ...newGiftList[indexNewGiftList],
-  //         spinRemain: spinRemain,
-  //         so_id: id,
-  //       };
-  //       localStorage.setItem("WINNING_GIFT", JSON.stringify(winningItem));
-  //       let angle = array_angle[indexNewGiftList]?.angle;
-  //       setTrans("rotate(" + (angle + 360 * 6) + "deg)");
-  //       setTimeout(() => {
-  //         handleChangeAnnounceStatus();
-  //       }, 6500);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       toast.warn(err);
-  //       setTimeout(() => {
-  //         navigate(`/list-rotation`);
-  //       }, 3000);
-  //       setIsDisable(false);
-  //     });
-  // };
   const handleChangeAnnounceStatus = () => {
     setIsAnnounce(!isAnnounce);
     setRender(!render);
@@ -351,8 +206,6 @@ export default function SpinTheWheel() {
   };
   const handleEnableBtn = () => {
     setIsDisable(!isDisable);
-
-    // getDataGift(severGiftList);
   };
   useEffect(() => {
     console.log(isAnnounce);

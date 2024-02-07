@@ -42,6 +42,7 @@ import { useState } from "react";
 import { detectIncognito } from "detectincognitojs";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import SpinFreeFire from "./pages/SpinFreeFire/SpinFreeFire";
 
 function App() {
   let { token } = userDataLocal.get();
@@ -162,6 +163,7 @@ function App() {
                   />
                   <Route path="/list-rotation" element={<ListRotation />} />
                   <Route path="/wheel/:id" element={<SpinTheWheel />} />
+                  <Route path="/spin-freefire" element={<SpinFreeFire />} />
                 </Route>
               </Routes>
             </QueryClientProvider>

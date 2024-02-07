@@ -1,0 +1,24 @@
+.rotate-spin-1 {
+  transform: translateX(42%) translateY(15%) rotate(45deg);
+}
+.rotate-spin-2 {
+  transform: translateX(60%) translateY(50%) rotate(90deg);
+}
+.rotate-spin-3 {
+  transform: translateX(42%) translateY(85%) rotate(135deg);
+}
+.rotate-spin-4 {
+  transform: translateX(0%) translateY(100%) rotate(180deg);
+}
+.rotate-spin-5 {
+  transform: translateX(-42%) translateY(85%) rotate(225deg);
+}
+.rotate-spin-6 {
+  transform: translateX(-60%) translateY(50%) rotate(270deg);
+}
+.rotate-spin-7 {
+  transform: translateX(-42%) translateY(15%) rotate(315deg);
+}
+.scale-spin {
+  transform: scale(0.95);
+}
