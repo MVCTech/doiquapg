@@ -5,7 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import NavbarHome from "../../component/NavbarHome/NavbarHome";
-import { homeServices } from "../../services/apiService/homeServices";
+import { getPosts, homeServices } from "../../services/apiService/homeServices";
 import CarouselMiddleItem from "./CarouselMiddleItem";
 import "../../assets/css/font-text.css";
 import "../../assets/css/Home.css";
@@ -40,6 +40,8 @@ import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo"
 import { format } from "date-fns";
 import NewConfirmPopup from "../../component/ConfirmPopupGuideTakePhoto/NewConfirmPopup";
 import PopupGeneral from "../../component/PopupPermissionCamera/PopupGeneral";
+import { useDispatch, useSelector } from "react-redux";
+import { increment, selectCount } from "../../Redux/Reducer/customerReducer";
 
 export default function Home() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
@@ -123,6 +125,7 @@ export default function Home() {
     getHomerBanner();
     const a = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
     console.log(a);
+    dispatch(getPosts());
   }, []);
   const handleJoin = (status) => {
     // setIsGuidePopup(status);
@@ -160,6 +163,10 @@ export default function Home() {
   const handleOpenPopupPermission = () => {
     setPopupGuide(true);
   };
+  const count = useSelector(selectCount);
+  const dispatch = useDispatch();
+  const [incrementAmount, setIncrementAmount] = useState("2");
+  console.log("data test", count);
   return (
     <div>
       <div className="mt-2.5">
@@ -172,8 +179,14 @@ export default function Home() {
               <div className="flex w-full">
                 <img src={LOGO_PG} className="w-12 h-12" />
                 <div className="ml-2">
-                  <div className="font-semibold-mon">Hi</div>
-                  <div>{phone ? phone : null}</div>
+                  <div className="font-semibold-mon">{count}</div>
+                  <button
+                    aria-label="Increment value"
+                    onClick={() => dispatch(increment())}
+                  >
+                    +
+                  </button>
+                  {/* <div>{phone ? phone : null}</div> */}
                 </div>
               </div>
               <div className="flex justify-end w-full">

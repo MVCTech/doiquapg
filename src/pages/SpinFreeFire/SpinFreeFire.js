@@ -2,7 +2,6 @@ import BG_TOP from "../../assets/fontawesome/image/bgtop-spin-freefire.png";
 import BG_BOTTOM from "../../assets/fontawesome/image/bgbottom-spin-freefire.png";
 import PIECE from "../../assets/fontawesome/image/piece.png";
 import PIECE_YELLOW from "../../assets/fontawesome/image/piece-yellow.png";
-import PIECE_LIGHT from "../../assets/fontawesome/image/piece-light.png";
 import BG_PIECE from "../../assets/fontawesome/image/bg-piece.png";
 import BG_PIECE_YELLOW from "../../assets/fontawesome/image/bg-piece-yellow.png";
 import START from "../../assets/fontawesome/image/start.png";
