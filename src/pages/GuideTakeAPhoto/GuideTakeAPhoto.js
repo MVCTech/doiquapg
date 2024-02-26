@@ -254,7 +254,6 @@ export default function GuideTakeAPhoto() {
       })
       .catch((err) => {
         localStorage.removeItem("GCS_RESULT");
-
         setErrMsg(err);
         setIsShowModalErr(true);
       })

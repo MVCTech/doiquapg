@@ -34,8 +34,13 @@ export default function ListRotation() {
   const handleToarstErr = () => {
     toast.error("Không có vòng quay");
   };
-  const redirectWheel = (id) => {
-    navigation(`/wheel/${id}`);
+  const redirectWheel = (id, game_type) => {
+    if (game_type === "gaming_wheel") {
+      console.log("pro");
+      navigation(`/spin-freefire/${id}`);
+    } else {
+      navigation(`/wheel/${id}`);
+    }
   };
   return (
     <div className="contain">
@@ -57,7 +62,7 @@ export default function ListRotation() {
                 className="w-full flex"
                 onClick={
                   item?.remaining_draw > 0
-                    ? () => redirectWheel(item.pg_so_code)
+                    ? () => redirectWheel(item.pg_so_code, item.game_type)
                     : () => handleToarstErr()
                 }
               >

@@ -179,14 +179,14 @@ export default function Home() {
               <div className="flex w-full">
                 <img src={LOGO_PG} className="w-12 h-12" />
                 <div className="ml-2">
-                  <div className="font-semibold-mon">{count}</div>
+                  {/* <div className="font-semibold-mon">{count}</div>
                   <button
                     aria-label="Increment value"
                     onClick={() => dispatch(increment())}
                   >
                     +
-                  </button>
-                  {/* <div>{phone ? phone : null}</div> */}
+                  </button> */}
+                  <div>{phone ? phone : null}</div>
                 </div>
               </div>
               <div className="flex justify-end w-full">

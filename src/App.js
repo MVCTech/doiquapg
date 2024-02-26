@@ -43,6 +43,7 @@ import { detectIncognito } from "detectincognitojs";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import SpinFreeFire from "./pages/SpinFreeFire/SpinFreeFire";
+import PageReceiveGiftCode from "./pages/SpinFreeFire/PageReceiveGiftCode";
 
 function App() {
   let { token } = userDataLocal.get();
@@ -163,7 +164,11 @@ function App() {
                   />
                   <Route path="/list-rotation" element={<ListRotation />} />
                   <Route path="/wheel/:id" element={<SpinTheWheel />} />
-                  <Route path="/spin-freefire" element={<SpinFreeFire />} />
+                  <Route path="/spin-freefire/:id" element={<SpinFreeFire />} />
+                  <Route
+                    path="/receive-code/:id"
+                    element={<PageReceiveGiftCode />}
+                  />
                 </Route>
               </Routes>
             </QueryClientProvider>

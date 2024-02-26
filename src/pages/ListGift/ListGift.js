@@ -14,9 +14,6 @@ import HeaderBackground from "../UpdateCustomerInfo/HeaderBackground";
 const TITLE = "Quà của tôi";
 
 export default function () {
-  let { token } = useSelector((state) => {
-    return state.userReducer.userData;
-  });
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
   const location = useLocation();
   const back = location.pathname.split("/")[3];
@@ -24,7 +21,6 @@ export default function () {
   const [items, setItems] = useState();
   const [openPopup, setOpenPopup] = useState();
 
-  setAuthorization(token);
   useEffect(() => {
     userServices
       .getMyPrizeList()
