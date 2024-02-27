@@ -177,58 +177,40 @@ export default function GuideTakeAPhoto() {
     formData.append("ocr_result", gcsResult.data);
     // formData.append(
     //   "gsutil_url",
-    //   "gs://mvcpro_vn/fd79f1a2-dd01-b3be-8805-5b25affd6f97_30-12-2023-13-22-27_454672bb-2e26-89f4-fca2-d17c4fb645c1432389c0-37d1-46e2-61cb-73fa700755e9.jpg"
+    //   "gs://mvcpro_vn/0c402b2e-59e0-0e41-a9e6-fee187c7a05b_27-02-2024-13-25-15_5fd7415c-6e45-f12f-625a-f01a3490bb9e002de665-93c4-a753-d72b-717e146845a2.jpg"
     // );
     // formData.append(
     //   "public_url",
-    //   "https://storage.googleapis.com/mvcpro_vn/fd79f1a2-dd01-b3be-8805-5b25affd6f97_30-12-2023-13-22-27_454672bb-2e26-89f4-fca2-d17c4fb645c1432389c0-37d1-46e2-61cb-73fa700755e9.jpg"
+    //   "https://storage.googleapis.com/mvcpro_vn/0c402b2e-59e0-0e41-a9e6-fee187c7a05b_27-02-2024-13-25-15_5fd7415c-6e45-f12f-625a-f01a3490bb9e002de665-93c4-a753-d72b-717e146845a2.jpg"
     // );
     // formData.append(
     //   "ocr_result",
     //   `{
-    //     "customer_name": "Coopmart Rach Mieu",
-    //     "counter": "20",
-    //     "cashier": "13017632-Thi",
-    //     "date_time": "11/12/2023 17:00:03",
-    //     "order_number": "32729",
-    //     "barcode": "0013002023121132729",
-    //     "tax_number": "0308123011",
-    //     "runtime": "1.67",
+    //     "customer_name": "10010",
+    //     "ticket_number": "",
+    //     "counter": "",
+    //     "cashier": "000019",
+    //     "date_time": "27/02/2024 10:54:00",
+    //     "order_number": "ISR10000025245",
+    //     "number_items": "1",
+    //     "runtime": "1.96",
     //     "product_list": [
     //         {
-    //             "barcode": "4987176200747",
-    //             "description": "NGAriel Ctren downy NH T2.5k",
+    //             "barcode": "376892",
+    //             "description": "LUOI DAO GILLETTE MACH3+ 3C",
     //             "quantity": 1,
-    //             "unitPrice": "169900",
-    //             "lineTotalNet": "169900"
-    //         },
-    //         {
-    //             "barcode": "4987176126665",
-    //             "description": "NX DOWNY yeuthuong",
-    //             "quantity": 1,
-    //             "unitPrice": "187000",
-    //             "lineTotalNet": "187000"
-    //         },
-    //         {
-    //             "barcode": "4902430284264",
-    //             "description": "XB SAFEGUARD th,moc 125g/130",
-    //             "quantity": 1,
-    //             "unitPrice": "19500",
-    //             "lineTotalNet": "19500"
-    //         },
-    //         {
-    //             "barcode": "4902430411776",
-    //             "description": "DG H&S SachGau BacHa 350/330",
-    //             "quantity": 1,
-    //             "unitPrice": "123000",
-    //             "lineTotalNet": "123000"
+    //             "unitPrice": "199000",
+    //             "lineTotalNet": "199000"
     //         }
     //     ],
+    //     "total_discount": "",
+    //     "total_gross": "199000",
     //     "promotion": true,
-    //     "received_creceipt_datetime": "2023-12-30 13:22:28",
-    //     "response_result_datetime": "2023-12-30 13:22:29",
-    //     "chain": "coopmart"
-    // }`
+    //     "received_creceipt_datetime": "2024-02-27 13:25:16",
+    //     "response_result_datetime": "2024-02-27 13:25:18",
+    //     "chain": "mega"
+    // }
+    // `
     // );
     formData.append(
       "request_id",

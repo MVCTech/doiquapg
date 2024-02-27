@@ -44,6 +44,7 @@ import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import SpinFreeFire from "./pages/SpinFreeFire/SpinFreeFire";
 import PageReceiveGiftCode from "./pages/SpinFreeFire/PageReceiveGiftCode";
+import PageReceiveGiftCodeAuto from "./pages/SpinFreeFire/PageReceiGiftCodeAuto";
 
 function App() {
   let { token } = userDataLocal.get();
@@ -112,7 +113,7 @@ function App() {
         draggable
         pauseOnHover
       />
-      <div class="control">
+      <div className="control">
         <input type="checkbox" id="scroll-check" hidden checked />
         <input type="checkbox" id="keyboard-check" hidden checked />
       </div>
@@ -168,6 +169,10 @@ function App() {
                   <Route
                     path="/receive-code/:id"
                     element={<PageReceiveGiftCode />}
+                  />
+                  <Route
+                    path="/get-gift-code/:id/:soids"
+                    element={<PageReceiveGiftCodeAuto />}
                   />
                 </Route>
               </Routes>

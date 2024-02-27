@@ -168,7 +168,7 @@ export default function RegisterComponent({ updateInfo, dataUserProfile }) {
             <input
               id="default-checkbox"
               type="checkbox"
-              defaultChecked={checkAgree1}
+              checked={checkAgree1}
               value={checkAgree1}
               onClick={(e) => handleAgree("ag1")}
               className="checkbox-confirm-register w-3 h-3 text-blue-600"
@@ -202,7 +202,7 @@ export default function RegisterComponent({ updateInfo, dataUserProfile }) {
             <input
               id="default-checkbox"
               type="checkbox"
-              defaultChecked={checkAgree2}
+              checked={checkAgree2}
               value={checkAgree2}
               onClick={(e) => handleAgree("ag2")}
               className="checkbox-confirm-register w-3 h-3 text-blue-600"

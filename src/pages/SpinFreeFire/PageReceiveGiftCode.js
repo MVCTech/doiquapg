@@ -15,10 +15,11 @@ export default function PageReceiveGiftCode() {
   const data = JSON.parse(localStorage.getItem(WHEEL_PHANTHUONG));
   const dataLuotQuay = JSON.parse(localStorage.getItem(WHEEL_LUOTQUAY));
   let appCode = window.location.pathname.split("/")[1];
+  let giftCode = window.location.pathname.split("/")[2];
   console.log(data?.gift_code.includes("cbmm"));
   const handleBack = () => {
     if (dataLuotQuay === 0) {
-      navigation(`/`);
+      navigation(`/list-rotation`);
     } else {
       navigation(`/spin-freefire/${id}`);
     }
@@ -61,7 +62,7 @@ export default function PageReceiveGiftCode() {
                     <div className="relative">
                       <img src={GIFT_CODE} />
                       <div className="absolute top-1 left-1/2 -translate-x-1/2 pr-5">
-                        YTUFGJYGLIK
+                        {giftCode}
                       </div>
                     </div>
                   </div>

@@ -21,15 +21,15 @@ export const counterSlice = createSlice({
       state.value += action.payload;
     },
   },
-  extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(getPosts.fulfilled, (state, action) => {
-      console.log("state: ", state);
-      console.log("action: ", action);
-      // Add user to the state array
-      //   state.entities.push(action.payload);
-    });
-  },
+  // extraReducers: (builder) => {
+  //   // Add reducers for additional action types here, and handle loading state as needed
+  //   builder.addCase(getPosts.fulfilled, (state, action) => {
+  //     console.log("state: ", state);
+  //     console.log("action: ", action);
+  //     // Add user to the state array
+  //     //   state.entities.push(action.payload);
+  //   });
+  // },
 });
 
 export const { increment, decrement, incrementByAmount } = counterSlice.actions;

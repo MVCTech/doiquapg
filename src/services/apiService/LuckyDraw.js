@@ -17,4 +17,9 @@ export const luckyDrawService = {
       },
     });
   },
+  getDetailGiftCode: (giftCode) => {
+    return axiosInstance.post("/doiqua/get_gamecode_details", {
+      params: { game_code: giftCode },
+    });
+  },
 };

@@ -42,10 +42,11 @@ export default function MainPopup({
   statusLuckyDraw,
   soIds,
   flag,
+  listPrize,
 }) {
   const navigation = useNavigate();
   const luotQuay = localStorage.getItem(WHEEL_LUOTQUAY);
-
+  console.log(listPrize);
   const winningGift = JSON.parse(localStorage.getItem(WHEEL_PHANTHUONG));
   let contact = localStorage.getItem("CONTACT");
   const handleClickOk = () => {};
@@ -55,12 +56,15 @@ export default function MainPopup({
     localStorage.removeItem(WHEEL_PHANTHUONG);
   };
   const handleRotation = () => {
+    const checkGiftCode = listPrize.filter((x) => x.game_code !== "");
+    console.log(checkGiftCode);
     navigation(`/list-rotation`);
     let info = { so_ids: soIds };
     userServices
       .postUpdateConsultant(info)
       .then((res) => {
         console.log(res);
+
         if (statusLuckyDraw === true) {
           console.log(res);
           console.log(res.so_ids.length);
@@ -83,22 +87,40 @@ export default function MainPopup({
     let info = { so_ids: soIds };
     console.log(info);
     console.log(soIds);
-
+    const checkGiftType = listPrize.filter(
+      (x) => x.game_type === "gaming_wheel"
+    );
+    const checkGiftCode = checkGiftType.filter(
+      (x) => x.gift_type === "game_code"
+    );
+    console.log(checkGiftType);
     userServices
       .postUpdateConsultant(info)
       .then((res) => {
         console.log(res);
-        if (statusLuckyDraw === true) {
-          console.log(res);
-          console.log(res.so_ids.length);
-
-          if (res.so_ids.length !== 1) {
-            navigation("/list-rotation");
+        if (checkGiftType.length > 0) {
+          if (checkGiftCode.length > 0) {
+            if (checkGiftCode[0].game_code !== "") {
+              navigation(
+                `/get-gift-code/${checkGiftCode[0].game_code}/${soIds}`
+              );
+            }
           } else {
-            navigation(`/wheel/${soIds}`);
+            navigation(`/spin-freefire/${soIds}`);
           }
         } else {
-          navigation("/list-gift");
+          if (statusLuckyDraw === true) {
+            console.log(res);
+            console.log(res.so_ids.length);
+
+            if (res.so_ids.length !== 1) {
+              navigation("/list-rotation");
+            } else {
+              navigation(`/wheel/${soIds}`);
+            }
+          } else {
+            navigation("/list-gift");
+          }
         }
       })
       .catch((err) => {

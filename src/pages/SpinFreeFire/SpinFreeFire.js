@@ -3,6 +3,7 @@ import BG_BOTTOM from "../../assets/fontawesome/image/bgbottom-spin-freefire.png
 import PIECE from "../../assets/fontawesome/image/piece.png";
 import PIECE_V1 from "../../assets/fontawesome/image/piece-light.png";
 import PIECE_YELLOW from "../../assets/fontawesome/image/piece-yellow.png";
+import PIECE_YELLOW_TOP from "../../assets/fontawesome/image/piece-yellow-top.png";
 import BG_PIECE from "../../assets/fontawesome/image/bg-piece.png";
 import BG_PIECE_YELLOW from "../../assets/fontawesome/image/bg-piece-yellow.png";
 import BG_BUTTON_ROTATION from "../../assets/fontawesome/image/bg-button-rotation.png";
@@ -252,8 +253,11 @@ export default function SpinFreeFire() {
             <div className="relative top-0">
               <div className="relative z-30 top-[6%] scale-spin">
                 <div className="relative z-30">
-                  <img src={count === 0 ? PIECE_YELLOW : PIECE} className="" />
-                  <div className="absolute -top-8 z-40 w-[90px] left-1/2 -translate-x-1/2">
+                  <img
+                    src={count === 0 ? PIECE_YELLOW_TOP : PIECE}
+                    className=""
+                  />
+                  <div className="absolute -top-7 z-40 w-[90px] left-1/2 -translate-x-1/2">
                     <div className="relative">
                       <img
                         src={count === 0 ? BG_PIECE_YELLOW : BG_PIECE}
@@ -399,13 +403,17 @@ export default function SpinFreeFire() {
               src={BG_BUTTON_ROTATION}
               className="absolute left-1/2 -translate-x-1/2"
             />
-            <div className="absolute left-1/2 -translate-x-1/2 top-3 text-white text-[22px] font-bold-mon w-full">
-              BẠN CÓ{" "}
-              <span className="text-[28px] text-yellow-300">
-                {giftNo > 9 ? giftNo : "0" + giftNo}
-              </span>{" "}
-              LƯỢT QUAY
-            </div>
+            {giftNo > 0 ? (
+              <div className="absolute left-1/2 -translate-x-1/2 top-3 text-white text-[22px] font-bold-mon w-full">
+                BẠN CÓ{" "}
+                <span className="text-[28px] text-yellow-300">{giftNo}</span>{" "}
+                LƯỢT QUAY
+              </div>
+            ) : (
+              <div className="absolute left-1/2 -translate-x-1/2 top-5 text-white text-[22px] font-bold-mon w-full">
+                BẠN HẾT LƯỢT QUAY
+              </div>
+            )}
           </button>
         </div>
       </div>

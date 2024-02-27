@@ -150,7 +150,7 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
                   <div className="px-3 tooltip" onClick={copyToClipboard}>
                     <img src={COPY} />
                     {isShow ? (
-                      <span class="tooltiptext font-semibold-mon">
+                      <span className="tooltiptext font-semibold-mon">
                         Đã sao chép!!
                       </span>
                     ) : null}

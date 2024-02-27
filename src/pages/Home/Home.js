@@ -5,7 +5,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import NavbarHome from "../../component/NavbarHome/NavbarHome";
-import { getPosts, homeServices } from "../../services/apiService/homeServices";
+import { homeServices } from "../../services/apiService/homeServices";
+import { getPosts, selectCampaign } from "../../services/apiService/testRedux";
 import CarouselMiddleItem from "./CarouselMiddleItem";
 import "../../assets/css/font-text.css";
 import "../../assets/css/Home.css";
@@ -15,8 +16,6 @@ import INFO from "../../assets/fontawesome/image/i.svg";
 import VONG__QUAY from "../../assets/fontawesome/image/vong_quay.svg";
 import GIFT from "../../assets/fontawesome/image/gift.svg";
 import LOGO_PG from "../../assets/fontawesome/image/logo_png.png";
-import LIKE from "../../assets/fontawesome/image/like.png";
-import LIKED from "../../assets/fontawesome/image/liked.png";
 import Advantace from "../../assets/fontawesome/image/advantace.png";
 import IconNotify from "../../assets/fontawesome/image/icon_notify.svg";
 import IconGuideHd from "../../assets/fontawesome/image/iconguide-hd.png";
@@ -41,7 +40,7 @@ import { format } from "date-fns";
 import NewConfirmPopup from "../../component/ConfirmPopupGuideTakePhoto/NewConfirmPopup";
 import PopupGeneral from "../../component/PopupPermissionCamera/PopupGeneral";
 import { useDispatch, useSelector } from "react-redux";
-import { increment, selectCount } from "../../Redux/Reducer/customerReducer";
+import { selectCount } from "../../Redux/Reducer/customerReducer";
 
 export default function Home() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
@@ -49,32 +48,18 @@ export default function Home() {
   const { token, phone } = JSON.parse(
     localStorage.getItem("USER_DATA_LOCAL") || "{}"
   );
-  console.log(phone);
   let appCode = window.location.pathname.split("/")[1];
   localStorage.setItem("CAMPAIGN_CODE", appCode);
-  const phoneData = JSON.parse(localStorage.getItem("PHONE_NUMBER" || "{}"));
   const navigation = useNavigate();
-  const [listCampaign, setListCampaign] = useState();
   const [isOpenPermission, setPopupGuide] = useState(false);
   const [isOpenGhim, setPopupGhim] = useState(false);
   const [campaignClip, setCampaignClip] = useState("");
-  const [campaignTop, setCampaignTop] = useState([]);
-  const [campaignDown, setCampaignDown] = useState([]);
+  const [notwheel, setNotWheel] = useState();
   const [isGuidePopup, setIsGuidePopup] = useState(false);
   const [isJoinPopup, setIsJoinPopup] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState(false);
   const [permission, setCameraPermission] = useState(false);
 
-  const getRunningCampaign = () => {
-    homeServices
-      .getRunningCampaign(appCode)
-      .then((res) => {
-        setListCampaign(res.campaign_list);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
   const getCampaignClip = () => {
     homeServices
       .getCampaignClip()
@@ -95,10 +80,10 @@ export default function Home() {
     homeServices
       .getRunningCampaignTopAndDown(appCode)
       .then((res) => {
+        console.log(res);
         localStorage.setItem(LOGIN_TYPE, res?.login_type);
         localStorage.setItem("CONTACT", res?.banner_middle[0]?.hotline);
-        setCampaignTop(res.banner_top);
-        setCampaignDown(res.banner_middle);
+
         localStorage.setItem("BANNER", JSON.stringify(res.banner_middle));
       })
       .catch((err) => {
@@ -111,6 +96,7 @@ export default function Home() {
       .then((res) => {
         console.log(res);
         localStorage.setItem("CONTACT", res?.hotline);
+        setNotWheel(res.not_used_wheel);
       })
       .catch((err) => {
         console.log(err);
@@ -119,7 +105,6 @@ export default function Home() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getRunningCampaign();
     getCampaignClip();
     getCampaignTopAndDown();
     getHomerBanner();
@@ -128,13 +113,11 @@ export default function Home() {
     dispatch(getPosts());
   }, []);
   const handleJoin = (status) => {
-    // setIsGuidePopup(status);
     setIsJoinPopup(true);
   };
   const handleTakePhoto = (status) => {
     setIsOpenPopupGuide(true);
     setIsGuidePopup(status);
-    // navigation(`/guide-takeaphoto`);
   };
   const handleGift = () => {
     if (token) {
@@ -154,19 +137,13 @@ export default function Home() {
   const handlePrizeRule = () => {
     navigation(`/prize-rules`);
   };
-  const handleGhim = () => {
-    setPopupGhim(true);
-  };
   const handleHistory = () => {
     navigation(`/list-notify`);
   };
-  const handleOpenPopupPermission = () => {
-    setPopupGuide(true);
-  };
   const count = useSelector(selectCount);
+  const getCampaign = useSelector(selectCampaign);
+  console.log(getCampaign);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState("2");
-  console.log("data test", count);
   return (
     <div>
       <div className="mt-2.5">
@@ -201,7 +178,7 @@ export default function Home() {
               <img src={Advantace} className="w-9/12" />
             </div>
           </div>
-          <div className="mt-5 hscroll flex justify-around px-3">
+          <div className="mt-5 hscroll flex justify-around px-3 relative z-0">
             <button
               className="w-20 background-menu"
               onClick={() => handleTakePhoto(false)}
@@ -218,7 +195,7 @@ export default function Home() {
               </div>
             </button>
             <button
-              className="h-[75px] w-[75px] background-menu"
+              className="h-[75px] w-[75px] background-menu relative"
               onClick={handleRotation}
             >
               <div className="h-[75px] w-[75px] rounded-[100%] p-3 bg-[#F5F9FF] relative left-1/2 -translate-x-1/2">
@@ -228,6 +205,11 @@ export default function Home() {
                 />
               </div>
               <div className="menu-bar font-bold-mon">Vòng quay</div>
+              <div className="absolute -top-0 z-40 right-0 text-white bg-red-500 w-5 h-5 rounded-3xl text-center">
+                <span className="text-[11px] relative -top-[3px]">
+                  {notwheel}
+                </span>
+              </div>
             </button>
             <button
               className="h-[75px] w-[75px] background-menu"
@@ -379,48 +361,6 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-              {/* <div className="mt-4 border-grid shadow-border">
-                <div
-                  className="grid grid-cols-12 gap-1 bg-white"
-                  onClick={handleOpenPopupPermission}
-                >
-                  <div className="col-span-2 flex items-center">
-                    <img src={PERMISSIONCAM} className="w-16" />
-                  </div>
-                  <div className="col-span-8 text-[15px] font-bold-mon py-4">
-                    <div>Cách cấp quyền máy ảnh</div>
-                    <div className="text-[11px] h-0 font-regular-mon mt-2">
-                      Khi không chụp được hóa đơn
-                    </div>
-                  </div>
-                  <div className="col-span-2 py-3 pl-4">
-                    <div className="border-iconnext py-4 pl-2">
-                      <img src={NEXT} className="w-6" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="mt-4 border-grid shadow-border">
-                <div
-                  className="grid grid-cols-12 gap-1 bg-white"
-                  onClick={handleGhim}
-                >
-                  <div className="col-span-2 flex flex-col justify-center">
-                    <img src={ICONGHIM} className="w-16" />
-                  </div>
-                  <div className="col-span-8 text-[15px] font-bold-mon py-4">
-                    <div>Phím tắt vào webstie</div>
-                    <div className="text-[11px] h-0 font-regular-mon mt-2">
-                      Hướng dẫn việc ghim website vào màn hình
-                    </div>
-                  </div>
-                  <div className="col-span-2 py-3 pl-4">
-                    <div className="border-iconnext py-4 pl-2">
-                      <img src={NEXT} className="w-6" />
-                    </div>
-                  </div>
-                </div>
-              </div> */}
             </div>
             <div>{permission}</div>
             <div className="h-20"></div>

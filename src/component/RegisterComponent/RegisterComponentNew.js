@@ -333,7 +333,7 @@ export default function RegisterComponentNew({ updateInfo }) {
             <input
               id="default-checkbox"
               type="checkbox"
-              defaultChecked={checkAgree1}
+              checked={checkAgree1}
               value={checkAgree1}
               onClick={(e) => handleAgree("ag1")}
               className="checkbox-confirm-register w-3 h-3 text-blue-600"

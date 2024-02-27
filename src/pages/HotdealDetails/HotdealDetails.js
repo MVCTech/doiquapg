@@ -24,7 +24,6 @@ export default function HotdealDetails() {
     campaignServices
       .getCampaignDetailApi(+id)
       .then((res) => {
-        console.log(res);
         setCampaignDetail(res);
       })
       .catch((err) => {
@@ -33,8 +32,6 @@ export default function HotdealDetails() {
   };
   useEffect(() => {
     getCampaignDetail(id);
-    let date1 = new Date().getTime();
-    console.log(date1);
   }, []);
 
   return (
