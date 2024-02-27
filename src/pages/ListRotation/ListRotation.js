@@ -107,7 +107,7 @@ export default function ListRotation() {
                 className="flex flex-col justify-end items-end align-bottom bottom-0 h-full "
                 onClick={
                   item?.remaining_draw > 0
-                    ? () => redirectWheel(item.pg_so_code)
+                    ? () => redirectWheel(item.pg_so_code, item.game_type)
                     : () => handleToarstErr()
                 }
               >

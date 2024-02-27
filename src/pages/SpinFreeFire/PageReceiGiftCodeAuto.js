@@ -111,11 +111,14 @@ export default function PageReceiveGiftCodeAuto() {
                 <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
                   <img src={giftCodeDetails?.image} />
                   <div className="relative top-0 w-full">
-                    <div className="absolute top-0">
-                      <div className="relative" onClick={copyToClipboard}>
+                    <div className="absolute top-0 w-full">
+                      <div
+                        className="relative w-full"
+                        onClick={copyToClipboard}
+                      >
                         <input
                           ref={textAreaRef}
-                          className="absolute z-50 top-1 left-1/2 -translate-x-1/2 pr-5 font-semibold-mon text-center input-hidden-link"
+                          className="absolute w-10/12 text-[14px] z-50 -mt-1 top-3 pr-5 font-semibold-mon text-center input-hidden-link"
                           value={giftCode}
                         />
                         <img src={GIFT_CODE} />
@@ -131,11 +134,11 @@ export default function PageReceiveGiftCodeAuto() {
                 <img src={POPUP_CARD_BOTTOM} className="relative top-0" />
                 <div className="absolute top-1/2 -translate-y-1/2 left-[5%]">
                   <button
-                    className="relative w-9/12 left-1/2 -translate-x-1/2"
+                    className="relative w-10/12 left-1/2 -translate-x-1/2"
                     onClick={handleOpenGuide}
                   >
-                    <img src={BT_LEFT} />
-                    <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-[10px] w-full">
+                    <img src={BT_LEFT} className="w-full" />
+                    <div className="absolute font-bold-mon top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-[11px] w-full">
                       HƯỚNG DẪN
                       <br /> ĐỔI MÃ
                     </div>
@@ -143,11 +146,11 @@ export default function PageReceiveGiftCodeAuto() {
                 </div>
                 <div className="absolute top-1/2 -translate-y-1/2 right-[5%]">
                   <button
-                    className="relative w-9/12 left-1/2 -translate-x-1/2"
+                    className="relative font-bold-mon w-10/12 left-1/2 -translate-x-1/2"
                     onClick={handleBack}
                   >
                     <img src={BT_RIGHT} />
-                    <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-[10px] w-full">
+                    <div className="absolute font-bold-mon top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 text-[11px] w-full">
                       <Fragment>
                         BẠN CÒN{" "}
                         <span className="text-[12px] text-yellow-300">

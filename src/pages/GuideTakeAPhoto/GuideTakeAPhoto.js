@@ -337,7 +337,7 @@ export default function GuideTakeAPhoto() {
                 ref={camera}
                 aspectRatio={
                   activeDeviceId
-                    ? 7 / 15
+                    ? 8 / 15
                     : os === "iOS"
                     ? width < 392
                       ? 8 / 15

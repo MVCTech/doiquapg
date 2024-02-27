@@ -204,7 +204,9 @@ export default function Home() {
                   className="relative top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2"
                 />
               </div>
-              <div className="menu-bar font-bold-mon">Vòng quay</div>
+              <div className="menu-bar font-bold-mon">
+                Vòng quay <br /> may mắn
+              </div>
               <div className="absolute -top-0 z-40 right-0 text-white bg-red-500 w-5 h-5 rounded-3xl text-center">
                 <span className="text-[11px] relative -top-[3px]">
                   {notwheel}

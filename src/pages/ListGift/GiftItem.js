@@ -91,12 +91,22 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
                 </div>
               </div>
             ) : null}
-            <div className="text-item-gift font-light-mon mt-1">
-              Chương trình
-              <div className="pr-3 font-semibold-mon text-[#52A0F7] text-right">
-                {infor.campaign_name}
+            {infor?.gift_type === "game_code" ? (
+              <div className="text-item-gift font-light-mon mt-1">
+                Mã Code
+                <div className="pr-3 font-semibold-mon text-[#52A0F7] text-right">
+                  {infor.urbox_link}
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="text-item-gift font-light-mon mt-1">
+                Chương trình
+                <div className="pr-3 font-semibold-mon text-[#52A0F7] text-right">
+                  {infor.campaign_name}
+                </div>
+              </div>
+            )}
+
             <div className="text-item-gift font-light-mon mt-1">
               Ngày tham gia
               <div className="pr-3 font-semibold-mon corlor-text-darkblack">
@@ -124,14 +134,18 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
             {infor?.is_physical_gift === false ? (
               <Fragment>
                 {infor?.gift_type === "card" ? null : (
-                  <div className="font-regular-mon mt-1 justify-between text-[12px] text-[#1D86FA] flex flex-nowrap">
-                    Link
-                    <div className="pr-3 font-semibold-mon corlor-text-darkblue text-[14px] text-right">
-                      <a href={infor?.urbox_link} target="_blank">
-                        {infor?.urbox_link}
-                      </a>
-                    </div>
-                  </div>
+                  <Fragment>
+                    {infor?.gift_type === "game_code" ? null : (
+                      <div className="font-regular-mon mt-1 justify-between text-[12px] text-[#1D86FA] flex flex-nowrap">
+                        Link
+                        <div className="pr-3 font-semibold-mon corlor-text-darkblue text-[14px] text-right">
+                          <a href={infor?.urbox_link} target="_blank">
+                            {infor?.urbox_link}
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </Fragment>
                 )}
               </Fragment>
             ) : null}
@@ -197,8 +211,17 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
               className="font-text-13 font-regular-mon text-[#4F4F4F] pl-5 mt-2"
               onClick={handleToggle}
             >
-              Ngày trúng thưởng{" "}
-              <span className="text-[#003DA5]">{infor.attend_date}</span>
+              {infor?.gift_type === "game_code" ? (
+                <Fragment>
+                  Mã Code{" "}
+                  <span className="text-[#003DA5]">{infor.urbox_link}</span>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  Ngày trúng thưởng{" "}
+                  <span className="text-[#003DA5]">{infor.attend_date}</span>
+                </Fragment>
+              )}
             </div>
           )}
           <div className=" flex flex-col justify-end items-end">
