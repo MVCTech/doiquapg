@@ -41,6 +41,8 @@ import NewConfirmPopup from "../../component/ConfirmPopupGuideTakePhoto/NewConfi
 import PopupGeneral from "../../component/PopupPermissionCamera/PopupGeneral";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCount } from "../../Redux/Reducer/customerReducer";
+import ConfirmPopupLogin from "../../component/ConfirmPopupLogin/ConfirmPopupLogin";
+import GiftIconImg from "../../assets/fontawesome/image/gift.png";
 
 export default function Home() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
@@ -115,9 +117,14 @@ export default function Home() {
   const handleJoin = (status) => {
     setIsJoinPopup(true);
   };
+  const [confirmPhone, setConfirmPhone] = useState(false);
   const handleTakePhoto = (status) => {
-    setIsOpenPopupGuide(true);
-    setIsGuidePopup(status);
+    if (token) {
+      setConfirmPhone(true);
+    } else {
+      setIsOpenPopupGuide(true);
+      setIsGuidePopup(status);
+    }
   };
   const handleGift = () => {
     if (token) {
@@ -163,7 +170,10 @@ export default function Home() {
                   >
                     +
                   </button> */}
-                  <div>{phone ? phone : null}</div>
+                  <div>
+                    <span className="font-bold-mon">Hi</span>{" "}
+                    {phone ? phone : null}
+                  </div>
                 </div>
               </div>
               <div className="flex justify-end w-full">
@@ -397,6 +407,22 @@ export default function Home() {
           dataIOS={image_ios}
           typePopup={"ghimWebsite"}
           setPopupGuide={setPopupGhim}
+        />
+      ) : null}
+      {confirmPhone ? (
+        <ConfirmPopupLogin
+          image={GiftIconImg}
+          labelCancel={"Để sau"}
+          labelOK={"Đồng ý"}
+          titlePopup={`Số điện thoại này có đúng của bạn không?`}
+          phone={phone}
+          handleCancel={() => {
+            setConfirmPhone(false);
+          }}
+          handleOk={() => {
+            setIsOpenPopupGuide(true);
+            setConfirmPhone(false);
+          }}
         />
       ) : null}
       <NavbarHome />

@@ -64,11 +64,12 @@ export default function ConfirmPopupLogin({
                 >
                   <label className="w-full font-regular-mon absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
                     {titlePopup}{" "}
-                    <span className="font-semibold-mon text-[#003DA5]">
+                    <div className="font-semibold-mon text-[#003DA5] text-[35px]">
                       {phone}
-                    </span>
+                    </div>
                   </label>
                 </div>
+                ``
                 <div className="relative left-1/2 -translate-x-1/2">
                   <img
                     src={Image}

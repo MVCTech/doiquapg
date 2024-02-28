@@ -10,14 +10,18 @@ import "../../assets/css/Home.css";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
-import ConfirmPopupGuideTakePhoto from "../ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
+import GiftIconImg from "../../assets/fontawesome/image/gift.png";
 import NewConfirmPopup from "../ConfirmPopupGuideTakePhoto/NewConfirmPopup";
+import ConfirmPopupLogin from "../ConfirmPopupLogin/ConfirmPopupLogin";
 
 export default function NavbarHome() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
   const location = useLocation();
-  const { token } = JSON.parse(localStorage.getItem("USER_DATA_LOCAL") || "{}");
+  const { token, phone } = JSON.parse(
+    localStorage.getItem("USER_DATA_LOCAL") || "{}"
+  );
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
+  const [confirmPhone, setConfirmPhone] = useState(false);
   const navigation = useNavigate();
   const handleClickMenuHome = () => {
     navigation(`/${appCode}`);
@@ -25,8 +29,12 @@ export default function NavbarHome() {
   const [isGuidePopup, setIsGuidePopup] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState();
   const handleClickMenuTakePhoto = (status) => {
-    setIsGuidePopup(status);
-    setIsOpenPopupGuide(true);
+    if (token) {
+      setConfirmPhone(true);
+    } else {
+      setIsOpenPopupGuide(true);
+      setIsGuidePopup(status);
+    }
   };
   const handleClickMenuProfile = () => {
     if (token) {
@@ -156,6 +164,22 @@ export default function NavbarHome() {
               Tài khoản
             </div>
           </li>
+          {confirmPhone ? (
+            <ConfirmPopupLogin
+              image={GiftIconImg}
+              labelCancel={"Để sau"}
+              labelOK={"Đồng ý"}
+              titlePopup={`Số điện thoại này có đúng của bạn không?`}
+              phone={phone}
+              handleCancel={() => {
+                setConfirmPhone(false);
+              }}
+              handleOk={() => {
+                setIsOpenPopupGuide(true);
+                setConfirmPhone(false);
+              }}
+            />
+          ) : null}
           {isOpenPopupGuide ? (
             <NewConfirmPopup
               isGuidePopup={isGuidePopup}

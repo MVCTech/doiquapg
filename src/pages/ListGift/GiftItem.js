@@ -95,7 +95,19 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
               <div className="text-item-gift font-light-mon mt-1">
                 Mã Code
                 <div className="pr-3 font-semibold-mon text-[#52A0F7] text-right">
-                  {infor.urbox_link}
+                  <input
+                    ref={textAreaRef}
+                    className="font-semibold-mon text-right input-hidden-link bg-[#f0f0f0]"
+                    value={infor?.urbox_link}
+                  />
+                  <div className="px-3 tooltip" onClick={copyToClipboard}>
+                    <img src={COPY} />
+                    {isShow ? (
+                      <span className="tooltiptext font-semibold-mon">
+                        Đã sao chép!!
+                      </span>
+                    ) : null}
+                  </div>
                 </div>
               </div>
             ) : (

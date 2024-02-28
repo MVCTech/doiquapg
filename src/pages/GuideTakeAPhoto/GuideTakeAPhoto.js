@@ -341,7 +341,7 @@ export default function GuideTakeAPhoto() {
                     : os === "iOS"
                     ? width < 392
                       ? 8 / 15
-                      : 9 / 15
+                      : 7 / 13
                     : 8 / 15
                 }
                 videoSourceDeviceId={activeDeviceId}
