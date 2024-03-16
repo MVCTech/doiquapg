@@ -27,10 +27,29 @@ const testRedux = createSlice({
   initialState,
   reducers: {},
   extraReducers: (build) => {
+    // Update state on Redux
+    //   build.addCase(
+    //     updateUserStatusFunc.fulfilled,
+    //     (state, action: PayloadAction<any>) => {
+    //         const index = state.findIndex(
+    //             (basicSal: UserModelResponse) => basicSal.generalUserInfoId === action.payload.id
+    //         );
+    //         state[index] = {
+    //             ...state[index],
+    //             ...action.payload,
+    //         };
+    //     }
+    // );
     build.addCase(getPosts.fulfilled, (state, action) => {
       console.log(action.payload);
-      return { state, ...action.payload };
+      return { ...action.payload };
     });
+    // build.addCase(
+    //   addNewUserFunc.fulfilled,
+    //   (state, action: PayloadAction<any>) => {
+    //       state.push(action.payload);
+    //   }
+    // )
   },
 });
 export const selectCampaign = (state) => state.campaign;

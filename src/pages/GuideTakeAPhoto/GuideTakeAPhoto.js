@@ -177,38 +177,43 @@ export default function GuideTakeAPhoto() {
     formData.append("ocr_result", gcsResult.data);
     // formData.append(
     //   "gsutil_url",
-    //   "gs://mvcpro_vn/0c402b2e-59e0-0e41-a9e6-fee187c7a05b_27-02-2024-13-25-15_5fd7415c-6e45-f12f-625a-f01a3490bb9e002de665-93c4-a753-d72b-717e146845a2.jpg"
+    //   "gs://mvcpro_vn/0d2c0d7a-e968-761e-8149-eee5495f54a3_06-03-2024-18-10-34_61712f6c-f094-5ce8-3778-815f6203cc8caa6f2e2e-01cb-ca6a-e8cf-9a162aa2d44f.jpg"
     // );
     // formData.append(
     //   "public_url",
-    //   "https://storage.googleapis.com/mvcpro_vn/0c402b2e-59e0-0e41-a9e6-fee187c7a05b_27-02-2024-13-25-15_5fd7415c-6e45-f12f-625a-f01a3490bb9e002de665-93c4-a753-d72b-717e146845a2.jpg"
+    //   "https://storage.googleapis.com/mvcpro_vn/0d2c0d7a-e968-761e-8149-eee5495f54a3_06-03-2024-18-10-34_61712f6c-f094-5ce8-3778-815f6203cc8caa6f2e2e-01cb-ca6a-e8cf-9a162aa2d44f.jpg?gidzl=PJOs87zBa21dAJ8cV5oM9MCWCIrc2f9uA7OtB68Daoeh8c8fD0t0V2btDYWn0vTuBNjbSJ0hJ9CnV4kS9m"
     // );
     // formData.append(
     //   "ocr_result",
     //   `{
-    //     "customer_name": "10010",
-    //     "ticket_number": "",
-    //     "counter": "",
-    //     "cashier": "000019",
-    //     "date_time": "27/02/2024 10:54:00",
-    //     "order_number": "ISR10000025245",
-    //     "number_items": "1",
-    //     "runtime": "1.96",
+    //     "customer_name": "Coopfood Van Kiep",
+    //     "counter": "01",
+    //     "cashier": "",
+    //     "date_time": "",
+    //     "order_number": "0007",
+    //     "barcode": "206401010103240007",
+    //     "tax_number": "0309129418",
+    //     "runtime": "1.22",
     //     "product_list": [
     //         {
-    //             "barcode": "376892",
-    //             "description": "LUOI DAO GILLETTE MACH3+ 3C",
+    //             "barcode": "4987176121981",
+    //             "description": "DCR Gillette Flexi Vibe 111",
     //             "quantity": 1,
-    //             "unitPrice": "199000",
-    //             "lineTotalNet": "199000"
+    //             "unitPrice": "32900",
+    //             "lineTotalNet": "32900"
+    //         },
+    //         {
+    //             "barcode": "4902430540872",
+    //             "description": "CDCR Gillette Mach 3",
+    //             "quantity": 1,
+    //             "unitPrice": "87500",
+    //             "lineTotalNet": "87500"
     //         }
     //     ],
-    //     "total_discount": "",
-    //     "total_gross": "199000",
     //     "promotion": true,
-    //     "received_creceipt_datetime": "2024-02-27 13:25:16",
-    //     "response_result_datetime": "2024-02-27 13:25:18",
-    //     "chain": "mega"
+    //     "received_creceipt_datetime": "2024-03-06 18:10:35",
+    //     "response_result_datetime": "2024-03-06 18:10:36",
+    //     "chain": "coopmart"
     // }
     // `
     // );
@@ -223,6 +228,7 @@ export default function GuideTakeAPhoto() {
     if (gcsResult.campaign_id) {
       formData.append("campaign_id", gcsResult.campaign_id);
     }
+    // campain_code
     receiptServices
       .submitReceiptApi(formData)
       .then((res) => {

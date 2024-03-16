@@ -34,7 +34,10 @@ import {
   permissions_android,
   permissions_iphone,
 } from "../../utils/dataFormat";
-import { LOGIN_TYPE } from "../../services/localService/localService";
+import {
+  LOGIN_TYPE,
+  userDataLocal,
+} from "../../services/localService/localService";
 import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
 import { format } from "date-fns";
 import NewConfirmPopup from "../../component/ConfirmPopupGuideTakePhoto/NewConfirmPopup";
@@ -43,6 +46,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCount } from "../../Redux/Reducer/customerReducer";
 import ConfirmPopupLogin from "../../component/ConfirmPopupLogin/ConfirmPopupLogin";
 import GiftIconImg from "../../assets/fontawesome/image/gift.png";
+import { userServices } from "../../services/apiService/userServices";
+import { getUserInfor, userCampaign } from "../../Redux/Reducer/userNewReducer";
 
 export default function Home() {
   const login_type = localStorage.getItem("LOGIN_TYPE");
@@ -92,6 +97,8 @@ export default function Home() {
         console.log(err);
       });
   };
+  let dataUser = userDataLocal.get();
+
   const getHomerBanner = () => {
     homeServices
       .getHomepageBannerApi(appCode)
@@ -104,12 +111,17 @@ export default function Home() {
         console.log(err);
       });
   };
-
+  // const getUserInfor = () => {
+  //   userServices.getUserInfo;
+  // };
   useEffect(() => {
     window.scrollTo(0, 0);
     getCampaignClip();
     getCampaignTopAndDown();
     getHomerBanner();
+    // getUserInfor();
+    const b = dispatch(getUserInfor(dataUser?.pnj_customer_id));
+    console.log(b);
     const a = format(new Date(), "yyyy-MM-dd'T'HH:mm:ss.SSSxxx");
     console.log(a);
     dispatch(getPosts());
@@ -150,6 +162,8 @@ export default function Home() {
   const count = useSelector(selectCount);
   const getCampaign = useSelector(selectCampaign);
   console.log(getCampaign);
+  const useCampaign = useSelector(userCampaign);
+  console.log(useCampaign);
   const dispatch = useDispatch();
   return (
     <div>
@@ -172,6 +186,7 @@ export default function Home() {
                   </button> */}
                   <div>
                     <span className="font-bold-mon">Hi</span>{" "}
+                    {/* <span>{useCampaign?.name}</span> */}
                     {phone ? phone : null}
                   </div>
                 </div>
@@ -189,7 +204,7 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-5 hscroll flex justify-around px-3 relative z-0">
-            <button
+            <div
               className="w-20 background-menu"
               onClick={() => handleTakePhoto(false)}
             >
@@ -203,8 +218,8 @@ export default function Home() {
                 Chụp hình
                 <br /> hóa đơn
               </div>
-            </button>
-            <button
+            </div>
+            <div
               className="h-[75px] w-[75px] background-menu relative"
               onClick={handleRotation}
             >
@@ -217,13 +232,19 @@ export default function Home() {
               <div className="menu-bar font-bold-mon">
                 Vòng quay <br /> may mắn
               </div>
-              <div className="absolute -top-0 z-40 right-0 text-white bg-red-500 w-5 h-5 rounded-3xl text-center">
+              <div
+                className={
+                  notwheel === 0
+                    ? "hidden"
+                    : "absolute -top-0 z-40 right-0 text-white bg-red-500 w-5 h-5 rounded-3xl text-center"
+                }
+              >
                 <span className="text-[11px] relative -top-[3px]">
                   {notwheel}
                 </span>
               </div>
-            </button>
-            <button
+            </div>
+            <div
               className="h-[75px] w-[75px] background-menu"
               onClick={handleGift}
             >
@@ -234,8 +255,8 @@ export default function Home() {
                 />
               </div>
               <div className="menu-bar font-bold-mon">Quà của tôi</div>
-            </button>
-            <button
+            </div>
+            <div
               className="h-[75px] w-[75px] background-menu"
               onClick={handlePrizeRule}
             >
@@ -249,7 +270,7 @@ export default function Home() {
                 Thể lệ
                 <br /> chương trình
               </div>
-            </button>
+            </div>
           </div>
           <div className="mt-[25px] w-full px-4">
             <Carousel
