@@ -33,10 +33,29 @@
   border-radius: 13px;
   padding-bottom: 8px;
 }
+
+.tab2 button:disabled {
+  height: 40px;
+  border-radius: 11px;
+  border: 1px solid #98ebff;
+  background-color: #003da5;
+  width: 90%;
+  color: white;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.tab2 button {
+  cursor: pointer;
+  text-align: center;
+}
+.tab2 {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1) inset;
+  border-radius: 16px;
+  padding-bottom: 8px;
+}
 .border-table-listgift {
-  /* border: 1px solid #333; */
   background-color: #bdbdbd;
   border-radius: 5px;
+  border: 0px solid #ffffff;
   padding: 5px;
   width: 75px;
   text-align: right;
@@ -45,7 +64,6 @@
 .border-table-listprize {
   border-radius: 5px;
   padding-top: 2px;
-  /* width: 40px; */
   text-align: right;
   font-size: 11px;
   height: 30px;

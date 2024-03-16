@@ -43,6 +43,7 @@ export default function RegisterComponentNew({ updateInfo }) {
   const {
     register,
     watch,
+    reset,
     formState: { errors },
     handleSubmit,
   } = useForm({
@@ -68,7 +69,7 @@ export default function RegisterComponentNew({ updateInfo }) {
         })
         .catch((error) => {
           toast.warn(error);
-          navigation("/login-password");
+          navigation("/login");
         });
     } else {
       toast.error("Mật khẩu xác thực không trùng nhau");
@@ -88,7 +89,7 @@ export default function RegisterComponentNew({ updateInfo }) {
   };
   useEffect(() => {
     console.log(phone.length);
-    setIsExist()
+    setIsExist();
     if (phone.length === 10) {
       const data = {
         phone: phone,
@@ -103,19 +104,19 @@ export default function RegisterComponentNew({ updateInfo }) {
         });
     }
   }, [phone]);
-  const [textNotify, setNotify] = useState("")
-  const handleCheckAgree = ()=>{
-    setNotify("Vui lòng chọn tôi đồng ý để tiếp tục")
-  }
-  useEffect(()=>{
-    if(checkAgree1 && checkAgree2){
-      setNotify("")
+  const [textNotify, setNotify] = useState("");
+  const handleCheckAgree = () => {
+    setNotify("Vui lòng chọn tôi đồng ý để tiếp tục");
+  };
+  useEffect(() => {
+    if (checkAgree1 && checkAgree2) {
+      setNotify("");
     }
-  },[checkAgree1, checkAgree2])
-  
-  const handleLogin = ()=>{
-    navigation("/login-password")
-  }
+  }, [checkAgree1, checkAgree2]);
+
+  const handleLogin = () => {
+    navigation("/login");
+  };
   return (
     <>
       <form className="form_register mt-5" onSubmit={handleSubmit(onSubmit)}>
@@ -138,7 +139,7 @@ export default function RegisterComponentNew({ updateInfo }) {
               },
             })}
           />
-          { isExist === false ? (
+          {isExist === false ? (
             <div>
               <img src={TICK} className="w-14 pr-4" />
             </div>
@@ -146,12 +147,17 @@ export default function RegisterComponentNew({ updateInfo }) {
             <div></div>
           )}
         </div>
-        {
-          isExist ? <div className="flex justify-start mt-1">
-            <div className="mr-2 w-24 text-white bg-[#003DA5] text-center rounded-md" onClick={handleLogin}>Đăng nhập</div>
+        {isExist ? (
+          <div className="flex justify-start mt-1">
+            <div
+              className="mr-2 w-24 text-white bg-[#003DA5] text-center rounded-md"
+              onClick={handleLogin}
+            >
+              Đăng nhập
+            </div>
             <div className="text-[red]">Số điện thoại này đã tồn tại</div>
-          </div>: null
-        }
+          </div>
+        ) : null}
         <div className="font-normal z-0 -mt-3 text-[red] text-[13px] text-center">
           <ErrorMessage
             errors={errors}
@@ -223,8 +229,9 @@ export default function RegisterComponentNew({ updateInfo }) {
             type={isShowPass ? "text" : "password"}
             {...register("password", {
               pattern: {
-                value: /^(?=.{6,})(?=.*\d)/,
-                message: "Vui lòng nhập ít nhất 6 kí tự bao gồm ít nhất 1 số",
+                value: /^(?=.*\d).{6,19}$/,
+                message:
+                  "Vui lòng nhập ít nhất 6 đến 19 kí tự bao gồm ít nhất 1 số",
               },
               validate: (val) => {
                 console.log(watch("name").replace(" ", ""));
@@ -326,7 +333,7 @@ export default function RegisterComponentNew({ updateInfo }) {
             <input
               id="default-checkbox"
               type="checkbox"
-              defaultChecked={checkAgree1}
+              checked={checkAgree1}
               value={checkAgree1}
               onClick={(e) => handleAgree("ag1")}
               className="checkbox-confirm-register w-3 h-3 text-blue-600"

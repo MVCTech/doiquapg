@@ -20,6 +20,7 @@ export default function UpdateCustomerInfo() {
     userServices
       .getUserInfo(dataUser?.pnj_customer_id)
       .then((res) => {
+        console.log(res);
         setDataUserProfile(res);
       })
       .catch((err) => {

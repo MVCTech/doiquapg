@@ -17,6 +17,8 @@ import ContentTCPopup from "../ConfirmPopupTnC/ContentTCPopup";
 import PROFILE from "../../assets/fontawesome/image/profile-icon.png";
 import { ErrorMessage } from "@hookform/error-message";
 import PHONE from "../../assets/fontawesome/image/phone-auth-icon.png";
+import { useDispatch } from "react-redux";
+import { updateUserInfor } from "../../Redux/Reducer/userNewReducer";
 
 RegisterComponent.propTypes = {
   updateInfo: PropTypes.string,
@@ -51,7 +53,7 @@ export default function RegisterComponent({ updateInfo, dataUserProfile }) {
     criteriaMode: "all",
   });
   const [isShow, setShow] = useState(false);
-
+  const dispatch = useDispatch();
   const onSubmit = (value) => {
     const data = {
       pnj_customer_id: dataUser.pnj_customer_id,
@@ -59,15 +61,16 @@ export default function RegisterComponent({ updateInfo, dataUserProfile }) {
       phone: customerPhone,
     };
     console.log(data);
-    userServices
-      .postUserInfo(data)
-      .then((res) => {
-        console.log(res);
-        navigation(`/${appCode}`);
-      })
-      .catch((err) => {
-        toast.error(err);
-      });
+    dispatch(updateUserInfor(data));
+    // userServices
+    //   .postUserInfo(data)
+    //   .then((res) => {
+    //     console.log(res);
+    //     navigation(`/${appCode}`);
+    //   })
+    //   .catch((err) => {
+    //     toast.error(err);
+    //   });
   };
   const [textNotify, setNotify] = useState("");
   useEffect(() => {
@@ -168,7 +171,7 @@ export default function RegisterComponent({ updateInfo, dataUserProfile }) {
             <input
               id="default-checkbox"
               type="checkbox"
-              defaultChecked={checkAgree1}
+              checked={checkAgree1}
               value={checkAgree1}
               onClick={(e) => handleAgree("ag1")}
               className="checkbox-confirm-register w-3 h-3 text-blue-600"
@@ -202,7 +205,7 @@ export default function RegisterComponent({ updateInfo, dataUserProfile }) {
             <input
               id="default-checkbox"
               type="checkbox"
-              defaultChecked={checkAgree2}
+              checked={checkAgree2}
               value={checkAgree2}
               onClick={(e) => handleAgree("ag2")}
               className="checkbox-confirm-register w-3 h-3 text-blue-600"

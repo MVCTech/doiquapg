@@ -6,7 +6,20 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select:focus,
+  textarea:focus,
+  input:focus {
+    font-size: 16px;
+  }
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -71,6 +84,14 @@
   outline-offset: 0px;
   outline: none;
 }
+.input-hidden-link {
+  background-color: transparent;
+}
+.input-hidden-link:focus {
+  border: none;
+  outline-offset: 0px;
+  outline: none;
+}
 .border-hd {
   background-color: #f0f0f0;
 }
@@ -118,4 +139,24 @@
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+.slider-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.slider-content {
+  display: inline-block;
+  transition: transform 0.5s ease; /* Adjust the transition duration and timing function as needed */
+}
+
+/* Example styling for the slider items */
+.slider-item {
+  width: 100px; /* Adjust the width of each item as needed */
+  height: 100px; /* Adjust the height of each item as needed */
+  background-color: #3498db;
+  color: #fff;
+  text-align: center;
+  line-height: 100px;
+  margin-right: 10px; /* Adjust the margin between items as needed */
 }

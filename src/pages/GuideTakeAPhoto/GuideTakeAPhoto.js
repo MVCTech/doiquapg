@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { toast } from "react-toastify";
 import uuid from "react-uuid";
-import Compressor from "compressorjs";
 import GiftIconImg from "../../assets/fontawesome/image/gift.png";
 import HOI from "../../assets/fontawesome/image/hoi.png";
 import { campaignServices } from "../../services/apiService/campaignServices";
@@ -24,8 +23,11 @@ import {
   permissions_android,
   permissions_iphone,
 } from "../../utils/dataFormat";
-import ConfirmPopupGuideTakePhoto from "../../component/ConfirmPopupGuideTakePhoto/ConfirmPopupGuideTakePhoto";
 import { setAuthorization } from "../../services/apiService/configURL";
+import { getOS } from "../../services/deviceModel";
+import { handleChangeImage } from "../../utils/compressImage";
+import NewConfirmPopup from "../../component/ConfirmPopupGuideTakePhoto/NewConfirmPopup";
+import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
 
 export default function GuideTakeAPhoto() {
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
@@ -39,63 +41,35 @@ export default function GuideTakeAPhoto() {
   const [isOpen, setIsOpen] = useState(false);
   const [listPrize, setListPrize] = useState([]);
   const [statusLuckyDraw, setStatusLuckyDraw] = useState();
-
   const [so_ids, setSo_ids] = useState([]);
   const [isAskLogin, setIsAskLogin] = useState(false);
   const [isOpenPopupGuide, setIsOpenPopupGuide] = useState(false);
   const [isGuidePopup, setIsGuidePopup] = useState(false);
+  const camera = useRef(null);
+  const os = getOS();
+  const [devices, setDevices] = useState([]);
+  const [image, setImage] = useState(undefined);
+  const [activeDeviceId, setActiveDeviceId] = useState(undefined);
+  const [openCam, setOpenCam] = useState(true);
+  const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
+  const [current, setCurrent] = useState("0");
+  const [isCheck, setIsCheck] = useState(false);
+  const [width, setWidth] = useState();
+  const [height, setHeight] = useState();
 
   const navigate = useNavigate();
   let { token } = userDataLocal.get();
+
   let { campaignId } = useParams();
-  let refInputUpload = useRef(null);
-
-  const onClickUpload = (event) => {
-    refInputUpload.current?.click();
-  };
-
   const handlePopupErrorOk = () => {
     navigate(`/${appCode}`);
   };
   useEffect(() => {
     window.scrollTo(0, 0);
     setAuthorization(token);
+    setHeight(window.screen.availHeight);
+    setWidth(window.screen.availWidth);
   }, []);
-  const handleChangeImage = (event) => {
-    let fileUploaded = event;
-    const fileUploadedSize = fileUploaded.size / 1024 / 1024;
-    if (fileUploadedSize > 20) {
-      new Compressor(fileUploaded, {
-        quality: 0.4, // 0.6 can also be used, but its not recommended to go below.
-        success: (res) => {
-          setImageFile(res);
-        },
-      });
-    } else if (fileUploadedSize > 10 && fileUploadedSize <= 20) {
-      new Compressor(fileUploaded, {
-        quality: 0.5, // 0.6 can also be used, but its not recommended to go below.
-        success: (res) => {
-          setImageFile(res);
-        },
-      });
-    } else if (fileUploadedSize > 6 && fileUploadedSize <= 10) {
-      new Compressor(fileUploaded, {
-        quality: 0.7, // 0.6 can also be used, but its not recommended to go below.
-        success: (res) => {
-          setImageFile(res);
-        },
-      });
-    } else if (fileUploadedSize > 3 && fileUploadedSize <= 6) {
-      new Compressor(fileUploaded, {
-        quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
-        success: (res) => {
-          setImageFile(res);
-        },
-      });
-    } else {
-      setImageFile(fileUploaded);
-    }
-  };
 
   const getCampaignDetail = (campaignId) => {
     campaignServices
@@ -110,6 +84,7 @@ export default function GuideTakeAPhoto() {
     homeServices
       .getRunningCampaignTopAndDown(appCode)
       .then((res) => {
+        console.log(res);
         setOcrEndpoint(res.ocr_endpoint);
       })
       .catch((err) => {});
@@ -138,38 +113,57 @@ export default function GuideTakeAPhoto() {
     formDataGCS.append("fileName", fileName);
     formDataGCS.append("ocrBase", ocrEndpoint);
     if (!token) {
-      navigate(
-        `${login_type === "password" ? "/login-password" : "/login-password"}`
-      );
+      setIsUpload(true);
+      ocrServices
+        .uploadImageToOCR(formDataGCS)
+        .then((res) => {
+          if (campaignId) {
+            console.log(campaignId);
+            res.data.campaign_id = campaignId;
+          }
+          const dataGcs = {
+            phoneCheck: phoneData,
+          };
+          let mergeDataGcsAndPhone = Object.assign(dataGcs, res.data);
+          localStorage.setItem(
+            "GCS_RESULT",
+            JSON.stringify(mergeDataGcsAndPhone)
+          );
+          navigate(`${login_type === "password" ? "/login" : "/login"}`);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsUpload(false);
+        });
     } else {
       setIsUpload(true);
+      ocrServices
+        .uploadImageToOCR(formDataGCS)
+        .then((res) => {
+          if (campaignId) {
+            console.log(campaignId);
+            res.data.campaign_id = campaignId;
+          }
+          const dataGcs = {
+            phoneCheck: phoneData,
+          };
+          let mergeDataGcsAndPhone = Object.assign(dataGcs, res.data);
+          localStorage.setItem(
+            "GCS_RESULT",
+            JSON.stringify(mergeDataGcsAndPhone)
+          );
+        })
+        .then((res) => {
+          if (token) {
+            let gcsResult = JSON.parse(localStorage.getItem("GCS_RESULT"));
+            submitReceipt(gcsResult);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsUpload(false);
+        });
     }
-    ocrServices
-      .uploadImageToOCR(formDataGCS)
-      .then((res) => {
-        if (campaignId) {
-          console.log(campaignId);
-          res.data.campaign_id = campaignId;
-        }
-        const dataGcs = {
-          phoneCheck: phoneData,
-        };
-        let mergeDataGcsAndPhone = Object.assign(dataGcs, res.data);
-        localStorage.setItem(
-          "GCS_RESULT",
-          JSON.stringify(mergeDataGcsAndPhone)
-        );
-      })
-      .then((res) => {
-        if (token) {
-          let gcsResult = JSON.parse(localStorage.getItem("GCS_RESULT"));
-          submitReceipt(gcsResult);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsUpload(false);
-      });
   };
   const onClickDeleteImg = (e) => {
     setImageFile(undefined);
@@ -181,6 +175,48 @@ export default function GuideTakeAPhoto() {
     formData.append("gsutil_url", gcsResult.gsutil_url);
     formData.append("public_url", gcsResult.public_url);
     formData.append("ocr_result", gcsResult.data);
+    // formData.append(
+    //   "gsutil_url",
+    //   "gs://mvcpro_vn/0d2c0d7a-e968-761e-8149-eee5495f54a3_06-03-2024-18-10-34_61712f6c-f094-5ce8-3778-815f6203cc8caa6f2e2e-01cb-ca6a-e8cf-9a162aa2d44f.jpg"
+    // );
+    // formData.append(
+    //   "public_url",
+    //   "https://storage.googleapis.com/mvcpro_vn/0d2c0d7a-e968-761e-8149-eee5495f54a3_06-03-2024-18-10-34_61712f6c-f094-5ce8-3778-815f6203cc8caa6f2e2e-01cb-ca6a-e8cf-9a162aa2d44f.jpg?gidzl=PJOs87zBa21dAJ8cV5oM9MCWCIrc2f9uA7OtB68Daoeh8c8fD0t0V2btDYWn0vTuBNjbSJ0hJ9CnV4kS9m"
+    // );
+    // formData.append(
+    //   "ocr_result",
+    //   `{
+    //     "customer_name": "Coopfood Van Kiep",
+    //     "counter": "01",
+    //     "cashier": "",
+    //     "date_time": "",
+    //     "order_number": "0007",
+    //     "barcode": "206401010103240007",
+    //     "tax_number": "0309129418",
+    //     "runtime": "1.22",
+    //     "product_list": [
+    //         {
+    //             "barcode": "4987176121981",
+    //             "description": "DCR Gillette Flexi Vibe 111",
+    //             "quantity": 1,
+    //             "unitPrice": "32900",
+    //             "lineTotalNet": "32900"
+    //         },
+    //         {
+    //             "barcode": "4902430540872",
+    //             "description": "CDCR Gillette Mach 3",
+    //             "quantity": 1,
+    //             "unitPrice": "87500",
+    //             "lineTotalNet": "87500"
+    //         }
+    //     ],
+    //     "promotion": true,
+    //     "received_creceipt_datetime": "2024-03-06 18:10:35",
+    //     "response_result_datetime": "2024-03-06 18:10:36",
+    //     "chain": "coopmart"
+    // }
+    // `
+    // );
     formData.append(
       "request_id",
       uuid() + "-" + format(new Date(), "ddMMyyyyHHmmss")
@@ -192,17 +228,20 @@ export default function GuideTakeAPhoto() {
     if (gcsResult.campaign_id) {
       formData.append("campaign_id", gcsResult.campaign_id);
     }
+    // campain_code
     receiptServices
       .submitReceiptApi(formData)
       .then((res) => {
+        console.log(res);
         setStatusLuckyDraw(res.lucky_draw);
         setListPrize(res.prize_list);
-        setSo_ids(res.pg_so_code);
+        setSo_ids(res.so_ids);
         toast.success(res);
         setIsOpen(true);
         localStorage.removeItem("GCS_RESULT");
       })
       .catch((err) => {
+        localStorage.removeItem("GCS_RESULT");
         setErrMsg(err);
         setIsShowModalErr(true);
       })
@@ -211,11 +250,35 @@ export default function GuideTakeAPhoto() {
       });
   };
 
-  const [image, setImage] = useState(undefined);
-  const [activeDeviceId, setActiveDeviceId] = useState(undefined);
-  const [openCam, setOpenCam] = useState(true);
-  const check_cam = JSON.parse(localStorage.getItem(SET_CHECK_CAM));
+  const getDeviceId = async () => {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const videoDevices = devices.filter((i) => i.kind == "videoinput");
+    console.log(videoDevices);
+    const font = ["Webcam", "back", "Camera mặt sau", "Back", "cực rộng"];
+    const matching = videoDevices.filter((l) => {
+      return font.some((term) => l.label.includes(term));
+    });
+    const a = [];
+    console.log(matching);
+    console.log(matching?.reverse());
+    // if (os !== "iOS") {
 
+    // }
+    setDevices(matching?.reverse());
+  };
+  useEffect(() => {
+    getDeviceId();
+    // setTimeout(getDeviceId(), 1000);
+  }, []);
+  useEffect(() => {
+    if (os !== "iOS") {
+      setTimeout(() => {
+        console.log(devices);
+        console.log(devices.length);
+        setActiveDeviceId(devices[devices.length - 1]?.deviceId);
+      }, 650);
+    }
+  }, [devices]);
   function urltoFile(url, filename, mimeType) {
     return fetch(url)
       .then(function (res) {
@@ -230,11 +293,12 @@ export default function GuideTakeAPhoto() {
       urltoFile(image, uuid() + uuid() + ".jpg", "image/jpeg").then(function (
         file
       ) {
-        handleChangeImage(file);
+        const a = handleChangeImage(file);
+        console.log(a);
+        setImageFile(a);
       });
     }
   }, [image]);
-  const camera = useRef(null);
 
   const handleCancelCam = () => {
     localStorage.removeItem(SET_CHECK_CAM);
@@ -245,11 +309,14 @@ export default function GuideTakeAPhoto() {
     navigate(`/${appCode}`);
   };
 
-  const [isCheck, setIsCheck] = useState(false);
-  const [popupGuide, setPopupGuide] = useState(true);
   useEffect(() => {}, [isCheck === true]);
   const handlePopupQuestion = () => {
     setIsOpenPopupGuide(true);
+  };
+  const handleIndex = (id, index) => {
+    console.log(id);
+    setActiveDeviceId(id);
+    setCurrent(index);
   };
   return (
     <>
@@ -274,12 +341,19 @@ export default function GuideTakeAPhoto() {
             <>
               <Camera
                 ref={camera}
-                aspectRatio={9 / 16.5}
+                aspectRatio={
+                  activeDeviceId
+                    ? 8 / 15
+                    : os === "iOS"
+                    ? width < 392
+                      ? 8 / 15
+                      : 7 / 13
+                    : 8 / 15
+                }
                 videoSourceDeviceId={activeDeviceId}
                 facingMode="environment"
                 errorMessages={{
-                  noCameraAccessible:
-                    "No camera device accessible. Please connect your camera or try a different browser.",
+                  noCameraAccessible: "",
                   permissionDenied:
                     "Permission denied. Please refresh and give camera permission.",
                   switchCamera:
@@ -292,7 +366,36 @@ export default function GuideTakeAPhoto() {
                   localStorage.setItem(SET_CHECK_CAM, true);
                 }}
               />
-
+              {os === "iOS" ? null : (
+                <div className="relative flex justify-between items-center w-28 bottom-44 bg-black px-4 rounded-3xl opacity-50">
+                  {devices.map((d, index) => (
+                    <div
+                      key={index}
+                      className={`${
+                        parseInt(current) === index ? "bg-white" : ""
+                      } text-[12px] w-8 rounded-2xl h-8 flex justify-between 
+                      items-center opacity-100`}
+                    >
+                      <div className="flex justify-center flex-auto ">
+                        <button
+                          onClick={() => handleIndex(d.deviceId, index)}
+                          className={`${
+                            parseInt(current) === index
+                              ? "text-black"
+                              : "text-white"
+                          } font-bold-mon opacity-100`}
+                        >
+                          {d.label.includes("camera2 2")
+                            ? "0.5x"
+                            : d.label.includes("camera2 0")
+                            ? "1x"
+                            : "2x"}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
               <div
                 style={{
                   backgroundColor: "#333333",
@@ -410,7 +513,6 @@ export default function GuideTakeAPhoto() {
                   dataIOS={permissions_iphone}
                   typePopup={"permissionCam"}
                   setCheckCam={setIsCheck}
-                  setPopupGuide={setPopupGuide}
                   isCheckCam={check_cam}
                 />
               ) : null}
@@ -455,11 +557,7 @@ export default function GuideTakeAPhoto() {
                   }}
                   handleOk={() => {
                     navigate(
-                      `${
-                        login_type === "password"
-                          ? "/login-password"
-                          : "/login-password"
-                      }`
+                      `${login_type === "password" ? "/login" : "/login"}`
                     );
                   }}
                 />
@@ -491,11 +589,12 @@ export default function GuideTakeAPhoto() {
         </>
       )}
       {isOpenPopupGuide ? (
-        <ConfirmPopupGuideTakePhoto
+        <NewConfirmPopup
           isGuidePopup={isGuidePopup}
           setIsOpenPopupGuide={setIsOpenPopupGuide}
         />
       ) : null}
+      <IconPhoneAndZalo />
     </>
   );
 }

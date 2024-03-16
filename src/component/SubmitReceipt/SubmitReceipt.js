@@ -39,6 +39,43 @@ export default function SubmitReceipt({ trigger }) {
     formData.append("gsutil_url", gcsResult.gsutil_url);
     formData.append("public_url", gcsResult.public_url);
     formData.append("ocr_result", gcsResult.data);
+    // formData.append(
+    //   "gsutil_url",
+    //   "gs://mvcpro_vn/0c402b2e-59e0-0e41-a9e6-fee187c7a05b_27-02-2024-13-25-15_5fd7415c-6e45-f12f-625a-f01a3490bb9e002de665-93c4-a753-d72b-717e146845a2.jpg"
+    // );
+    // formData.append(
+    //   "public_url",
+    //   "https://storage.googleapis.com/mvcpro_vn/0c402b2e-59e0-0e41-a9e6-fee187c7a05b_27-02-2024-13-25-15_5fd7415c-6e45-f12f-625a-f01a3490bb9e002de665-93c4-a753-d72b-717e146845a2.jpg"
+    // );
+    // formData.append(
+    //   "ocr_result",
+    //   `{
+    //     "customer_name": "10010",
+    //     "ticket_number": "",
+    //     "counter": "",
+    //     "cashier": "000019",
+    //     "date_time": "27/02/2024 10:54:00",
+    //     "order_number": "ISR10000025245",
+    //     "number_items": "1",
+    //     "runtime": "1.96",
+    //     "product_list": [
+    //         {
+    //             "barcode": "376892",
+    //             "description": "LUOI DAO GILLETTE MACH3+ 3C",
+    //             "quantity": 1,
+    //             "unitPrice": "199000",
+    //             "lineTotalNet": "199000"
+    //         }
+    //     ],
+    //     "total_discount": "",
+    //     "total_gross": "199000",
+    //     "promotion": true,
+    //     "received_creceipt_datetime": "2024-02-27 13:25:16",
+    //     "response_result_datetime": "2024-02-27 13:25:18",
+    //     "chain": "mega"
+    // }
+    // `
+    // );
     formData.append("phone", localStorage.getItem("phoneData"));
     formData.append("customer_name", localStorage.getItem("nameData"));
     if (gcsResult.campaign_id) {
@@ -63,6 +100,8 @@ export default function SubmitReceipt({ trigger }) {
         localStorage.removeItem("GCS_RESULT");
       })
       .catch((err) => {
+        localStorage.removeItem("GCS_RESULT");
+
         setErrMsg(err);
         setIsShowModalErr(true);
       })

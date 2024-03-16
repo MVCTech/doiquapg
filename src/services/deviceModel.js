@@ -46,14 +46,18 @@ export function isMobileDevice() {
 
 export function isSupportedBrowser() {
   let deviceInfo = getDeviceInfo();
+  let a = false;
 
-  return (
-    deviceInfo.browser.name === "Chrome" ||
-    deviceInfo.browser.name === "Safari" ||
-    deviceInfo.browser.name === "Mobile Safari" ||
-    deviceInfo.browser.name === "Samsung Browser" ||
-    deviceInfo.browser.name === "MIUI Browser"
-  );
+  if (
+    deviceInfo.browser.name.includes("WebKit") ||
+    deviceInfo.browser.name.includes("Android Browser") ||
+    deviceInfo.browser.name.includes("ZALO")
+  ) {
+    a = false;
+  } else {
+    a = true;
+  }
+  return a;
 }
 
 export function isLocalhost() {

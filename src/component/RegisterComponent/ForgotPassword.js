@@ -25,9 +25,7 @@ export default function ForgotPassword() {
   const [isExist, setIsExist] = useState();
 
   const handleForgetPass = () => {
-    navigation(
-      `${login_type === "password" ? "/login-password" : "/login-password"}`
-    );
+    navigation(`${login_type === "password" ? "/login" : "/login"}`);
   };
   const handleRegister = () => {
     navigation(`/register-new`);
@@ -77,7 +75,7 @@ export default function ForgotPassword() {
       })
       .catch((error) => {
         toast.warn(error);
-        navigation("/login-password");
+        navigation("/login");
       });
   };
 
@@ -164,13 +162,7 @@ export default function ForgotPassword() {
             setPopup(false);
           }}
           handleOk={() => {
-            navigation(
-              `${
-                login_type === "password"
-                  ? "/login-password"
-                  : "/login-password"
-              }`
-            );
+            navigation(`${login_type === "password" ? "/login" : "/login"}`);
           }}
         />
       ) : null}

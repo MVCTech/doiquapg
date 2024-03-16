@@ -21,6 +21,7 @@ export default function ModalGift({
           flagButton="gift_prize"
           statusLuckyDraw={statusLuckyDraw}
           soIds={soIds}
+          listPrize={listPrize}
         >
           <p className="containerNotify__background-list px-2">
             <div className="text-center mb-5">

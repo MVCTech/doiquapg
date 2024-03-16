@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 CarouselMiddleItem.propTypes = {
-  item: PropTypes.string,
+  item: PropTypes.object,
 };
 export default function CarouselMiddleItem({ item }) {
   console.log(item);

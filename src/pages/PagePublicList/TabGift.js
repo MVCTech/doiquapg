@@ -5,15 +5,17 @@ export default function TabGift({ item, key, index }) {
         className="h-12"
         style={
           index % 2 === 0
-            ? { backgroundColor: "#E7E7E7" }
+            ? { backgroundColor: "#E7E7E7", border: "1px solid #ffffff" }
             : { backgroundColor: "#ffffff" }
         }
       >
-        <td className="font-regular-mon w-48">{item.gift}</td>
-        <td className=" flex justify-center mt-1">
-          <div className="border-table-listgift mt-1 ml-0"> {item.plan}</div>
+        <td id="gift" className="font-regular-mon pl-1 w-[150px]">
+          {item.gift}
         </td>
-        <td className="">
+        <td id="gift" className="border-0">
+          <div className="border-table-listgift ml-0"> {item.plan}</div>
+        </td>
+        <td id="gift" className="">
           <div
             className="border-table-listwhitegift"
             style={
@@ -25,7 +27,7 @@ export default function TabGift({ item, key, index }) {
             {item.used}
           </div>
         </td>
-        <td className="">
+        <td id="gift" className="">
           <div
             className="border-table-listwhitegift "
             style={

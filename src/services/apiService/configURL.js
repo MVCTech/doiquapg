@@ -39,17 +39,16 @@ export const checkPhoneStatus = {
 
 axiosInstance.interceptors.response.use(
   function (response) {
-    console.log(response)
+    console.log(response);
     if (response.data.result && response.data.result.meta) {
       if (!response.data.result.meta.status) {
         if (response.data.result.meta.status_code === 403) {
           window.location.assign(
-            `${
-              login_type === "password" ? "/login-password" : "/login-password"
-            }`
+            `${login_type === "password" ? "/login" : "/login"}`
           );
+          localStorage.removeItem(USER_DATA_LOCAL);
         } else {
-          localStorage.removeItem("GCS_RESULT");
+          // localStorage.removeItem("GCS_RESULT");
         }
         return Promise.reject(response.data.result.meta.message);
       }

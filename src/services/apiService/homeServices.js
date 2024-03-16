@@ -1,3 +1,4 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance, campaignURL } from "./configURL";
 
 export const homeServices = {
@@ -64,3 +65,27 @@ export const homeServices = {
     );
   },
 };
+// export const getPosts = createAsyncThunk("posts/getPosts", async (appCode) => {
+//   const res = await homeServices.getRunningCampaign(appCode);
+//   console.log(res);
+//   //  return res
+//   // return fetch(
+//   //   `https://quantri.scanbill.vn/doiqua/get_running_campaign`,
+//   //   {
+//   //     params: {
+//   //       chain: "bigc",
+//   //     },
+//   //   },
+//   //   {
+//   //     headers: "Content-Type: application/json",
+//   //   }
+//   // )
+//   //   .then((res) => {
+//   //     console.log(res);
+//   //     // return res.json()
+//   //   })
+//   //   .catch((error) => {
+//   //     console.log(error);
+//   //     // return rejectWithValue([], error);
+//   //   });
+// });

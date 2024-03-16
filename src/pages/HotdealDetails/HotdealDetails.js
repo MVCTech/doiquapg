@@ -7,6 +7,7 @@ import "../../assets/css/backgroundPhone.css";
 import "../../assets/css/backgroundListNotify.css";
 import "../../assets/css/font-text.css";
 import "../../assets/css/backgroundButton.css";
+import "./HotdealDetail.css";
 import Footer from "../../component/Footer/Footer";
 import { formatDate } from "../../utils/format";
 
@@ -23,7 +24,6 @@ export default function HotdealDetails() {
     campaignServices
       .getCampaignDetailApi(+id)
       .then((res) => {
-        console.log(res);
         setCampaignDetail(res);
       })
       .catch((err) => {
@@ -32,8 +32,6 @@ export default function HotdealDetails() {
   };
   useEffect(() => {
     getCampaignDetail(id);
-    let date1 = new Date().getTime();
-    console.log(date1);
   }, []);
 
   return (

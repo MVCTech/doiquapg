@@ -1,0 +1,89 @@
+.rotate-spin-1 {
+  transform: translateX(42%) translateY(15%) rotate(45deg);
+}
+.rotate-spin-2 {
+  transform: translateX(60%) translateY(50%) rotate(90deg);
+}
+.rotate-spin-3 {
+  transform: translateX(42%) translateY(85%) rotate(135deg);
+}
+.rotate-spin-4 {
+  transform: translateX(0%) translateY(100%) rotate(180deg);
+}
+.rotate-spin-5 {
+  transform: translateX(-42%) translateY(85%) rotate(225deg);
+}
+.rotate-spin-6 {
+  transform: translateX(-60%) translateY(50%) rotate(270deg);
+}
+.rotate-spin-7 {
+  transform: translateX(-42%) translateY(15%) rotate(315deg);
+}
+.scale-spin {
+  transform: scale(0.95);
+}
+.rotate-gift-1 {
+  transform: rotate(-45deg);
+}
+.rotate-gift-2 {
+  transform: rotate(-90deg);
+}
+.rotate-gift-3 {
+  transform: rotate(-135deg);
+}
+.rotate-gift-4 {
+  transform: rotate(-180deg);
+}
+.rotate-gift-5 {
+  transform: rotate(-225deg);
+}
+.rotate-gift-6 {
+  transform: rotate(-270deg);
+}
+.rotate-gift-7 {
+  transform: rotate(-315deg);
+}
+.rotate-giftsize {
+  width: 100%;
+}
+.button_start-rotation {
+  padding: 20px 45px;
+  border: 1px solid #999999;
+  display: inline-block;
+  position: relative;
+  background: white;
+  color: #999999;
+}
+.button_start-rotation:before,
+.button_start-rotation:after {
+  height: 25px;
+  width: 25px;
+  background: white;
+  position: absolute;
+  content: "";
+}
+.button_start-rotation:before {
+  top: 0;
+  left: 0;
+  border-right: 1px solid #999999;
+  transform: rotate(49deg) translate(-71%);
+}
+.button_start-rotation:after {
+  bottom: 0;
+  right: 0;
+  border-left: 1px solid #999999;
+  transform: rotate(49deg) translate(71%);
+}
+.animation-bg-code {
+  animation: fadeZoomBgCode 2.5s ease-in-out infinite;
+}
+@keyframes fadeZoomBgCode {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(2.5);
+    opacity: 0.4;
+  }
+}

@@ -1,0 +1,11 @@
+div table tbody tr #gift {
+  border: 1px solid #ffffff;
+  text-align: left;
+  padding: 8px;
+}
+
+div table tbody tr td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}

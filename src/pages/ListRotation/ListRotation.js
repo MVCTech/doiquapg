@@ -9,6 +9,7 @@ import "../../assets/css/font-text.css";
 import "../../assets/css/backgroundListNotify.css";
 import "../../assets/css/backgroundPhone.css";
 import HeaderBackground from "../UpdateCustomerInfo/HeaderBackground";
+import { WHEEL_LUOTQUAY, WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
 
 const TITLE = "Danh sách vòng quay";
 
@@ -17,6 +18,8 @@ export default function ListRotation() {
   const appCode = localStorage.getItem("CAMPAIGN_CODE");
   const navigation = useNavigate();
   useEffect(() => {
+    localStorage.removeItem(WHEEL_LUOTQUAY);
+    localStorage.removeItem(WHEEL_PHANTHUONG);
     luckyDrawService
       .getLuckyDrawList()
       .then((res) => {
@@ -30,26 +33,35 @@ export default function ListRotation() {
   const handleToarstErr = () => {
     toast.error("Không có vòng quay");
   };
-  const redirectWheel = (id) => {
-    navigation(`/wheel/${id}`);
+  const redirectWheel = (id, game_type) => {
+    if (game_type === "gaming_wheel") {
+      console.log("pro");
+      navigation(`/spin-freefire/${id}`);
+    } else {
+      navigation(`/wheel/${id}`);
+    }
   };
   return (
     <div className="contain">
       <HeaderBackground TITLE={TITLE} buttonBack={`/${appCode}`} />
-      <div className="containerNotify__background bg-[#fff] max-h-full absolute rounded-[30px_30px_0_0] top-20 h-[88%] w-full z-10">
+      <div
+        className="containerNotify__background bg-[#fff] max-h-full absolute 
+      rounded-[30px_30px_0_0] top-20 h-[88%] w-full z-10"
+      >
         <ul className="containerNotify__background-list pt-8 box-border z-20">
           {luckyDrawList?.map((item) => (
             <li
               key={item.so_id}
-              className={`mx-[25px] rounded-2xl flex items-center h-[126px] bg-[#F0F0F0] mb-4 overflow-hidden ${
-                item.remaining_draw > 0 ? "" : "filter grayscale"
-              }`}
+              className={`mx-[25px] rounded-2xl flex items-center h-[126px]
+               bg-[#F0F0F0] mb-4 overflow-hidden ${
+                 item.remaining_draw > 0 ? "" : "filter grayscale"
+               }`}
             >
               <div
                 className="w-full flex"
                 onClick={
                   item?.remaining_draw > 0
-                    ? () => redirectWheel(item.pg_so_code)
+                    ? () => redirectWheel(item.pg_so_code, item.game_type)
                     : () => handleToarstErr()
                 }
               >
@@ -95,7 +107,7 @@ export default function ListRotation() {
                 className="flex flex-col justify-end items-end align-bottom bottom-0 h-full "
                 onClick={
                   item?.remaining_draw > 0
-                    ? () => redirectWheel(item.pg_so_code)
+                    ? () => redirectWheel(item.pg_so_code, item.game_type)
                     : () => handleToarstErr()
                 }
               >

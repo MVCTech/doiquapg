@@ -33,8 +33,8 @@ const NoAccessBrowser = () => {
             <div style={{ textAlign: "center" }}>
               <div>
                 <div className="noaccess-content">
-                  Bạn vui lòng truy cập ứng dụng trên trình duyệt (Không phải ẩn danh) Chrome hoặc
-                  Safari của thiết bị di động. Nhấn vào dấu
+                  Bạn vui lòng truy cập ứng dụng trên trình duyệt (Không phải ẩn
+                  danh) Chrome hoặc Safari của thiết bị di động. Nhấn vào dấu
                   “…” ở góc phải màn hình xong chọn “Mở bằng trình duyệt” để
                   tiếp tục tham gia chương trình.
                 </div>

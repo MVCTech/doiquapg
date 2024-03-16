@@ -14,8 +14,8 @@
 .btn-takephoto {
   display: flex;
   justify-content: space-around;
-  height: 55px;
-  width: 140px;
+  height: 48px;
+  width: 125px;
   border-radius: 16px;
 }
 .content-description-bill {

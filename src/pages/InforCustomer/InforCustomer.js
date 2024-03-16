@@ -11,13 +11,20 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ConfirmPopupLogin from "../../component/ConfirmPopupLogin/ConfirmPopupLogin";
 import CheckPermission from "../../component/PopupPermissionCamera/CheckPermission";
-import { image_android, image_ios } from "../../utils/dataFormat";
+import {
+  image_android,
+  image_ios,
+  permissions_android,
+  permissions_iphone,
+} from "../../utils/dataFormat";
 import { userServices } from "../../services/apiService/userServices";
 import { useDispatch } from "react-redux";
 import { setLogout } from "../../Redux/Action/userAction";
 import { setAuthorization } from "../../services/apiService/configURL";
-import LOCKAUTH from "../../assets/fontawesome/image/lock-auth-icon.png";
+import CAMX from "../../assets/fontawesome/image/cam-x.png";
 import { luckyDrawService } from "../../services/apiService/LuckyDraw";
+import { WHEEL_LUOTQUAY, WHEEL_PHANTHUONG } from "../../utils/KeyConstant";
+import IconPhoneAndZalo from "../../component/IconPhoneAndZalo/IconPhoneAndZalo";
 
 const TITLE = "Thông tin khách hàng";
 const clickFilter = `/list-notify/tick`;
@@ -56,12 +63,9 @@ export default function InforCustomer() {
           localStorage.removeItem("GCS_RESULT");
           localStorage.removeItem("PHONE_NUMBER");
           localStorage.removeItem("NAME_USER");
-
-          navigation(
-            `${
-              login_type === "password" ? "/login-password" : "/login-password"
-            }`
-          );
+          localStorage.removeItem(WHEEL_LUOTQUAY);
+          localStorage.removeItem(WHEEL_PHANTHUONG);
+          navigation(`${login_type === "password" ? "/login" : "/login"}`);
         })
         .catch((err) => {
           console.log(err);
@@ -77,7 +81,10 @@ export default function InforCustomer() {
         console.log(err);
       });
   }, []);
-
+  const [camx, setCamx] = useState(false);
+  const handleCam = () => {
+    setCamx(true);
+  };
   return (
     <div>
       <HeaderBackground
@@ -100,7 +107,7 @@ export default function InforCustomer() {
               <img src={ICON_RIGHT} />
             </div>
           </NavLink>
-          <li
+          {/* <li
             className="content-info-li font-regular-mon mt-3 py-1 rounded-xl"
             onClick={handleChangePassword}
           >
@@ -111,7 +118,7 @@ export default function InforCustomer() {
             <div className="ml-auto mr-6">
               <img src={ICON_RIGHT} />
             </div>
-          </li>
+          </li> */}
           <li
             className="content-info-li font-regular-mon mt-3 py-1 rounded-xl"
             onClick={handleHistory}
@@ -138,6 +145,18 @@ export default function InforCustomer() {
           </li>
           <li
             className="content-info-li font-regular-mon py-1 mt-3 rounded-xl"
+            onClick={handleCam}
+          >
+            <div className="icon-infor-li">
+              <img src={CAMX} className="w-4" />
+            </div>
+            <div>Cách cấp quyền máy ảnh</div>
+            <div className="ml-auto mr-6">
+              <img src={ICON_RIGHT} />
+            </div>
+          </li>
+          <li
+            className="content-info-li font-regular-mon py-1 mt-3 rounded-xl"
             onClick={handleLogout}
           >
             <div className="py-[15px] px-4">
@@ -150,6 +169,8 @@ export default function InforCustomer() {
           </li>
         </ul>
       </div>
+      <IconPhoneAndZalo />
+
       {isPopupLogout ? (
         <ConfirmPopupLogin
           titlePopup={"Bạn có muốn đăng xuất thiết bị này"}
@@ -167,6 +188,14 @@ export default function InforCustomer() {
           dataIOS={image_ios}
           typePopup={"ghimWebsite"}
           setPopupGuide={setPopupGuide}
+        />
+      ) : null}
+      {camx ? (
+        <CheckPermission
+          dataAndroid={permissions_android}
+          dataIOS={permissions_iphone}
+          typePopup={"permissionCam"}
+          setPopupGuide={setCamx}
         />
       ) : null}
       <NavbarHome />

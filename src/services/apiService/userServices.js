@@ -92,7 +92,7 @@ export const userServices = {
     });
   },
   postUpdateConsultant: (data) => {
-    return axiosInstance.post("/doiqua/update_consultant", { params: data });
+    return axiosInstance.post("/doiqua/customer_confirm", { params: data });
   },
   checkPhoneExist: (userInfo) => {
     return axiosInstance.post("/doiqua/check_phone", {

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import "../../assets/css/font-text.css";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
@@ -22,15 +22,18 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
   useEffect(() => {
     setStatus(false);
   }, [current]);
+  const [isShow, setIsShow] = useState(false);
+  const textAreaRef = useRef(null);
 
-  const handleCopy = async () => {
-    let pin = document.getElementById("myPin").innerHTML;
-    try {
-      await navigator.clipboard.writeText(pin);
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
-  };
+  function copyToClipboard(e) {
+    setIsShow(true);
+    setTimeout(() => {
+      setIsShow(false);
+    }, 1500);
+    textAreaRef.current.select();
+    document.execCommand("copy");
+    e.target.focus();
+  }
   const handlePopupPrize = (e) => {
     localStorage.setItem("prize", e);
     setOpenPopup(true);
@@ -50,17 +53,27 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
               Bạn đã trúng phần quà là
             </div>
             <div className="font-semibold-mon text-[16px] ">{infor.gift}</div>
-            {infor.exchange_status_str !== "Chưa nhận" ? (
-              <div className="item-status font-regular-mon text-[#00AF43]">
-                Đã nhận{" "}
-                {infor?.urbox_details === "" ? null : (
-                  <Fragment>{infor?.urbox_details}</Fragment>
-                )}
-              </div>
+            {infor?.reject_receive_gift ? (
+              <>
+                <div className="item-status font-regular-mon text-red-600 ">
+                  Khách hàng từ chối nhận quà
+                </div>
+              </>
             ) : (
-              <div className="item-status font-regular-mon text-red-600 ">
-                {infor.exchange_status_str}
-              </div>
+              <>
+                {infor.exchange_status_str !== "Chưa nhận" ? (
+                  <div className="item-status font-regular-mon text-[#00AF43]">
+                    Đã nhận{" "}
+                    {infor?.urbox_details === "" ? null : (
+                      <Fragment>{infor?.urbox_details}</Fragment>
+                    )}
+                  </div>
+                ) : (
+                  <div className="item-status font-regular-mon text-red-600 ">
+                    {infor.exchange_status_str}
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -78,12 +91,34 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
                 </div>
               </div>
             ) : null}
-            <div className="text-item-gift font-light-mon mt-1">
-              Chương trình
-              <div className="pr-3 font-semibold-mon text-[#52A0F7] text-right">
-                {infor.campaign_name}
+            {infor?.gift_type === "game_code" ? (
+              <div className="text-item-gift font-light-mon mt-1">
+                Mã Code
+                <div className="pr-3 font-semibold-mon text-[#52A0F7] text-right">
+                  <input
+                    ref={textAreaRef}
+                    className="font-semibold-mon text-right input-hidden-link bg-[#f0f0f0]"
+                    value={infor?.urbox_link}
+                  />
+                  <div className="px-3 tooltip" onClick={copyToClipboard}>
+                    <img src={COPY} />
+                    {isShow ? (
+                      <span className="tooltiptext font-semibold-mon">
+                        Đã sao chép!!
+                      </span>
+                    ) : null}
+                  </div>
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className="text-item-gift font-light-mon mt-1">
+                Chương trình
+                <div className="pr-3 font-semibold-mon text-[#52A0F7] text-right">
+                  {infor.campaign_name}
+                </div>
+              </div>
+            )}
+
             <div className="text-item-gift font-light-mon mt-1">
               Ngày tham gia
               <div className="pr-3 font-semibold-mon corlor-text-darkblack">
@@ -111,32 +146,40 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
             {infor?.is_physical_gift === false ? (
               <Fragment>
                 {infor?.gift_type === "card" ? null : (
-                  <div className="font-regular-mon mt-1 justify-between text-[12px] text-[#1D86FA] flex flex-nowrap">
-                    Link
-                    <div className="pr-3 font-semibold-mon corlor-text-darkblue text-[14px] text-right">
-                      <a href={infor?.urbox_link} target="_blank">
-                        {infor?.urbox_link}
-                      </a>
-                    </div>
-                  </div>
+                  <Fragment>
+                    {infor?.gift_type === "game_code" ? null : (
+                      <div className="font-regular-mon mt-1 justify-between text-[12px] text-[#1D86FA] flex flex-nowrap">
+                        Link
+                        <div className="pr-3 font-semibold-mon corlor-text-darkblue text-[14px] text-right">
+                          <a href={infor?.urbox_link} target="_blank">
+                            {infor?.urbox_link}
+                          </a>
+                        </div>
+                      </div>
+                    )}
+                  </Fragment>
                 )}
               </Fragment>
             ) : null}
             {infor?.gift_type === "urbox" ? (
               <div
                 className="font-regular-mon mt-1 text-[12px] text-[#fa1d1d] flex justify-between pb-5"
-                onClick={handleCopy}
+                onClick={copyToClipboard}
               >
                 Mã bảo vệ
                 <div className="flex">
-                  <div className="font-semibold-mon" id="myPin">
-                    {infor?.urbox_pin}
-                  </div>
-                  <div className="px-3 tooltip" onClick={handleCopy}>
+                  <input
+                    ref={textAreaRef}
+                    className="font-semibold-mon text-right input-hidden-link bg-[#f0f0f0]"
+                    value={infor?.urbox_pin}
+                  />
+                  <div className="px-3 tooltip" onClick={copyToClipboard}>
                     <img src={COPY} />
-                    <span class="tooltiptext font-semibold-mon">
-                      Đã sao chép!!
-                    </span>
+                    {isShow ? (
+                      <span className="tooltiptext font-semibold-mon">
+                        Đã sao chép!!
+                      </span>
+                    ) : null}
                   </div>
                 </div>
               </div>
@@ -180,8 +223,17 @@ export default function GiftItem({ infor, current, setOpenPopup }) {
               className="font-text-13 font-regular-mon text-[#4F4F4F] pl-5 mt-2"
               onClick={handleToggle}
             >
-              Ngày trúng thưởng{" "}
-              <span className="text-[#003DA5]">{infor.attend_date}</span>
+              {infor?.gift_type === "game_code" ? (
+                <Fragment>
+                  Mã Code{" "}
+                  <span className="text-[#003DA5]">{infor.urbox_link}</span>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  Ngày trúng thưởng{" "}
+                  <span className="text-[#003DA5]">{infor.attend_date}</span>
+                </Fragment>
+              )}
             </div>
           )}
           <div className=" flex flex-col justify-end items-end">
