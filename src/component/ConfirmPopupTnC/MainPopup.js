@@ -64,7 +64,12 @@ export default function MainPopup({
       .postUpdateConsultant(info)
       .then((res) => {
         console.log(res);
-
+        const checkGiftType = listPrize.filter(
+          (x) => x.game_type === "gaming_wheel"
+        );
+        const checkGiftCode = checkGiftType.filter(
+          (x) => x.gift_type === "game_code"
+        );
         if (statusLuckyDraw === true) {
           console.log(res);
           console.log(res.so_ids.length);
@@ -75,7 +80,16 @@ export default function MainPopup({
             navigation(`/wheel/${soIds}`);
           }
         } else {
-          navigation("/list-rotation");
+          if (checkGiftCode.length > 0) {
+            if (checkGiftCode[0].game_code !== "") {
+              navigation(
+                `/get-gift-code/${checkGiftCode[0].game_code}/${soIds}`
+              );
+            }
+          } else {
+            // navigation(`/spin-freefire/${soIds}`);
+            navigation("/list-rotation");
+          }
         }
       })
       .catch((err) => {
@@ -94,6 +108,7 @@ export default function MainPopup({
       (x) => x.gift_type === "game_code"
     );
     console.log(checkGiftType);
+    console.log(checkGiftCode);
     userServices
       .postUpdateConsultant(info)
       .then((res) => {

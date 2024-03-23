@@ -172,51 +172,46 @@ export default function GuideTakeAPhoto() {
   };
   const submitReceipt = (gcsResult) => {
     let formData = new FormData();
-    formData.append("gsutil_url", gcsResult.gsutil_url);
-    formData.append("public_url", gcsResult.public_url);
-    formData.append("ocr_result", gcsResult.data);
-    // formData.append(
-    //   "gsutil_url",
-    //   "gs://mvcpro_vn/0d2c0d7a-e968-761e-8149-eee5495f54a3_06-03-2024-18-10-34_61712f6c-f094-5ce8-3778-815f6203cc8caa6f2e2e-01cb-ca6a-e8cf-9a162aa2d44f.jpg"
-    // );
-    // formData.append(
-    //   "public_url",
-    //   "https://storage.googleapis.com/mvcpro_vn/0d2c0d7a-e968-761e-8149-eee5495f54a3_06-03-2024-18-10-34_61712f6c-f094-5ce8-3778-815f6203cc8caa6f2e2e-01cb-ca6a-e8cf-9a162aa2d44f.jpg?gidzl=PJOs87zBa21dAJ8cV5oM9MCWCIrc2f9uA7OtB68Daoeh8c8fD0t0V2btDYWn0vTuBNjbSJ0hJ9CnV4kS9m"
-    // );
-    // formData.append(
-    //   "ocr_result",
-    //   `{
-    //     "customer_name": "Coopfood Van Kiep",
-    //     "counter": "01",
-    //     "cashier": "",
-    //     "date_time": "",
-    //     "order_number": "0007",
-    //     "barcode": "206401010103240007",
-    //     "tax_number": "0309129418",
-    //     "runtime": "1.22",
-    //     "product_list": [
-    //         {
-    //             "barcode": "4987176121981",
-    //             "description": "DCR Gillette Flexi Vibe 111",
-    //             "quantity": 1,
-    //             "unitPrice": "32900",
-    //             "lineTotalNet": "32900"
-    //         },
-    //         {
-    //             "barcode": "4902430540872",
-    //             "description": "CDCR Gillette Mach 3",
-    //             "quantity": 1,
-    //             "unitPrice": "87500",
-    //             "lineTotalNet": "87500"
-    //         }
-    //     ],
-    //     "promotion": true,
-    //     "received_creceipt_datetime": "2024-03-06 18:10:35",
-    //     "response_result_datetime": "2024-03-06 18:10:36",
-    //     "chain": "coopmart"
-    // }
-    // `
-    // );
+    // formData.append("gsutil_url", gcsResult.gsutil_url);
+    // formData.append("public_url", gcsResult.public_url);
+    // formData.append("ocr_result", gcsResult.data);
+    formData.append(
+      "gsutil_url",
+      "gs://mvcpro_vn/62df9870-0175-b53e-b0ed-2e172a7948e3_29-02-2024-11-10-37_bdb6df46-dee6-85f0-519e-1cbcdbd8964d19d238a0-b0db-5ca8-aa8c-2f44fa712334.jpg"
+    );
+    formData.append(
+      "public_url",
+      "https://storage.googleapis.com/mvcpro_vn/62df9870-0175-b53e-b0ed-2e172a7948e3_29-02-2024-11-10-37_bdb6df46-dee6-85f0-519e-1cbcdbd8964d19d238a0-b0db-5ca8-aa8c-2f44fa712334.jpg"
+    );
+    formData.append(
+      "ocr_result",
+      `{
+            "customer_name": "10010",
+            "ticket_number": "",
+            "counter": "10",
+            "cashier": "000019",
+            "date_time": "23/03/2024 10:54:00",
+            "order_number": "ISR10000025245",
+            "number_items": "1",
+            "runtime": "1.45",
+            "product_list": [
+                {
+                    "barcode": "376892",
+                    "description": "LUOI DAO GILLETTE HACH3+ 3C",
+                    "quantity": 1,
+                    "unitPrice": "199000",
+                    "lineTotalNet": "199000"
+                }
+            ],
+            "total_discount": "",
+            "total_gross": "199000",
+            "promotion": true,
+            "received_creceipt_datetime": "2024-02-29 11:10:37",
+            "response_result_datetime": "2024-02-29 11:10:39",
+            "chain": "mega"
+        }
+        `
+    );
     formData.append(
       "request_id",
       uuid() + "-" + format(new Date(), "ddMMyyyyHHmmss")

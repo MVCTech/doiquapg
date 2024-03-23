@@ -5,6 +5,7 @@ GiftItem.propTypes = {
   infor: PropTypes.string,
 };
 export default function GiftItem({ infor }) {
+  console.log(infor);
   return (
     <div className="flex relative h-[75px] pl-[14px]">
       <div className="flex flex-col justify-center rounded-2xl">

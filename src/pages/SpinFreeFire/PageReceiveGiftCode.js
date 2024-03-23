@@ -20,7 +20,7 @@ export default function PageReceiveGiftCode() {
   console.log(data?.gift_code.includes("cbmm"));
   const handleBack = () => {
     if (dataLuotQuay === 0) {
-      navigation(`/list-rotation`);
+      navigation(`/`);
     } else {
       navigation(`/spin-freefire/${id}`);
     }
